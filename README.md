@@ -1,13 +1,13 @@
 # rfe2204-FEC
 
-FEC Team Halicarnasses 
+## FEC Team Halicarnasses 
 
-Naming Standards
+#### Naming Standards
 
-Styling:
+##### Styling:
   AirBnB
 
-Branch Names:
+**Branch Names**
   
   Branch Name: widgetName-ticketLabel
   Commit Message: what does this commit do?

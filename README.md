@@ -4,6 +4,9 @@ FEC Team Halicarnasses
 
 Naming Standards
 
+Styling:
+  AirBnB
+
 Branch Names:
   
   Branch Name: widgetName-ticketLabel
@@ -20,7 +23,7 @@ Branch Names:
   
  File and Folders:
   Follow repo guide
-  Component names: Name.jsx
+  Component names: Name.js
   
 App Structure:
 

@@ -25,9 +25,9 @@ Branch Names:
 App Structure:
 
 index.js
---<App />
------<ProductDetail />
------<Ratings />
------<Questions />
------<RelatedItems />
+--<App
+-----<ProductDetail
+-----<Ratings
+-----<Questions 
+-----<RelatedItems
 

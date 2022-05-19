@@ -1,16 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import Overview from './components/Overview.jsx'
 
-class Overview extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+function Overview(props) {
 
-  render() {
-    return <div>Overview</div>
-  }
+  return <div>Overview</div>
 }
 
 export default Overview

@@ -2,7 +2,7 @@
 // const root = createRoot(document.getElementById("root"));
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ProductDetails from './ProductDetails.jsx'
+import ProductDetails from './components/ProductDetails.jsx'
 
 // Huzzah for jsx!
 // const App = () => {

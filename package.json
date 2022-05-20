@@ -1,9 +1,8 @@
 {
-  "name": "rfe2204-FEC",
+  "name": "rfe2204-fec",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/halicarnasses/rfe2204-FEC.git",
-  "author": "Jonathan Huang <jonathan95129@gmail.com>",
+  "author": "Team Halicarnassus",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",
@@ -24,9 +23,9 @@
     "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
-    "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
-    "dev": "webpack serve --open",
-    "server-dev": "npx nodemon server/index.js"
+    "build-dev": "webpack --watch",
+    "server-dev": "nodemon server/server.js",
+    "dev": "webpack serve --open"
   }
 }

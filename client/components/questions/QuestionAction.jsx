@@ -1,9 +1,7 @@
-import React, { useState, useEffect  } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 function QuestionAction() {
   const [question, setQuestion] = useState('');
-  const [questionData, setQuestionData] = useState([]);
 
   // Use to add question.
   const onChangeHandler = (event) => {
@@ -25,21 +23,6 @@ function QuestionAction() {
     event.preventDefault();
     console.log('LOAD MORE QUESTIONS');
   };
-
-
-
-  useEffect(() => {
-    axios.get(`/qa/questions/?product_id=${37311}`)
-    .then((response) => {
-      console.log('QUESTIONS', response.data);
-      return setQuestionData(response.data.results);
-    });
-  }, [setQuestionData]);
-
-
-
-
-
 
 
   return (

@@ -7,23 +7,20 @@ import QuestionAction from './questions/QuestionAction.jsx';
 import './questions/Questions.css'
 
 function Questions({props}) {
-  console.log(props);
   const [productID, setProductID] = useState(props);
-  const [questionData, setQuestionData] = useState([]);
+  const [questions, setQuestions] = useState();
 
   const questionURL = '';
-
-
 
   // When componenet mounts, get question info for product.
 
   useEffect(() => {
     axios.get(`/qa/questions/?product_id=${productID}`)
     .then((response) => {
-      console.log('QUESTIONS', response.data);
-      return setQuestionData(response.data.results);
+      const results = response.data.results;
+      setQuestions(results);
     });
-  }, [setQuestionData]);
+  }, [setQuestions]);
 
 
 
@@ -31,7 +28,7 @@ function Questions({props}) {
     <div className="questions-div">
       <h2>QUESTIONS</h2>
       <QuestionSearch />
-      <QuestionList />
+      <QuestionList  props={questions}/>
       <QuestionAction />
     </div>
   );

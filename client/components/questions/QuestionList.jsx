@@ -1,31 +1,30 @@
-import React, { useState, useEffect  } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Question from "./Question.jsx"
-function QuestionList() {
-  const [questions, setQuery] = useState([]);
-  const [questionData, setQuestionData] = useState([]);
+function QuestionList({props}) {
+
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    setQuestions(props)
+  }, [props, setQuestions]);
 
   const clickHandler = (event) => {
     event.preventDefault();
   }
 
+  if (questions !== undefined) {
+    return (
+      <div  className="question-list">
+        <h3>Question List</h3>
+        { questions.map((q) => (
+          <Question key={q.question_id} props={q}/>
+        ))
+        }
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    axios.get(`/qa/questions/?product_id=${37311}`)
-    .then((response) => {
-      console.log('QUESTIONS', response.data);
-      return setQuestionData(response.data.results);
-    });
-  }, [setQuestionData]);
-
-
-
-  return (
-    <div  className="question-list">
-      <h3>Question List</h3>
-      <Question />
-    </div>
-  );
+  return <div></div>
 
 }
 

@@ -38,17 +38,12 @@ EX: bug-questions, imp-productDetail
 | fea | Feature        |
 | tbt | Technical Debt |
 
-Keep commits to single major changes to code only.
-Keep commit messages short and in the form of the answer to:
-This commit "your message here"
-EX: "fixed question submit form", "changed order of componets", "created new folders for componenets"
+-Keep commits to single major changes to code only.
+-Keep commit messages short and in the form of the answer to:
+-This commit "your message here"
+  -EX: "fixed question submit form", "changed order of componets", "created new folders for componenets"
+-Remove all console.logs() when they are no longer needed!
+-App must comply with Accessibility standards
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG
 
 ### App Structure
-<!-- App Structure: -->
-<!--
-index.js
-<ProductDetail
------<ProductDetail
------<Ratings
------<Questions
------<RelatedItems -->

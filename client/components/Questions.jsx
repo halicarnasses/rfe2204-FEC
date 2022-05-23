@@ -20,7 +20,7 @@ function Questions({props}) {
   useEffect(() => {
     axios.get(`/qa/questions/?product_id=${productID}`)
     .then((response) => {
-      console.log(response.data);
+      console.log('QUESTIONS', response.data);
       return setQuestionData(response.data.results);
     });
   }, [setQuestionData]);

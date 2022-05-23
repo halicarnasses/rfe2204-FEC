@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 
 function Overview(props) {
-
-  return <div>Overview</div>
+  return (
+    <div>
+      <h2>Overview</h2>
+    </div>
+  );
 }
 
-export default Overview
+export default Overview;

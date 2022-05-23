@@ -10,16 +10,18 @@ function QuestionSearch({searchHandler}) {
     const value = target.value;
     setQuery(value);
     // Add handler to search questions.
+    console.log(`SEARCH: ${query}`);
   };
 
-  const handleSubmit = (event) => {
+  const searchQuestions = (event) => {
     event.preventDefault();
+    console.log(`SEARCH FOR: ${query}`);
     // Add handler to search questions.
   }
 
   return (
-    <div>
-      <h3>Search Bar</h3>
+    <div  className="question-search">
+      <h3>Search</h3>
       <input
         type="text"
         value={query}
@@ -27,7 +29,7 @@ function QuestionSearch({searchHandler}) {
         onChange={onChangeHandler}>
       </input>
         {/* Searchs questions */}
-      <button onSubmit={handleSubmit}>SEARCH</button>
+      <button onClick={searchQuestions}>SEARCH</button>
     </div>
   );
 

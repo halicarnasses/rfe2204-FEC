@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import QuestionSearch from './questions/QuestionSearch.jsx';
+import QuestionList from './questions/QuestionList.jsx';
+import QuestionAction from './questions/QuestionAction.jsx';
+
+import './questions/Questions.css'
 
 function Questions({props}) {
   console.log(props);
@@ -9,26 +13,12 @@ function Questions({props}) {
 
   // When componenet mounts, get question info for product.
 
-
   return (
-    <div>
-      <h2>Questions</h2>
+    <div className="questions-div">
+      <h2>QUESTIONS</h2>
       <QuestionSearch />
-      <h3>QuestionList</h3>
-        {/* QAListItem */}
-          {/* Item Question */}
-            {/* Helpful Button */}
-            {/* Add Answer MAKE MODAL*/}
-          {/* Item Answer */}
-            {/* Timestamp with UserID */}
-            {/* Helpful Button */}
-            {/* Report Button */}
-            {/* Potential Photo List MAKE MODAL */}
-            {/* Load more answers for question */}
-      <h3>ActionBar</h3>
-        {/* More Questions Button */}
-          {/* Loads more questions */}
-        {/* Add Questions Button MAKE MODAL */}
+      <QuestionList />
+      <QuestionAction />
     </div>
   );
 }

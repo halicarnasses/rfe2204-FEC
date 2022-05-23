@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
+import QuestionSearch from './questions/QuestionSearch.jsx';
 
 function Questions({props}) {
   console.log(props);
@@ -8,18 +9,12 @@ function Questions({props}) {
 
   // When componenet mounts, get question info for product.
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Make request to server
-  }
 
   return (
     <div>
       <h2>Questions</h2>
-      <h3>Search Bar</h3>
-        {/* Searchs questions */}
-        <button onSubmit={handleSubmit}>SEARCH</button>
-      <h3>QAList</h3>
+      <QuestionSearch />
+      <h3>QuestionList</h3>
         {/* QAListItem */}
           {/* Item Question */}
             {/* Helpful Button */}

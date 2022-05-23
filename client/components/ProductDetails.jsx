@@ -18,7 +18,7 @@ function ProductDetails() {
   return (
     <div>
       <h1>Product Details</h1>
-      <Overview props={productID} />
+      {/* <Overview props={productID} /> */}
       <Questions props={productID} />
       {/* <Reviews productID={productID} /> */}
     </div>

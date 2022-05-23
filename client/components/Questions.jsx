@@ -18,6 +18,7 @@ function Questions({props}) {
     axios.get(`/qa/questions/?product_id=${productID}`)
     .then((response) => {
       const results = response.data.results;
+      console.log('GOT', results);
       setQuestions(results);
     });
   }, [setQuestions]);

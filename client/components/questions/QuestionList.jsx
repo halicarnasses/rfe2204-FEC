@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Question from "./Question.jsx"
 function QuestionList({props}) {
+  console.log(props);
 
   const [questions, setQuestions] = useState([]);
 

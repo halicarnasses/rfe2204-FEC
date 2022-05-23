@@ -35,22 +35,28 @@ function Question({props}) {
   return (
     <div  className="question-item">
       <h4>Question</h4>
-      <div className="item-q">
-        <h5>Q: {qBody}</h5>
-        <h6>Helpful?</h6>
-        <h6 onClick={updateState} name="yes">Yes {qHelpfulness}</h6>
-        <h6>|</h6>
-        <h6 onClick={updateState} name="add-answer">Add Answer</h6>
+
+      <div className="question">
+        <h5 className="question-body">Q: {qBody}</h5>
+        <div className="question-info">
+          <h6>Helpful?</h6>
+          <h6 onClick={updateState} name="yes">Yes {qHelpfulness}</h6>
+          <h6>|</h6>
+          <h6 onClick={updateState} name="add-answer">Add Answer</h6>
+        </div>
       </div>
-      <div className="item-a">
-        <h5>A: {qAnswers[0].body}</h5>
-        <h6>{qAnswers[0].answerer_name}</h6>
-        <h6>{qAnswers[0].date}</h6>
-        <h6>|</h6>
-        <h6>Helpful?</h6>
-        <h6 onClick={updateState}>Yes {qAnswers[0].helpfulness}</h6>
-        <h6>|</h6>
-        <h6 onClick={reportAnswer}>Report</h6>
+
+      <div className="answer">
+        <h5 className="answer-body">A: {qAnswers[0].body}</h5>
+        <div className="answer-info">
+          <h6>{qAnswers[0].answerer_name}</h6>
+          <h6>{qAnswers[0].date}</h6>
+          <h6>|</h6>
+          <h6>Helpful?</h6>
+          <h6 onClick={updateState}>Yes {qAnswers[0].helpfulness}</h6>
+          <h6>|</h6>
+          <h6 onClick={reportAnswer}>Report</h6>
+        </div>
       </div>
     </div>
   );

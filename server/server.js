@@ -40,7 +40,7 @@ app.get('/*', function(req, res) {
     }
   })
   .then((response) => {
-    console.log('API SENT:', response.data);
+    console.log('API SENT:', response.data.product_id, response.data.results.length);
     res.send(response.data)
   })
   .catch((error) => {

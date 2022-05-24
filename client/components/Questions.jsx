@@ -13,7 +13,6 @@ function Questions({props}) {
   const questionURL = '';
 
   // When componenet mounts, get question info for product.
-
   useEffect(() => {
     axios.get(`/qa/questions/?product_id=${productID}`)
     .then((response) => {
@@ -24,15 +23,19 @@ function Questions({props}) {
   }, [setQuestions]);
 
 
-
-  return (
-    <div className="questions-div">
+  if (questions) {
+    return (
+      <div className="questions-div">
       <h2>QUESTIONS</h2>
       <QuestionSearch />
       <QuestionList  props={questions}/>
-      <QuestionAction />
     </div>
-  );
+    )
+  } else {
+    return (
+      <div></div>
+    );
+  }
 }
 
 export default Questions;

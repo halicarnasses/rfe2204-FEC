@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Answer ({answer, helpfulHandler}) {
+function Answer ({answer, helpfulHandler, reportHandler}) {
   console.log(answer);
   return (
     <div>
@@ -14,7 +14,13 @@ function Answer ({answer, helpfulHandler}) {
             name="helpful-answer"
             className="onclick">Yes
           </a>
-            {answer.helpfulness}
+            {answer.helpfulness} |
+          <a
+            href=""
+            onClick={reportHandler}
+            name="report-answer"
+            className="onclick">Report
+          </a>
         </p>
       </div>
     </div>

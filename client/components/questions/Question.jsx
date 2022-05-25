@@ -11,7 +11,7 @@ function Question({body, date, name, helpfulness, reported, answers, requestHand
     event.preventDefault();
     const target = event.target;
     const name = target.name;
-    console.log(name);
+
     if (name === 'helpful-question') {
       requestHandler('PUT', '/qa/questions/:question_id/helpful');
     } else if (name === 'helpful-answer') {
@@ -19,9 +19,16 @@ function Question({body, date, name, helpfulness, reported, answers, requestHand
     }
   };
 
-  const reportAnswer = () => {
+  const report = (event) => {
     event.preventDefault();
-    console.log('REPORT ANSWER');
+    const target = event.target;
+    const name = target.name;
+
+    if (name === 'report-question') {
+      requestHandler('PUT', '/qa/questions/:question_id/report');
+    } else if (name === 'report-answer') {
+      requestHandler('PUT', '/qa/answers/:answer_id/report');
+    }
   };
 
   const addAnswer = () => {
@@ -29,9 +36,11 @@ function Question({body, date, name, helpfulness, reported, answers, requestHand
     alert('Add answer here!');
   };
 
-  const showAll = () => {
-
+  const showMoreAnswers = () => {
+    const newLimit = answerKeys.length;
+    setALimit(newLimit);
   };
+
 
   return (
     <div  className="list-item">
@@ -52,17 +61,24 @@ function Question({body, date, name, helpfulness, reported, answers, requestHand
         </div>
         <div>
           {
-            answerKeys.map((key) => (
-              <Answer
-                key={key}
-                answer={answers[key]}
-                helpfulHandler={markHelpful}
-                reportHandler={reportAnswer}
-              />
-            ))
+            answerKeys.map((key, i) => {
+              if (i < answerLimit) {
+                return (
+                  <Answer
+                    key={key}
+                    answer={answers[key]}
+                    helpfulHandler={markHelpful}
+                    reportHandler={report}
+                  />
+                )
+              }
+            })
           }
         </div>
       </div>
+
+      <button id="more-answers-btn" name="more-answers"
+          onClick={showMoreAnswers}>Load More Answers</button>
 
     </div>
   );

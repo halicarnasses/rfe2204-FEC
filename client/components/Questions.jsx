@@ -30,13 +30,6 @@ function Questions({props, axiosRequest}) {
     alert('Add you question here!');
   }
 
-  // const markHelpful = (event) => {
-  //   event.preventDefault();
-  //   const target = event.target;
-  //   const name = target.name;
-  //   console.log();
-  // }
-
   if (questions) {
     return (
       <div className="questions-div">

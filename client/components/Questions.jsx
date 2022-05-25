@@ -17,24 +17,12 @@ function Questions({props}) {
 
   const questionURL = '';
 
-  // When componenet mounts, get question info for product.
-  // useEffect(() => {
-  //   axios.get(`/qa/questions/?product_id=${productID}`)
-  //   .then((response) => {
-  //     const results = response.data.results;
-  //     console.log('GOT', results);
-  //     setQuestions(results);
-  //   });
-  // }, [setQuestions]);
-
-
   // Use to update data via server/api.
   const updateQuestions = () => {
     // Add POST or PUT requests.
     // Add GET request after response.
     // Update state.
     // setQuestions();
-
   };
 
   const searchHandler = (filter) => {
@@ -45,10 +33,10 @@ function Questions({props}) {
   if (questions) {
     return (
       <div className="questions-div">
-      <h2>QUESTIONS</h2>
-      <QuestionSearch />
-      <QuestionList  props={questions}/>
-    </div>
+        <h2>QUESTIONS</h2>
+        {/* <QuestionSearch /> */}
+        <QuestionList props={questions}/>
+      </div>
     )
   } else {
     return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Question from "./Question.jsx"
 
 function QuestionList({props}) {
-  console.log('LIST',props);
+  console.log('LIST', props);
 
   const [questions, setQuestions] = useState(props);
   const [qLimit, setQLimit] = useState(2);
@@ -31,15 +31,16 @@ function QuestionList({props}) {
           return (
             <Question
               key={q.question_id}
-              qBody={q.question_body}
-              qDate={q.question_date}
-              qName={q.asker_name}
-              qHelpfulness={q.question_helpfulness}
-              qReported={q.reported}
-              qAnswers={q.answers}/>)
+              body={q.question_body}
+              date={q.question_date}
+              name={q.asker_name}
+              helpfulness={q.question_helpfulness}
+              reported={q.reported}
+              answers={q.answers}/>)
         }
       })}
-      <button id="more-questions-btn" name="more-questions" onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button id="more-questions-btn" name="more-questions"
+         onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
       <button>ADD A QUESTION +</button>
     </div>
   );

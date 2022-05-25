@@ -2,84 +2,94 @@ import React, { useState } from 'react';
 
 function Question({qBody, qDate, qName, qHelpfulness, qReported, qAnswers}) {
 
-  let answersArr = [];
-  for (let answer in qAnswers) {
-    answersArr.push(qAnswers[answer]);
+  // We need to track and update answer helpfulness
+  const qAnswerHelpfulness = {};
+  for (let a in qAnswers) {
+    // qAnswerHelp.push(qAnswers[a].helpfulness);
+    qAnswerHelpfulness[a] = qAnswers[a].helpfulness;
   }
+  console.log(qAnswerHelpfulness);
 
   const [body, setBody] = useState(qBody);
   const [date, setDate] = useState(qDate);
   const [name, setAsker] = useState(qName);
   const [helpfulness, setHelpfulness] = useState(qHelpfulness);
   const [reported, setReported] = useState(qReported);
-  const [answers, setAnswers] = useState(answersArr);
 
-  const updateState = (event) => {
-    const target = event.target;
-    const name = target.name;
-    console.log(name);
-  }
+  const [answers, setAnswers] = useState(qAnswers);
+  const [answerKeys, setAnswerKeys] = useState(Object.keys(qAnswers));
+  const [answerHelpfulness, setAnswerHelpfulness] = useState(qAnswerHelpfulness);
+  const [answerLimit, setAnswerLimit] = useState(2);
 
-  // const reportAnswer = (event) => {
+  // const updateState = (event) => {
   //   const target = event.target;
   //   const name = target.name;
   //   console.log(name);
   // }
 
-
-  // Need funcs:
-  // questionHelpful
-  // answerHelpful
-  // reportAnswer
-  // addAnswerModal
-
   const markHelpful = (event) => {
+    event.preventDefault();
     const target = event.target;
-    const id = target.id;
+    const name = target.name;
 
     // Set limit to one click per user
     // Add PUT request to update database
-
-    if (id === 'helpful-question') {
+    if (name === 'helpful-question') {
       let newHelpfulness = helpfulness;
       newHelpfulness ++;
       setHelpfulness(newHelpfulness);
-    } else if (id === 'helpful-answer') {
+    } else if (name === 'helpful-answer') {
+      const id = target.id;
+      let newHelp = answerHelpfulness;
+      newHelp[id]++;
+      setAnswerHelpfulness(newHelp);
     }
   }
 
   const reportAnswer = () => {
+    event.preventDefault();
     console.log('REPORT ANSWER');
   }
 
   const addAnswer = () => {
+    event.preventDefault();
     alert('Add answer here!');
   }
-
 
   return (
     <div  className="list-item">
 
       <div className="item-question">
-        <h5 className="question-body">Q: {body}</h5>
-        <div className="question-info">
-          <h6>Helpful?</h6>
-          <h6 onClick={markHelpful} id="helpful-question">Yes {helpfulness}</h6>
-          <h6>|</h6>
-          <h6 onClick={addAnswer} name="add-answer">Add Answer</h6>
-        </div>
+        <p className="question-body">Q: {body}</p>
+        <p className="question-info">
+          Helpful?
+          <a href="" onClick={markHelpful} name="helpful-question" className="onclick">Yes</a> {helpfulness} |
+          <a href="" onClick={addAnswer} name="add-answer" className="onclick">Add Answer</a>
+        </p>
       </div>
 
       <div className="item-answer">
-        <h5 className="answer-body">A: {answers[0].body}</h5>
-        <div className="answer-info">
-          <h6>{answers[0].answerer_name}</h6>
-          <h6>{answers[0].date}</h6>
-          <h6>|</h6>
-          <h6>Helpful?</h6>
-          <h6 onClick={markHelpful} id="helpful-answer">Yes {answers[0].helpfulness}</h6>
-          <h6>|</h6>
-          <h6 onClick={reportAnswer}>Report</h6>
+        <div>
+          <p>A: </p>
+        </div>
+        <div>
+          {answerKeys.map((key, i) => {
+            console.log(key);
+            if (i < answerLimit) {
+              return (
+                <div key={key}>
+                  <p className="answer-body">{answers[key].body}</p>
+                  <div>
+                    <p>
+                      by {answers[key].answerer_name}, {answers[key].date} |
+                      Helpful?
+                      <a id={answers[key].id} href="" onClick={markHelpful} name="helpful-answer" className="onclick">Yes</a> {answerHelpfulness[key]}
+                    </p>
+                  </div>
+                </div>
+              )
+            }
+          })}
         </div>
       </div>
 
@@ -87,6 +97,5 @@ function Question({qBody, qDate, qName, qHelpfulness, qReported, qAnswers}) {
   );
 
 }
-
 
 export default Question;

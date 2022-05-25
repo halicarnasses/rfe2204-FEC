@@ -7,10 +7,6 @@ function QuestionList({props}) {
   const [questions, setQuestions] = useState(props);
   const [qLimit, setQLimit] = useState(2);
 
-  // useEffect(() => {
-  //   setQuestions(props)
-  // }, [props, setQuestions]);
-
   const clickHandler = (event) => {
     const target = event.target;
     const name = target.name;

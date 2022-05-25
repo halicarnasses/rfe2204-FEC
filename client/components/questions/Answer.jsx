@@ -4,7 +4,6 @@ function Answer ({answer, helpfulHandler}) {
   console.log(answer);
   return (
     <div>
-      <h6>Answer</h6>
       <p className="answer-body">{answer.body}</p>
       <div>
         <p>

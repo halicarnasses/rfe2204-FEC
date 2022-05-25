@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import Answer from './Answer.jsx';
 
-function Question({body, date, name, helpfulness, reported, answers}) {
+function Question({body, date, name, helpfulness, reported, answers, requestHandler}) {
 
   const [answerLimit, setALimit] = useState(2);
   const [allAnswers, setAllAnswers] = useState(false);
   const [answerKeys, setAnswerKeys] = useState(Object.keys(answers));
-  console.log(answerKeys);
 
   const markHelpful = (event) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
     console.log(name);
+    if (name === 'helpful-question') {
+      requestHandler('PUT', '/qa/questions/:question_id/helpful');
+    } else if (name === 'helpful-answer') {
+      requestHandler('PUT', '/qa/questions/:answer_id/helpful');
+    }
   };
 
   const reportAnswer = () => {

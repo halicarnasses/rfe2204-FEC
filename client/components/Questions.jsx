@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuestionSearch from './questions/QuestionSearch.jsx';
 import Question from "./questions/Question.jsx"
-import questionData from './questions/questions-sample.js'
+// import questionData from './questions/questions-sample.js'
 import './questions/Questions.css';
 
 function Questions({id, questionsData, stateHandler}) {
-  console.log(id, questionsData)
 
   const [productID, setProductID] = useState(id);
-  const [questions, setQuestions] = useState(questionData.results);
+  const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
+
+  useEffect(() => {
+    setQuestions(questionsData);
+  }, [questionsData]);
 
   // Search
   const searchHandler = (filter) => {
@@ -32,12 +35,9 @@ function Questions({id, questionsData, stateHandler}) {
     alert('Add you question here!');
   }
 
-
-
   const updateState = () => {
     stateHandler(37317);
   }
-
 
   if (questions) {
     return (

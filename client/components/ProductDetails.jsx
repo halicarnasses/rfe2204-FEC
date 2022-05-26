@@ -19,7 +19,7 @@ function ProductDetails() {
   }, [])
 
   const updateState = (id) => {
-    console.log(`Updating ${id} ${productID}`);
+    console.log(`Updating ${id}`);
 
     axios
       .all([
@@ -43,7 +43,7 @@ function ProductDetails() {
         }
         allInfo.productInfo = responses[0].data;
         allInfo.productStyles = responses[1].data;
-        allInfo.questions = responses[2].data;
+        allInfo.questions = responses[2].data.results;
         allInfo.reviews = responses[3].data;
         allInfo.reviewsMeta = responses[4].data;
         return allInfo;

@@ -33,18 +33,18 @@ app.get('/*', function(req, res) {
   const queryParams = req.query;
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
-  console.log(queryParams, endpoint);
+  console.log('GOT', queryParams, endpoint);
   axios.get(fullURL, {
     headers: {
       authorization: TOKEN,
     }
   })
   .then((response) => {
-    console.log('API SENT:', response.data);
+    console.log(`FOR ${endpoint} API SENT: ${response.data}`);
     res.send(response.data)
   })
   .catch((error) => {
-    console.log(error.message, error.status);
+    console.log(error.message, endpoint);
     res.sendStatus(404)
   });
 });

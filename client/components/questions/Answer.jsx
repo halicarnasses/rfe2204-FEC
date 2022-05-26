@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
-  console.log(answer);
   return (
     <div>
       <p className="answer-body">{answer.body}</p>
@@ -25,8 +24,6 @@ function Answer ({answer, helpfulHandler, reportHandler}) {
       </div>
     </div>
   )
-
 }
-
 
 export default Answer;

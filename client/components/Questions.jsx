@@ -5,12 +5,12 @@ import Question from "./questions/Question.jsx"
 import questionData from './questions/questions-sample.js'
 import './questions/Questions.css';
 
-function Questions({props, axiosRequest}) {
-  const [productID, setProductID] = useState(props);
+function Questions({id, questionsData, stateHandler}) {
+  console.log(id, questionsData)
+
+  const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionData.results);
   const [qLimit, setQLimit] = useState(2);
-
-
 
   // Search
   const searchHandler = (filter) => {
@@ -32,6 +32,13 @@ function Questions({props, axiosRequest}) {
     alert('Add you question here!');
   }
 
+
+
+  const updateState = () => {
+    stateHandler(37317);
+  }
+
+
   if (questions) {
     return (
 
@@ -49,14 +56,15 @@ function Questions({props, axiosRequest}) {
                 name={q.asker_name}
                 helpfulness={q.question_helpfulness}
                 reported={q.reported}
-                answers={q.answers}
-                requestHandler={axiosRequest}/>)
-          }
-        })}
+                answers={q.answers}/>
+              )
+            }
+          })
+        }
 
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={addQuestion}>ADD A QUESTION +</button>
+        <button onClick={updateState}>ADD A QUESTION +</button>
       </div>
     )
   } else {
@@ -64,6 +72,7 @@ function Questions({props, axiosRequest}) {
       <div>NO QUESTIONS!</div>
     );
   }
+
 }
 
 export default Questions;

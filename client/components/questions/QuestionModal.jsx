@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './QuestionModal.css'
 
-function QuestionModal ({show, hide}) {
+function QuestionModal ({show, hide, submitHandler}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   return (

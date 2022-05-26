@@ -10,8 +10,8 @@ function Questions({id, questionsData, stateHandler}) {
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
-  const [showQuestionModal, setShowQuestionModal] = useState(false);
-  const [showAnswerModal, setShowAnswerModal] = useState(false);
+  const [questionModal, setQuestionModal] = useState(false);
+  const [answerModal, setAnswerModal] = useState(false);
 
   useEffect(() => {
     setQuestions(questionsData);
@@ -83,28 +83,34 @@ function Questions({id, questionsData, stateHandler}) {
   };
 
 
-  const addQuestion = (event) => {
+  const showQuestionModal = (event) => {
     event.preventDefault();
-    setShowQuestionModal(true);
-  }
+    setQuestionModal(true);
+  };
 
   const hideQuestionModal = (event) => {
     event.preventDefault();
-    setShowQuestionModal(false);
-  }
+    setQuestionModal(false);
+  };
 
-  const addAnswer = (event) => {
+  const showAnswerModal = (event) => {
     event.preventDefault();
     console.log('ADD ANSWER');
-    setShowAnswerModal(true);
-  }
+    setAnswerModal(true);
+  };
 
   const hideAnswerModal = (event) => {
     event.preventDefault();
-    setShowAnswerModal(false);
-  }
+    setAnswerModal(false);
+  };
 
+  const addQuestion = (data) => {
+    console.log("ADD Q: ", data);
+  };
 
+  const addAnswer = (data) => {
+    console.log("ADD A: ", data);
+  };
 
   // Actions
   const showMoreQuestions = () => {
@@ -117,13 +123,15 @@ function Questions({id, questionsData, stateHandler}) {
     }
   };
 
+
+
   if (questions) {
     return (
 
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-        <QuestionModal show={showQuestionModal} hide={hideQuestionModal}/>
-        <AnswerModal show={showAnswerModal} hide={hideAnswerModal}/>
+        <QuestionModal show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
+        <AnswerModal show={answerModal} hide={hideAnswerModal}/>
         { questions.map((q, i) => {
           if ( i < qLimit) {
             return (
@@ -138,7 +146,7 @@ function Questions({id, questionsData, stateHandler}) {
                 answers={q.answers}
                 helpfulHandler={markHelpful}
                 reportHandler={report}
-                modalHandler={addAnswer}
+                modalHandler={showAnswerModal}
                 />
               )
             }
@@ -147,7 +155,7 @@ function Questions({id, questionsData, stateHandler}) {
 
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={addQuestion}>ADD A QUESTION +</button>
+        <button onClick={showQuestionModal}>ADD A QUESTION +</button>
       </div>
     )
   } else {

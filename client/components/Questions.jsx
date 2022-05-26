@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import QuestionSearch from './questions/QuestionSearch.jsx';
 import Question from "./questions/Question.jsx"
-// import questionData from './questions/questions-sample.js'
+
 import './questions/Questions.css';
 
 function Questions({id, questionsData, stateHandler}) {
-
+  console.log(questionsData);
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
@@ -15,12 +14,72 @@ function Questions({id, questionsData, stateHandler}) {
     setQuestions(questionsData);
   }, [questionsData]);
 
-  // Search
-  const searchHandler = (filter) => {
-    // Update question list based on filter.
+  // updates global state
+  // change this name
+  const updateState = () => {
+    stateHandler(productID);
+  }
+
+  // Search bar
+
+
+  // List functions
+  const markHelpful = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(name);
+    if (name === 'helpful-question') {
+      // console.log(target.getAttribute('value'));
+      const id = target.getAttribute('value');
+      axios
+        .put(`/qa/questions/${id}/helpful`)
+        .then((response) => {
+          console.log('PUT GOT', response.data);
+          stateHandler(productID);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (name === 'helpful-answer') {
+      const id = target.getAttribute('value');
+      axios
+        .put(`/qa/answers/${id}/helpful`)
+        .then((response) => {
+          console.log('PUT GOT', response.data);
+          stateHandler(productID);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
-// Actions
+  const report = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(name);
+
+    // if (name === 'report-question') {
+    //   requestHandler('PUT', '/qa/questions/:question_id/report');
+    // } else if (name === 'report-answer') {
+    //   requestHandler('PUT', '/qa/answers/:answer_id/report');
+    // }
+  };
+
+
+  const addQuestion = () => {
+    alert('Add you question here!');
+  }
+
+  const addAnswer = () => {
+    event.preventDefault();
+    alert('Add answer here!');
+  };
+
+
+  // Actions
   const showMoreQuestions = () => {
     let newLimit = qLimit;
     newLimit += 2;
@@ -31,32 +90,28 @@ function Questions({id, questionsData, stateHandler}) {
     }
   };
 
-  const addQuestion = () => {
-    alert('Add you question here!');
-  }
-
-  const updateState = () => {
-    stateHandler(37317);
-  }
-
   if (questions) {
     return (
 
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-        {/* <QuestionSearch /> */}
 
         { questions.map((q, i) => {
           if ( i < qLimit) {
             return (
               <Question
                 key={q.question_id}
+                id={q.question_id}
                 body={q.question_body}
                 date={q.question_date}
                 name={q.asker_name}
                 helpfulness={q.question_helpfulness}
                 reported={q.reported}
-                answers={q.answers}/>
+                answers={q.answers}
+                helpfulHandler={markHelpful}
+                reportHandler={report}
+                answerHandler={addAnswer}
+                />
               )
             }
           })

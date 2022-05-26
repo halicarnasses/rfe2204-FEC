@@ -8,6 +8,7 @@ function Answer ({answer, helpfulHandler, reportHandler}) {
         <p>
           by {answer.answerer_name}, {answer.date} | Helpful?
           <a
+            value={answer.id}
             href=""
             onClick={helpfulHandler}
             name="helpful-answer"

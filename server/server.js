@@ -75,29 +75,29 @@ app.post('/*', function(req, res) {
 
 
 // I'll update this soon
-// app.put('/*', function(req, res) {
+app.put('/*', function(req, res) {
 
-//   const data = req.body;
-//   // const data = {};
-//   const getUrl = req.url;
+  const data = req.body;
+  // const data = {};
+  const getUrl = req.url;
 
-//   console.log(req.url, data);
-//   // console.log(API_URL + getUrl);
-//   const apiReqURL = API_URL + getUrl;
-//   console.log(apiReqURL);
+  console.log(req.url, data);
+  // console.log(API_URL + getUrl);
+  const apiReqURL = API_URL + getUrl;
+  console.log(apiReqURL);
 
-//   axios.put(apiReqURL, data, {
-//     headers: {
-//       authorization: TOKEN,
-//     }
-//   })
-//   .then((response) => {
-//     console.log('API SENT:', response.data);
-//     res.send(response.data)
-//   })
-//   .catch(error => console.log(error.message));
+  axios.put(apiReqURL, data, {
+    headers: {
+      authorization: TOKEN,
+    }
+  })
+  .then((response) => {
+    console.log('API SENT:', response.data);
+    res.send(response.data)
+  })
+  .catch(error => console.log(error.message));
 
-// });
+});
 
 
 

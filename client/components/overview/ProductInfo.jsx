@@ -1,27 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
+// require('dotenv').config();
+const axios = require('axios')
+
 
 function ProductInfo(props) {
-  // star endpoint:
-  // https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/reviews/meta?product_id=37313
-  // response:
-
-//     "product_id": "37313",
-//     "ratings": {
-//         "1": "1",
-//         "2": "2",
-//         "3": "1",
-//         "4": "16",
-//         "5": "12"
-//     },
 
   return <div>
-    <div>star rating</div>
+    <div>---Product Info---</div>
+    <div>star rating: {props.ratings.stars}</div>
+    <a href="#reviews">read all {props.ratings.count} ratings</a>
     <div>share on socials (fb, twitter, pinterest)</div>
-    <div>prod category: {props.Product.category}</div>
-    <div>product title: {props.Product.name}, ID = {props.Product.id}</div>
-    <div>price: {props.Product.default_price}</div>
-    <div>product overview: {props.Product.slogan}</div>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Share to Twitter</a><script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+    <div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share on Facebook</a></div>
+    <div>prod category: {props.product.category}</div>
+    <div>product title: {props.product.name}, ID = {props.product.id}</div>
+    <s>{props.currStyle.sale_price ? props.currStyle.original_price : ''}</s>
+    <div>price: {props.currStyle.sale_price || props.currStyle.original_price}</div>
+    <div>product overview: {props.product.slogan}</div>
   </div>
 }
 

@@ -41,7 +41,6 @@ function Question({body, date, name, helpfulness, reported, answers, requestHand
     setALimit(newLimit);
   };
 
-
   return (
     <div  className="list-item">
 

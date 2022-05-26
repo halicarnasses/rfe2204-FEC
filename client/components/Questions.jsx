@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
+import AnswerModal from "./questions/AnswerModal.jsx"
 
 import './questions/Questions.css';
 
 function Questions({id, questionsData, stateHandler}) {
-  console.log(questionsData);
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
-  const [show, setShow] = useState(false);
+  const [showQuestionModal, setShowQuestionModal] = useState(false);
+  const [showAnswerModal, setShowAnswerModal] = useState(false);
 
   useEffect(() => {
     setQuestions(questionsData);
@@ -82,13 +83,28 @@ function Questions({id, questionsData, stateHandler}) {
   };
 
 
-  const showModal = () => {
-    setShow(true);
+  const addQuestion = (event) => {
+    event.preventDefault();
+    setShowQuestionModal(true);
   }
 
-  const hideModal = () => {
-    setShow(false);
+  const hideQuestionModal = (event) => {
+    event.preventDefault();
+    setShowQuestionModal(false);
   }
+
+  const addAnswer = (event) => {
+    event.preventDefault();
+    console.log('ADD ANSWER');
+    setShowAnswerModal(true);
+  }
+
+  const hideAnswerModal = (event) => {
+    event.preventDefault();
+    setShowAnswerModal(false);
+  }
+
+
 
   // Actions
   const showMoreQuestions = () => {
@@ -106,7 +122,8 @@ function Questions({id, questionsData, stateHandler}) {
 
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-        <QuestionModal show={show} hide={hideModal}/>
+        <QuestionModal show={showQuestionModal} hide={hideQuestionModal}/>
+        <AnswerModal show={showAnswerModal} hide={hideAnswerModal}/>
         { questions.map((q, i) => {
           if ( i < qLimit) {
             return (
@@ -121,6 +138,7 @@ function Questions({id, questionsData, stateHandler}) {
                 answers={q.answers}
                 helpfulHandler={markHelpful}
                 reportHandler={report}
+                modalHandler={addAnswer}
                 />
               )
             }
@@ -129,7 +147,7 @@ function Questions({id, questionsData, stateHandler}) {
 
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={showModal}>ADD A QUESTION +</button>
+        <button onClick={addQuestion}>ADD A QUESTION +</button>
       </div>
     )
   } else {

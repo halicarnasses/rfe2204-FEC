@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-flow: row;
+}
+
+.item {
+  display: flex;
+  flex-flow: column;
+
+}
+
+.size {
+
+}
+
+.quantity {
+
+}

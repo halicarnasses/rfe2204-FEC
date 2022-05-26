@@ -1,42 +1,64 @@
 import React, { useState } from 'react';
 import './QuestionModal.css'
 
-function QuestionModal ({show, hide, submitHandler}) {
+function QuestionModal ({id, show, hide, submitHandler}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
-  const [newQuestion, setNewQuestoin] = useState('');
+  const [newQuestion, setNewQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
   const submitForm = (event) => {
     event.preventDefault();
+    console.log('Verify Data!', newQuestion, nickname, email);
+    // Use regex similar to:
+    // newQuestion === /a-zA-Z?!./
+    // nickname === /a-zA-Z0-9/
+    // email === /[a-zA-Z0-9.]@a-zA-Z0-9].[com, edu, gov]/
+    const data = {
+      body: newQuestion,
+      name: nickname,
+      email: email,
+      product_id: id
+    };
+    submitHandler(data);
   };
+
+  const changeHandler = (event) => {
+    const target = event.target;
+    const name = target.name;
+    let inputString = '';
+    switch(name) {
+      case 'question-input':
+        inputString  = target.value;
+        setNewQuestion(inputString);
+        break;
+      case 'nickname-input':
+        inputString  = target.value;
+        setNickname(inputString);
+        break;
+      case 'email-input':
+        inputString  = target.value;
+        setEmail(inputString);
+        break;
+    }
+  }
+
+
 
   return (
     <div className={showHideClassName}>
       <div className='modal-content'>
-        <h1>Add Your Question!</h1>
-        <button onClick={hide}>Close</button>
 
-        <form onSubmit={submitForm}>
-          {/*
+        <div className="modal-header">
+          <h1>Add Your Question!</h1>
+          <a className="modal-close onclick" onClick={hide}>X</a>
+        </div>
 
-          Your Question: large text window allows up to 1000 chars
-          What Is Your Nickname: Text input up to 60 chars Placeholder= "Example: jackson11!"
-            Below line reads= "For privacy reasons, do not use your full name or email address"
-          Your Email: text input up to 60 chars
-            Below reads = "For authentication reasons, you will not be emailed"
-          Submit Question Button
-            When clicked, forms inputs are validated
-            If not correct, form does not submit
-            If not correct, message appears saying: You must enter the following
-            Error occurs if:
-              Fields are blank
-              email is not in correct format */}
-
-          <input type="text" placeholder="Your Question"></input>
-          <input type="text" placeholder="Your Nickname"></input>
-          <input type="text" placeholder="Your Email"></input>
+        <form id="modal-form" onSubmit={submitForm}>
+          <textarea name="question-input" value={newQuestion} rows="4" cols="40" placeholder="Your Question" onChange={changeHandler}></textarea>
+          <input name="nickname-input" value={nickname} type="text" placeholder="Your Nickname" onChange={changeHandler}/>
+          <input name="email-input" value={email} type="text" placeholder="Your Email" onChange={changeHandler}/>
           <button type="submit">SUBMIT QUESTION</button>
         </form>
 

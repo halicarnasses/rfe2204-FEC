@@ -7,6 +7,7 @@ import AnswerModal from "./questions/AnswerModal.jsx"
 import './questions/Questions.css';
 
 function Questions({id, questionsData, stateHandler}) {
+  console.log(questionsData);
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
@@ -24,8 +25,6 @@ function Questions({id, questionsData, stateHandler}) {
   }
 
   // Search bar
-
-
   // List functions
   const markHelpful = (event) => {
     event.preventDefault();
@@ -82,6 +81,29 @@ function Questions({id, questionsData, stateHandler}) {
 
   };
 
+  const addQuestion = (data) => {
+    console.log("ADD Q: ", data);
+    axios
+      .post('/qa/questions', data)
+      .then((response) => (
+        stateHandler(productID)
+      ))
+      .catch((error) => {
+        console.log(error)
+      });
+  };
+
+  const addAnswer = (data) => {
+    console.log("ADD A: ", data);
+    axios
+    .post(`/qa/questions/${data.id}/answers`, data)
+    .then((response) => (
+      stateHandler(productID)
+    ))
+    .catch((error) => {
+      console.log(error)
+    });
+  };
 
   const showQuestionModal = (event) => {
     event.preventDefault();
@@ -104,13 +126,6 @@ function Questions({id, questionsData, stateHandler}) {
     setAnswerModal(false);
   };
 
-  const addQuestion = (data) => {
-    console.log("ADD Q: ", data);
-  };
-
-  const addAnswer = (data) => {
-    console.log("ADD A: ", data);
-  };
 
   // Actions
   const showMoreQuestions = () => {
@@ -130,7 +145,7 @@ function Questions({id, questionsData, stateHandler}) {
 
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-        <QuestionModal show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
+        <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
         <AnswerModal show={answerModal} hide={hideAnswerModal}/>
         { questions.map((q, i) => {
           if ( i < qLimit) {

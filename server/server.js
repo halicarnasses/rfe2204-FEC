@@ -17,19 +17,17 @@ app.get('/*', function(req, res) {
   const queryParams = req.query;
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
-  console.log('GOT', queryParams, endpoint);
+
   axios.get(fullURL, {
     headers: {
       authorization: TOKEN,
     }
   })
   .then((response) => {
-    console.log(`FOR ${endpoint} API SENT: ${response.data}`);
     res.send(response.data)
   })
   .catch((error) => {
-    console.log(error.message, endpoint);
-    res.sendStatus(404)
+    console.log(error.message);
   });
 });
 
@@ -38,20 +36,20 @@ app.post('/*', function(req, res) {
   const data = req.body;
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
+  console.log(endpoint, data);
 
   axios.post(fullURL, data, {
     headers: {
       authorization: TOKEN,
+      'content-type': 'application/json'
     }
   })
   .then((response) => {
     console.log('API SENT:', response.data, response.status);
     res.send(response.data)
-    return response.status;
   })
   .catch((error) => {
     console.log(error.message);
-    res.send(error.response.status)
   });
 
 });
@@ -60,15 +58,10 @@ app.post('/*', function(req, res) {
 app.put('/*', function(req, res) {
 
   const data = req.body;
-  // const data = {};
-  const getUrl = req.url;
+  const endpoint = req.url;
+  const fullURL = API_URL + endpoint;
 
-  console.log(req.url, data);
-  // console.log(API_URL + getUrl);
-  const apiReqURL = API_URL + getUrl;
-  console.log(apiReqURL);
-
-  axios.put(apiReqURL, data, {
+  axios.put(fullURL, data, {
     headers: {
       authorization: TOKEN,
     }
@@ -77,7 +70,9 @@ app.put('/*', function(req, res) {
     console.log('API SENT:', response.data);
     res.send(response.data)
   })
-  .catch(error => console.log(error.message));
+  .catch((error) => {
+    console.log(error.message)
+  });
 
 });
 

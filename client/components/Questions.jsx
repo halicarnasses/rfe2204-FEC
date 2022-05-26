@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from "./questions/Question.jsx"
+import QuestionModal from "./questions/QuestionModal.jsx"
 
 import './questions/Questions.css';
 
@@ -9,6 +10,7 @@ function Questions({id, questionsData, stateHandler}) {
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     setQuestions(questionsData);
@@ -80,15 +82,13 @@ function Questions({id, questionsData, stateHandler}) {
   };
 
 
-  const addQuestion = () => {
-    alert('Add you question here!');
+  const showModal = () => {
+    setShow(true);
   }
 
-  const addAnswer = () => {
-    event.preventDefault();
-    alert('Add answer here!');
-  };
-
+  const hideModal = () => {
+    setShow(false);
+  }
 
   // Actions
   const showMoreQuestions = () => {
@@ -106,7 +106,7 @@ function Questions({id, questionsData, stateHandler}) {
 
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-
+        <QuestionModal show={show} hide={hideModal}/>
         { questions.map((q, i) => {
           if ( i < qLimit) {
             return (
@@ -121,7 +121,6 @@ function Questions({id, questionsData, stateHandler}) {
                 answers={q.answers}
                 helpfulHandler={markHelpful}
                 reportHandler={report}
-                answerHandler={addAnswer}
                 />
               )
             }
@@ -130,7 +129,7 @@ function Questions({id, questionsData, stateHandler}) {
 
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={updateState}>ADD A QUESTION +</button>
+        <button onClick={showModal}>ADD A QUESTION +</button>
       </div>
     )
   } else {

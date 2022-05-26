@@ -12,22 +12,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 API_URL = `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.CAMPUS_CODE}`;
 
-
-// Client should send GET requests in the form of:
-
-// You can use template literals to add variables directly into path
-// To get a single product:
-// const product_id = 37311
-// axios.get(`/products/:${product_id}`)
-
-// For a list of products:
-// Which page from product list to return
-// const page = 1;
-// How many products on that page to return.
-// const count = 10;
-// axios.get(`/products/?page=${page}&count=$`)
-
-
 app.get('/*', function(req, res) {
 
   const queryParams = req.query;
@@ -48,7 +32,6 @@ app.get('/*', function(req, res) {
     res.sendStatus(404)
   });
 });
-
 
 app.post('/*', function(req, res) {
 
@@ -72,7 +55,6 @@ app.post('/*', function(req, res) {
   });
 
 });
-
 
 // I'll update this soon
 app.put('/*', function(req, res) {
@@ -98,18 +80,6 @@ app.put('/*', function(req, res) {
   .catch(error => console.log(error.message));
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(PORT);
 console.log(`Server listening at http://localhost:${PORT}`);

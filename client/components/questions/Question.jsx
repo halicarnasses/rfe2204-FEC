@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Answer from './Answer.jsx';
 
-function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, answerHandler}) {
+function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler}) {
 
   const [answerLimit, setALimit] = useState(2);
   const [allAnswers, setAllAnswers] = useState(false);
@@ -14,14 +14,13 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
 
   return (
     <div  className="list-item">
-
       <div className="item-question">
         <p className="question-body">Q: {body}</p>
         <p className="question-info">
           Helpful?
           <a value={id} href="" onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
           {helpfulness} |
-          <a href="" onClick={answerHandler} name="add-answer" className="onclick">Add Answer</a>
+          <a href="" name="add-answer" className="onclick">Add Answer</a>
         </p>
       </div>
 

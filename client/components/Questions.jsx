@@ -29,24 +29,20 @@ function Questions({id, questionsData, stateHandler}) {
     const target = event.target;
     const name = target.name;
     console.log(name);
+    const id = target.getAttribute('value');
     if (name === 'helpful-question') {
-      // console.log(target.getAttribute('value'));
-      const id = target.getAttribute('value');
       axios
         .put(`/qa/questions/${id}/helpful`)
         .then((response) => {
-          console.log('PUT GOT', response.data);
           stateHandler(productID);
         })
         .catch((error) => {
           console.log(error);
         });
     } else if (name === 'helpful-answer') {
-      const id = target.getAttribute('value');
       axios
         .put(`/qa/answers/${id}/helpful`)
         .then((response) => {
-          console.log('PUT GOT', response.data);
           stateHandler(productID);
         })
         .catch((error) => {
@@ -61,11 +57,26 @@ function Questions({id, questionsData, stateHandler}) {
     const name = target.name;
     console.log(name);
 
-    // if (name === 'report-question') {
-    //   requestHandler('PUT', '/qa/questions/:question_id/report');
-    // } else if (name === 'report-answer') {
-    //   requestHandler('PUT', '/qa/answers/:answer_id/report');
-    // }
+    if (name === 'report-question') {
+      axios
+      .put(`/qa/questions/${id}/report`)
+      .then((response) => {
+        stateHandler(productID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } else if (name === 'report-answer') {
+      axios
+      .put(`/qa/answers/${id}/report`)
+      .then((response) => {
+        stateHandler(productID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
   };
 
 

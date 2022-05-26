@@ -2,14 +2,34 @@
 
 ## FEC Team Halicarnasses
 
+### Getting Started
 
-### Styling
+Install dependencies:
 
-  AirBnB
+yarn install
+
+Start development server:
+
+yarn server-dev
+
+Start development client:
+
+yarn build-dev
+
+## Project Style Guide
+
+### Lint Style
+
+Follows AirBnB mostly:
+
+LINK FOR STYLE HERE
 
 ### Naming Standards
 
-Branch Names
+Branch Names:
+
+Branch names should be in the form of 'pre-widget'
+EX: bug-questions, imp-productDetail
 
 | PRE | Ticket Type    |
 | --- | -------------- |
@@ -18,19 +38,12 @@ Branch Names
 | fea | Feature        |
 | tbt | Technical Debt |
 
-  EX: bug-questions, imp-productDetail
-  MSG: fixed question submit form
+-Keep commits to single major changes to code only.
+-Keep commit messages short and in the form of the answer to:
+-This commit "your message here"
+  -EX: "fixed question submit form", "changed order of componets", "created new folders for componenets"
+-Remove all console.logs() when they are no longer needed!
+-App must comply with Accessibility standards
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG
 
- File and Folders:
-  Follow repo guide
-  Component names: Name.js
-
-App Structure:
-<!--
-index.js
-<ProductDetail
------<ProductDetail
------<Ratings
------<Questions
------<RelatedItems -->
-
+### App Structure

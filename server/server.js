@@ -12,22 +12,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 API_URL = `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.CAMPUS_CODE}`;
 
-
-// Client should send GET requests in the form of:
-
-// You can use template literals to add variables directly into path
-// To get a single product:
-// const product_id = 37311
-// axios.get(`/products/:${product_id}`)
-
-// For a list of products:
-// Which page from product list to return
-// const page = 1;
-// How many products on that page to return.
-// const count = 10;
-// axios.get(`/products/?page=${page}&count=$`)
-
-
 app.get('/*', function(req, res) {
 
   const queryParams = req.query;
@@ -42,76 +26,57 @@ app.get('/*', function(req, res) {
     }
   })
   .then((response) => {
-    console.log('API SENT:', response.data);
     res.send(response.data)
   })
   .catch((error) => {
     console.log(error.message);
-    res.sendStatus(error.response.status)
   });
 });
-
 
 app.post('/*', function(req, res) {
 
   const data = req.body;
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
+  console.log(endpoint, data);
 
   axios.post(fullURL, data, {
     headers: {
       authorization: TOKEN,
+      'content-type': 'application/json'
     }
   })
   .then((response) => {
     console.log('API SENT:', response.data, response.status);
     res.send(response.data)
-    return response.status;
   })
   .catch((error) => {
     console.log(error.message);
-    res.send(error.response.status)
   });
 
 });
 
-
 // I'll update this soon
-// app.put('/*', function(req, res) {
+app.put('/*', function(req, res) {
 
-//   const data = req.body;
-//   // const data = {};
-//   const getUrl = req.url;
+  const data = req.body;
+  const endpoint = req.url;
+  const fullURL = API_URL + endpoint;
 
-//   console.log(req.url, data);
-//   // console.log(API_URL + getUrl);
-//   const apiReqURL = API_URL + getUrl;
-//   console.log(apiReqURL);
+  axios.put(fullURL, data, {
+    headers: {
+      authorization: TOKEN,
+    }
+  })
+  .then((response) => {
+    console.log('API SENT:', response.data);
+    res.send(response.data)
+  })
+  .catch((error) => {
+    console.log(error.message)
+  });
 
-//   axios.put(apiReqURL, data, {
-//     headers: {
-//       authorization: TOKEN,
-//     }
-//   })
-//   .then((response) => {
-//     console.log('API SENT:', response.data);
-//     res.send(response.data)
-//   })
-//   .catch(error => console.log(error.message));
-
-// });
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 app.listen(PORT);
 console.log(`Server listening at http://localhost:${PORT}`);

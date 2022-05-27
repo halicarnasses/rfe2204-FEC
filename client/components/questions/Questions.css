@@ -1,0 +1,72 @@
+p {
+  font-size: 80%;
+}
+
+.questions-div {
+  margin: 10px;
+  /* padding: 2%; */
+  border: 4px solid black;
+}
+
+.question-search{
+  margin: 10px;
+  padding: 5px;
+  border: 4px solid blue;
+}
+
+/* Should be scrollable and fit screen */
+.question-list{
+  margin: 10px;
+  padding: 5px;
+  border: 4px solid blue;
+}
+
+.list-item {
+  margin: 10px;
+  padding: 5px;
+  border: 4px solid green;
+}
+
+.onclick {
+  cursor: pointer;
+}
+
+.item-question {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+}
+
+.question-body {
+  height:auto;
+  border: 2px solid orange;
+}
+
+.question-info {
+  height:fit-content;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  border: 2px solid orange;
+}
+
+.item-answer {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+}
+
+.answer-body {
+  height:fit-content;
+  border: 2px solid orange;
+}
+
+.answer-info {
+  height:fit-content;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+}

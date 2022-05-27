@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
-
 import ProductDetails from './components/ProductDetails.jsx';
 
 const container = document.getElementById('root');

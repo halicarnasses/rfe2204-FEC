@@ -60,6 +60,7 @@ function Questions({id, questionsData, stateHandler}) {
     console.log(name);
 
     const id = target.getAttribute('value');
+
     if (name === 'report-question') {
       axios
       .put(`/qa/questions/${id}/report`)

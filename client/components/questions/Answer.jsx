@@ -9,14 +9,11 @@ function Answer ({answer, helpfulHandler, reportHandler}) {
           by {answer.answerer_name}, {answer.date} | Helpful?
           <a
             value={answer.id}
-            href=""
             onClick={helpfulHandler}
             name="helpful-answer"
-            className="onclick">Yes
-          </a>
-            {answer.helpfulness} |
-          <a
-            href=""
+            className="onclick">Yes</a> {answer.helpfulness} |
+            <a
+            value={answer.id}
             onClick={reportHandler}
             name="report-answer"
             className="onclick">Report

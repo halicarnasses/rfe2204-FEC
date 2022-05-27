@@ -18,7 +18,6 @@ app.get('/*', function(req, res) {
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
 
-  console.log(queryParams);
   axios.get(fullURL, {
     headers: {
       authorization: TOKEN,

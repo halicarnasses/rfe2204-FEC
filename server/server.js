@@ -34,6 +34,8 @@ app.get('/*', function(req, res) {
   const endpoint = req.url;
   const fullURL = API_URL + endpoint;
 
+  console.log('get request detected: ' + fullURL)
+
   axios.get(fullURL, {
     headers: {
       authorization: TOKEN,

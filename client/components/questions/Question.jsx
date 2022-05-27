@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 
 function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, modalHandler}) {
 
   const [answerLimit, setAnswerLimit] = useState(2);
-  const [answerKeys, setAnswerKeys] = useState(Object.keys(answers));
+  const [answerKeys, setAnswerKeys] = useState([]);
+
+  useEffect(() => {
+    setAnswerKeys(Object.keys(answers));
+  }, []);
 
   const showMoreAnswers = (event) => {
     const target = event.target;
@@ -33,6 +37,7 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
         <div>
           {
             answerKeys.map((key, i) => {
+              console.log(key);
               if (i < answerLimit) {
                 return (
                   <Answer

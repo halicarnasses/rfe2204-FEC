@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
+
   return (
     <div>
       <p className="answer-body">{answer.body}</p>

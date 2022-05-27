@@ -13,6 +13,7 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
     setAnswerLimit(answerKeys.length);
   };
 
+  console.log(answers);
   return (
     <div  className="list-item">
       <div className="item-question">
@@ -42,14 +43,21 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
                   />
                 )
               }
+              if (i === answerLimit) {
+                return (
+                  <button className="more-answers-btn" name="more-answers"
+                    onClick={showMoreAnswers}>Load More Answers
+                  </button>
+                )
+              }
             })
           }
         </div>
       </div>
 
-      <button className="more-answers-btn" name="more-answers"
+      {/* <button className="more-answers-btn" name="more-answers"
           onClick={showMoreAnswers}>Load More Answers
-      </button>
+      </button> */}
 
     </div>
   );

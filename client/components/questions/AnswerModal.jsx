@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './QuestionModals.css'
 
-function AnswerModal ({id, show, hide, submitHandler}) {
+function AnswerModal ({questionID, productName, questionBody, show, hide, submitHandler}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   const [newAnswer, setNewAnswer] = useState('');
@@ -19,16 +19,48 @@ function AnswerModal ({id, show, hide, submitHandler}) {
       body: newAnswer,
       name: nickname,
       email: email,
-      question_id: id
+      question_id: questionID
     };
     submitHandler(data);
   };
 
+  const changeHandler = (event) => {
+    const target = event.target;
+    const name = target.name;
+    let inputString = '';
+    switch(name) {
+      case 'question-input':
+        inputString  = target.value;
+        setNewAnswer(inputString);
+        break;
+      case 'nickname-input':
+        inputString  = target.value;
+        setNickname(inputString);
+        break;
+      case 'email-input':
+        inputString  = target.value;
+        setEmail(inputString);
+        break;
+    }
+  }
+
   return (
     <div className={showHideClassName}>
       <div className='modal-content'>
-        <h1>Add Your Answer!</h1>
-        <button onClick={hide}>Close</button>
+
+        <div className="modal-header">
+          <h1>Submit Your Answer</h1>
+          <h2>"{productName}: {questionBody}"</h2>
+          <a className="modal-close onclick" onClick={hide}>X</a>
+        </div>
+
+        <form id="modal-form" onSubmit={submitForm}>
+          <textarea name="question-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
+          <input name="nickname-input" value={nickname} type="text" placeholder="Your Nickname" onChange={changeHandler}/>
+          <input name="email-input" value={email} type="text" placeholder="Your Email" onChange={changeHandler}/>
+          <button type="submit">SUBMIT ANSWER</button>
+        </form>
+
       </div>
     </div>
   );

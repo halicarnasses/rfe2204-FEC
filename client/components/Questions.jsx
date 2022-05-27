@@ -5,15 +5,18 @@ import QuestionModal from "./questions/QuestionModal.jsx"
 
 import './questions/Questions.css';
 
-function Questions({id, questionsData, stateHandler}) {
+function Questions({id, product, questionsData, stateHandler}) {
+
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(product);
 
   useEffect(() => {
     setQuestions(questionsData);
-  }, [questionsData]);
+    setCurrentProduct(product);
+  }, [questionsData, product]);
 
   // updates global state
   // change this name
@@ -152,6 +155,7 @@ function Questions({id, questionsData, stateHandler}) {
             return (
               <Question
                 key={q.question_id}
+                productName={product.name}
                 id={q.question_id}
                 body={q.question_body}
                 date={q.question_date}

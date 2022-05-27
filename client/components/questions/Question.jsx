@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import AnswerModal from "./AnswerModal.jsx"
 
-function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
+function Question({id, productName, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
 
   const [answerLimit, setAnswerLimit] = useState(2);
   const [answerKeys, setAnswerKeys] = useState([]);
@@ -34,7 +34,13 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
 
   return (
     <div  className="list-item">
-      <AnswerModal show={answerModal} hide={hideAnswerModal} submitHandler={submitHandler}/>
+      <AnswerModal
+        questionID={id}
+        productName={productName}
+        questionBody={body}
+        show={answerModal}
+        hide={hideAnswerModal}
+        submitHandler={submitHandler}/>
 
       <div className="item-question">
         <p className="question-body">Q: {body}</p>
@@ -58,7 +64,6 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
                 return (
                   <Answer
                     key={key}
-                    question_id={id}
                     answer={answers[key]}
                     helpfulHandler={helpfulHandler}
                     reportHandler={reportHandler}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Tile from './Tile.jsx';
+import SortOptions from './SortOption.jsx'
 
 // import data from '/Users/kedirzeinu/Documents/project2/rfe2204-FEC/mock.js';
 // Get data using one of the three methods
@@ -9,10 +10,10 @@ import Tile from './Tile.jsx';
 
 // const myData = data.results;
 function List({ pId }) {
-  pId = pId || 37311
+  pId = pId || 37311;
   const [list, setList] = useState([]);
   const [sort, setSort] = useState('relevant');
-  const [page, setCount] = useState(1);
+  const [page, setPage] = useState(1);
   const [feedTile, setFeedTile] = useState([]);
   const [restList, setRestList] = useState([]);
 
@@ -23,31 +24,38 @@ function List({ pId }) {
       url: `/reviews/?page=${page}&count=${count}&sort=${sort}&product_id=${pId}`,
     };
     axios(options)
-      .then(data => {
+      .then((data) => {
         setList(data.data.results);
         setFeedTile(data.data.results.slice(0, 2));
         setRestList(data.data.results.slice(2));
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [sort, page, pId]);
 
+  // This function handles the change in sorting option
+  function handleSortingChange(sortTo) {
+    setSort(sortTo);
+  }
+
+  // This function adds next two reviews from our list
   function handleNextList(e) {
     e.preventDefault();
     setFeedTile(feedTile.concat(restList.slice(0, 2)));
     setRestList(restList.slice(2));
   }
 
-  return (<div>
-    <ul>
-      {
-        feedTile.map(item => {
-          return <Tile key={item.review_id} item={item}/>
-        })
-      }
-    </ul>
-    <button type="button" onClick={handleNextList}>show more</button>
-  </div>)
+  return (
+    <div>
+      <SortOptions handleSort={() => handleSortingChange} />
+      <ul>
+        {
+          feedTile.map((item) => <Tile key={item.review_id} item={item} />)
+        }
+      </ul>
+      <button type="button" onClick={handleNextList}>show more</button>
+    </div>
+  );
 }
 export default List;

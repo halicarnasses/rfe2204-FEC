@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Modal from './Modal.jsx';
 import styled from 'styled-components';
+import Modal from './Modal.jsx';
 
 const Img = styled.img`
   heigh: 100px;
@@ -10,7 +10,6 @@ const Img = styled.img`
 `;
 
 function Image({ image }) {
-  const imag = <img src={`${image.url}`} alt="Hello" />;
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>

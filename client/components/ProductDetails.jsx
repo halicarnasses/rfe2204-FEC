@@ -15,7 +15,7 @@ function ProductDetails() {
   // Update state on mount.
   useEffect(() => {
     updateState(productID);
-  }, [])
+  }, []);
 
   const updateState = (id) => {
     console.log(`Updating ${id}`);

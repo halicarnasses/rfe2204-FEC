@@ -138,8 +138,6 @@ function Questions({id, questionsData, stateHandler}) {
     }
   };
 
-
-
   if (questions) {
     return (
 

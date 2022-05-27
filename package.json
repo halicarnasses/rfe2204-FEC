@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
-    "build-dev": "webpack --watch",
+    "build-dev": "webpack --mode=development --watch",
     "server-dev": "nodemon server/server.js",
     "dev": "webpack serve --open"
   }

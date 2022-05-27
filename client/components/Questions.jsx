@@ -59,6 +59,7 @@ function Questions({id, questionsData, stateHandler}) {
     const name = target.name;
     console.log(name);
 
+    const id = target.getAttribute('value');
     if (name === 'report-question') {
       axios
       .put(`/qa/questions/${id}/report`)
@@ -72,6 +73,7 @@ function Questions({id, questionsData, stateHandler}) {
       axios
       .put(`/qa/answers/${id}/report`)
       .then((response) => {
+        console.log('REPORT: ', response.status);
         stateHandler(productID);
       })
       .catch((error) => {
@@ -140,13 +142,12 @@ function Questions({id, questionsData, stateHandler}) {
 
   if (questions) {
     return (
-
       <div className="questions-div">
         <h2>QUESTIONS</h2>
         <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
         <AnswerModal show={answerModal} hide={hideAnswerModal}/>
         { questions.map((q, i) => {
-          if ( i < qLimit) {
+          if (i < qLimit) {
             return (
               <Question
                 key={q.question_id}
@@ -165,7 +166,6 @@ function Questions({id, questionsData, stateHandler}) {
             }
           })
         }
-
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
         <button onClick={showQuestionModal}>ADD A QUESTION +</button>

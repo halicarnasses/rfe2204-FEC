@@ -45,7 +45,7 @@ Products
 Product List
 GET /products/?page=&count=
 
-Prodcut Information
+Product Information
 GET /products/:product_id
 
 Product Styles
@@ -79,7 +79,8 @@ PUT /qa/answers/:answer_id/helpful
 Report Question
 PUT /qa/questions/:question_id/report
 
-
+DOES NOT HAVE ENDPOINT
+404 ERROR
 Report Answer
 PUT /qa/answers/:answer_id/report
 

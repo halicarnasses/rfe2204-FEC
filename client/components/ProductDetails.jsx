@@ -24,11 +24,15 @@ function ProductDetails() {
       .all([
         // All products not needed right now.
         // axios.get(`/products/?page=${page}&count=${count}`),
+        // Product Information
         axios.get(`/products/${id}`),
+        // Product Styles
         axios.get(`/products/${id}/styles`),
+        // Questions
         axios.get(`/qa/questions/?product_id=${id}`),
-        axios.get(`/reviews/?product_id=${id}`),
-        axios.get(`/reviews/?page=&count=&product_id=${id}`)
+        //
+        axios.get(`/reviews/?page=&count=&product_id=${id}`),
+        axios.get(`/reviews/meta/?product_id=${id}`),
       ])
       .then(axios.spread((...responses) => {
 

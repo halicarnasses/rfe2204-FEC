@@ -47,7 +47,7 @@ function QuestionModal ({id, productName, show, hide, submitHandler}) {
 
 
   return (
-    <div className={showHideClassName}>
+    <div hidden={!show}>
       <div className='modal-content'>
 
         <div className="modal-header">
@@ -58,12 +58,12 @@ function QuestionModal ({id, productName, show, hide, submitHandler}) {
 
         <form id="modal-form" onSubmit={submitForm}>
           <h6>Your Question</h6>
-          <textarea name="question-input" value={newQuestion} rows="4" cols="40" placeholder="" onChange={changeHandler}></textarea>
+          <textarea maxLength={1000} name="question-input" value={newQuestion} rows="4" cols="40" placeholder="" onChange={changeHandler}></textarea>
           <h6>What is your nickname?</h6>
-          <input name="nickname-input" value={nickname} type="text" placeholder="Example: jackson11!" onChange={changeHandler}/>
+          <input maxLength={60} name="nickname-input" value={nickname} type="text" placeholder="Example: jackson11!" onChange={changeHandler}/>
           <p>For privacy reasons, do not use your full name or email</p>
           <h6>Your Email</h6>
-          <input name="email-input" value={email} type="text" placeholder="Example: jackson@email.com" onChange={changeHandler}/>
+          <input maxLength={60} name="email-input" value={email} type="text" placeholder="Example: jackson@email.com" onChange={changeHandler}/>
           <p>For authentication reasons, you will not be emailed</p>
           <button type="submit">SUBMIT QUESTION</button>
         </form>

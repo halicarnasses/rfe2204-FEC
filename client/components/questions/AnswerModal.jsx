@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './QuestionModals.css'
 
 function AnswerModal ({questionID, productName, questionBody, show, hide, submitHandler}) {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+  console.log('answershow', show);
+  // const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   const [newAnswer, setNewAnswer] = useState('');
   const [nickname, setNickname] = useState('');
@@ -12,15 +13,16 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
     event.preventDefault();
     console.log('Verify Data!', newAnswer, nickname, email);
     // Use regex similar to:
-    // newQuestion === /a-zA-Z?!./
-    // nickname === /a-zA-Z0-9/
-    // email === /[a-zA-Z0-9.]@a-zA-Z0-9].[com, edu, gov]/
+    // newQuestion === [a-xA-Z0-9.!?''""]+
+    // nickname === [a-xA-Z0-9]+
+    // email === [a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z]{2,3}
     const data = {
       body: newAnswer,
       name: nickname,
       email: email,
       question_id: questionID
     };
+
     submitHandler(data);
   };
 
@@ -45,7 +47,7 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
   }
 
   return (
-    <div className={showHideClassName}>
+    <div hidden={!show}>
       <div className='modal-content'>
 
         <div className="modal-header">
@@ -56,12 +58,12 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
 
         <form id="modal-form" onSubmit={submitForm}>
           <h6>Your Answers</h6>
-          <textarea name="answer-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
+          <textarea maxLength={1000} name="answer-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
           <h6>What is your nickname?</h6>
-          <input name="nickname-input" value={nickname} type="text" placeholder="Example: jack543!" onChange={changeHandler}/>
+          <input maxLength={60} name="nickname-input" value={nickname} type="text" placeholder="Example: jack543!" onChange={changeHandler}/>
           <p>For privacy reasons, do not use your full name or email address</p>
           <h6>Your Email</h6>
-          <input name="email-input" value={email} type="text" placeholder="Example: jack@email.com" onChange={changeHandler}/>
+          <input maxLength={60} name="email-input" value={email} type="text" placeholder="Example: jack@email.com" onChange={changeHandler}/>
           <p>For authentication reasons, you will not be emailed</p>
           <button type="submit">SUBMIT ANSWER</button>
         </form>

@@ -3,13 +3,14 @@ import Answer from './Answer.jsx';
 
 function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, modalHandler}) {
 
-  const [answerLimit, setALimit] = useState(2);
-  const [allAnswers, setAllAnswers] = useState(false);
+  const [answerLimit, setAnswerLimit] = useState(2);
   const [answerKeys, setAnswerKeys] = useState(Object.keys(answers));
 
-  const showMoreAnswers = () => {
-    const newLimit = answerKeys.length;
-    setALimit(newLimit);
+  const showMoreAnswers = (event) => {
+    const target = event.target;
+    target.classList.toggle('questions-hide-button')
+    console.log(target.classList);
+    setAnswerLimit(answerKeys.length);
   };
 
   return (
@@ -46,8 +47,9 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
         </div>
       </div>
 
-      <button id="more-answers-btn" name="more-answers"
-          onClick={showMoreAnswers}>Load More Answers</button>
+      <button className="more-answers-btn" name="more-answers"
+          onClick={showMoreAnswers}>Load More Answers
+      </button>
 
     </div>
   );

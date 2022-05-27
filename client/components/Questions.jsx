@@ -130,13 +130,14 @@ function Questions({id, questionsData, stateHandler}) {
 
 
   // Actions
-  const showMoreQuestions = () => {
+  const showMoreQuestions = (event) => {
+    const target = event.target;
     let newLimit = qLimit;
     newLimit += 2;
     setQLimit(newLimit);
     // if questions.length < newLimit, hide more question button
     if (questions.length < newLimit) {
-      document.getElementById('more-questions-btn').style.display = 'none';
+      target.classList.toggle('questions-hide-button');
     }
   };
 

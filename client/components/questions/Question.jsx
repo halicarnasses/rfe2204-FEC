@@ -59,7 +59,6 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
         <div>
           {
             answerKeys.map((key, i) => {
-              console.log(key);
               if (i < answerLimit) {
                 return (
                   <Answer

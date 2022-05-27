@@ -6,22 +6,26 @@ import QuestionModal from "./questions/QuestionModal.jsx"
 import './questions/Questions.css';
 
 function Questions({id, product, questionsData, stateHandler}) {
-
+  console.log(questionsData);
   const [productID, setProductID] = useState(id);
-  const [questions, setQuestions] = useState(questionsData);
+  const [questions, setQuestions] = useState([]);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
 
   useEffect(() => {
+
+    if (questions && questions.length <= 2 ) {
+      document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
+    }
     setQuestions(questionsData);
     setCurrentProduct(product);
-  }, [questionsData, product]);
+  }, [questionsData, product, questions]);
 
   // updates global state
   // change this name
   const updateState = () => {
-    stateHandler(productID);
+    stateHandler(productID, 1, 100);
   }
 
   // Search bar
@@ -30,26 +34,18 @@ function Questions({id, product, questionsData, stateHandler}) {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
-    console.log(name);
+
     const id = target.getAttribute('value');
     if (name === 'helpful-question') {
       axios
         .put(`/qa/questions/${id}/helpful`)
-        .then((response) => {
-          stateHandler(productID);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     } else if (name === 'helpful-answer') {
       axios
         .put(`/qa/answers/${id}/helpful`)
-        .then((response) => {
-          stateHandler(productID);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     }
   };
 
@@ -63,23 +59,14 @@ function Questions({id, product, questionsData, stateHandler}) {
     console.log('REPORTING', id);
     if (name === 'report-question') {
       axios
-      .put(`/qa/questions/${id}/report`)
-      .then((response) => {
-        stateHandler(productID);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .put(`/qa/questions/${id}/report`)
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     } else if (name === 'report-answer') {
       axios
-      .put(`/qa/answers/${id}/report`)
-      .then((response) => {
-        console.log('REPORT: ', response.status);
-        stateHandler(productID);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .put(`/qa/answers/${id}/report`)
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     }
 
   };
@@ -88,24 +75,16 @@ function Questions({id, product, questionsData, stateHandler}) {
     console.log("ADD Q: ", data);
     axios
       .post('/qa/questions', data)
-      .then((response) => (
-        stateHandler(productID)
-      ))
-      .catch((error) => {
-        console.log(error)
-      });
+      .then((response) => ( updateState() ))
+      .catch((error) => ( console.log(error) ));
   };
 
   const addAnswer = (data) => {
     console.log("ADD A: ", data);
     axios
-    .post(`/qa/questions/${data.id}/answers`, data)
-    .then((response) => (
-      stateHandler(productID)
-    ))
-    .catch((error) => {
-      console.log(error)
-    });
+      .post(`/qa/questions/${data.id}/answers`, data)
+      .then((response) => ( updateState() ))
+      .catch((error) => ( console.log(error) ));
   };
 
   const showQuestionModal = (event) => {
@@ -117,20 +96,6 @@ function Questions({id, product, questionsData, stateHandler}) {
     event.preventDefault();
     setQuestionModal(false);
   };
-
-  // const showAnswerModal = (event) => {
-  //   event.preventDefault();
-  //   const target = event.target;
-  //   const id = target.id;
-  //   console.log('ADD ANSWER TO', id);
-  //   setAnswerModal(true);
-  // };
-
-  // const hideAnswerModal = (event) => {
-  //   event.preventDefault();
-  //   setAnswerModal(false);
-  // };
-
 
   // Actions
   const showMoreQuestions = (event) => {

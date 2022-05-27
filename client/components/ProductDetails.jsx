@@ -8,7 +8,7 @@ function ProductDetails() {
 
   // Inital product ID = 37311.
   // Use this product ID to test all of your API requests.
-  const [productID, setProductID] = useState(37317);
+  const [productID, setProductID] = useState(37420);
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
 
@@ -18,7 +18,7 @@ function ProductDetails() {
   }, []);
 
   const updateState = (id, page=1, count=10, sort='newest') => {
-    console.log(`Updating ${id}`);
+    console.log(`Updating ${id} ${page} ${count}`);
 
     axios
       .all([

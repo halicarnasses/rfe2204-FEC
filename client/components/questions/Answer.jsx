@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
 
+  const formatDate = () => {
+    answer.date = new Date(answer.date);
+    console.log(answer.date);
+    // return fDate;
+  };
+
+  // formatDate();
+
   return (
     <div>
       <p className="answer-body">{answer.body}</p>

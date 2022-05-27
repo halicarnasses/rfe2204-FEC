@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './QuestionModals.css'
 
-function QuestionModal ({id, show, hide, submitHandler}) {
+function QuestionModal ({id, productName, show, hide, submitHandler}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   const [newQuestion, setNewQuestion] = useState('');
@@ -51,14 +51,20 @@ function QuestionModal ({id, show, hide, submitHandler}) {
       <div className='modal-content'>
 
         <div className="modal-header">
-          <h1>Add Your Question!</h1>
+          <h4>Add Your Question!</h4>
+          <h5>About the {productName}</h5>
           <a className="modal-close onclick" onClick={hide}>X</a>
         </div>
 
         <form id="modal-form" onSubmit={submitForm}>
-          <textarea name="question-input" value={newQuestion} rows="4" cols="40" placeholder="Your Question" onChange={changeHandler}></textarea>
-          <input name="nickname-input" value={nickname} type="text" placeholder="Your Nickname" onChange={changeHandler}/>
-          <input name="email-input" value={email} type="text" placeholder="Your Email" onChange={changeHandler}/>
+          <h6>Your Question</h6>
+          <textarea name="question-input" value={newQuestion} rows="4" cols="40" placeholder="" onChange={changeHandler}></textarea>
+          <h6>What is your nickname?</h6>
+          <input name="nickname-input" value={nickname} type="text" placeholder="Example: jackson11!" onChange={changeHandler}/>
+          <p>For privacy reasons, do not use your full name or email</p>
+          <h6>Your Email</h6>
+          <input name="email-input" value={email} type="text" placeholder="Example: jackson@email.com" onChange={changeHandler}/>
+          <p>For authentication reasons, you will not be emailed</p>
           <button type="submit">SUBMIT QUESTION</button>
         </form>
 

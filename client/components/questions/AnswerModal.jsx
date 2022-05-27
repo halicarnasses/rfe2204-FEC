@@ -29,7 +29,7 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
     const name = target.name;
     let inputString = '';
     switch(name) {
-      case 'question-input':
+      case 'answer-input':
         inputString  = target.value;
         setNewAnswer(inputString);
         break;
@@ -49,15 +49,20 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
       <div className='modal-content'>
 
         <div className="modal-header">
-          <h1>Submit Your Answer</h1>
-          <h2>"{productName}: {questionBody}"</h2>
+          <h4>Submit Your Answer</h4>
+          <h5>"{productName}: {questionBody}"</h5>
           <a className="modal-close onclick" onClick={hide}>X</a>
         </div>
 
         <form id="modal-form" onSubmit={submitForm}>
-          <textarea name="question-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
-          <input name="nickname-input" value={nickname} type="text" placeholder="Your Nickname" onChange={changeHandler}/>
-          <input name="email-input" value={email} type="text" placeholder="Your Email" onChange={changeHandler}/>
+          <h6>Your Answers</h6>
+          <textarea name="answer-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
+          <h6>What is your nickname?</h6>
+          <input name="nickname-input" value={nickname} type="text" placeholder="Example: jack543!" onChange={changeHandler}/>
+          <p>For privacy reasons, do not use your full name or email address</p>
+          <h6>Your Email</h6>
+          <input name="email-input" value={email} type="text" placeholder="Example: jack@email.com" onChange={changeHandler}/>
+          <p>For authentication reasons, you will not be emailed</p>
           <button type="submit">SUBMIT ANSWER</button>
         </form>
 

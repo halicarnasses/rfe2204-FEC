@@ -3,9 +3,6 @@ import { format, parseISO } from 'date-fns';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
 
-  // console.log(parseISO(answer.date));
-  console.log(`DATE ${format(parseISO(answer.date), 'MMMM, dd, yyyy')}`);
-
   return (
     <div>
       <p className="answer-body">{answer.body}</p>

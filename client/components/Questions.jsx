@@ -6,19 +6,25 @@ import QuestionModal from "./questions/QuestionModal.jsx"
 import './questions/Questions.css';
 
 function Questions({id, product, questionsData, stateHandler}) {
-  console.log(questionsData);
+
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState([]);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
     if (questions && questions.length <= 2 ) {
       document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
     }
+    if (product) {
+      setCurrentProduct(product);
+      setProductName(product.name);
+    }
+
     setQuestions(questionsData);
-    setCurrentProduct(product);
+    // setPName(product.name);
   }, [questionsData, product, questions]);
 
   // updates global state
@@ -112,15 +118,14 @@ function Questions({id, product, questionsData, stateHandler}) {
     return (
       <div className="questions-div">
         <h2>QUESTIONS</h2>
-        <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-        {/* <AnswerModal show={answerModal} hide={hideAnswerModal} submitHandler={addAnswer}/> */}
+        <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
         { questions.map((q, i) => {
+
           if (i < qLimit) {
-            console.log(q.question_id);
             return (
               <Question
                 key={q.question_id}
-                productName={product.name}
+                productName={productName}
                 id={q.question_id}
                 body={q.question_body}
                 date={q.question_date}

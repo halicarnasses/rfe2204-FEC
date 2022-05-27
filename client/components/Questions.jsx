@@ -14,7 +14,6 @@ function Questions({id, product, questionsData, stateHandler}) {
   const [currentProduct, setCurrentProduct] = useState(product);
 
   useEffect(() => {
-
     if (questions && questions.length <= 2 ) {
       document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
     }
@@ -117,6 +116,7 @@ function Questions({id, product, questionsData, stateHandler}) {
         {/* <AnswerModal show={answerModal} hide={hideAnswerModal} submitHandler={addAnswer}/> */}
         { questions.map((q, i) => {
           if (i < qLimit) {
+            console.log(q.question_id);
             return (
               <Question
                 key={q.question_id}

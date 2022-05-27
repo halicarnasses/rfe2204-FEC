@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
+import { format, parseISO } from 'date-fns';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
 
-  const formatDate = () => {
-    answer.date = new Date(answer.date);
-    console.log(answer.date);
-    // return fDate;
-  };
-
-  // formatDate();
+  // console.log(parseISO(answer.date));
+  console.log(`DATE ${format(parseISO(answer.date), 'MMMM, dd, yyyy')}`);
 
   return (
     <div>
       <p className="answer-body">{answer.body}</p>
       <div>
         <p>
-          by {answer.answerer_name}, {answer.date} | Helpful?
+          by {answer.answerer_name}, {format(parseISO(answer.date), 'MMMM, dd, yyyy')} | Helpful?
           <a
             value={answer.id}
             onClick={helpfulHandler}

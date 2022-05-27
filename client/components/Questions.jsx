@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
-import AnswerModal from "./questions/AnswerModal.jsx"
 
 import './questions/Questions.css';
 
 function Questions({id, questionsData, stateHandler}) {
-  console.log(questionsData);
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
-  const [answerModal, setAnswerModal] = useState(false);
 
   useEffect(() => {
     setQuestions(questionsData);
@@ -118,16 +115,18 @@ function Questions({id, questionsData, stateHandler}) {
     setQuestionModal(false);
   };
 
-  const showAnswerModal = (event) => {
-    event.preventDefault();
-    console.log('ADD ANSWER');
-    setAnswerModal(true);
-  };
+  // const showAnswerModal = (event) => {
+  //   event.preventDefault();
+  //   const target = event.target;
+  //   const id = target.id;
+  //   console.log('ADD ANSWER TO', id);
+  //   setAnswerModal(true);
+  // };
 
-  const hideAnswerModal = (event) => {
-    event.preventDefault();
-    setAnswerModal(false);
-  };
+  // const hideAnswerModal = (event) => {
+  //   event.preventDefault();
+  //   setAnswerModal(false);
+  // };
 
 
   // Actions
@@ -147,7 +146,7 @@ function Questions({id, questionsData, stateHandler}) {
       <div className="questions-div">
         <h2>QUESTIONS</h2>
         <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-        <AnswerModal show={answerModal} hide={hideAnswerModal}/>
+        {/* <AnswerModal show={answerModal} hide={hideAnswerModal} submitHandler={addAnswer}/> */}
         { questions.map((q, i) => {
           if (i < qLimit) {
             return (
@@ -162,7 +161,7 @@ function Questions({id, questionsData, stateHandler}) {
                 answers={q.answers}
                 helpfulHandler={markHelpful}
                 reportHandler={report}
-                modalHandler={showAnswerModal}
+                submitHandler={addAnswer}
                 />
               )
             }

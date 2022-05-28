@@ -23,6 +23,10 @@
   border: 4px solid blue;
 }
 
+.question-search input {
+  width: 80%;
+}
+
 /* Questions List */
 .questions-list{
   margin: 10px;

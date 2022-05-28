@@ -29,7 +29,7 @@ function ProductDetails() {
         axios.get(`/products/${id}/styles`),
         // Questions
         axios.get(`/qa/questions/?product_id=${id}&page=${page}&count=${count}`),
-        //
+        // Reviews
         axios.get(`/reviews/?page=&count=&product_id=${id}`),
         axios.get(`/reviews/meta/?product_id=${id}`),
       ])

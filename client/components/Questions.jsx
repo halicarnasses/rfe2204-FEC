@@ -7,35 +7,21 @@ import QuestionSearch from "./questions/QuestionSearch.jsx"
 import './questions/Questions.css';
 
 function Questions({id, product, questionsData, stateHandler}) {
-  console.log('questions first', questionsData);
+
   const [productID, setProductID] = useState(id);
-  const [questions, setQuestions] = useState(questionsData);
+  const [questions, setQuestions] = useState([]);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
   const [productName, setProductName] = useState('');
-  const [filteredQuestions, setFilteredQuestions] = useState([])
-
-  console.log(questions? true : false, questions);
+  const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
-    console.log('questions mount');
-    // if (questions && questions.length <= 2 ) {
-    //   document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
-    // }
-    // if (product) {
-    //   setCurrentProduct(product);
-    //   setProductName(product.name);
-    // }
-    // if (filteredQuestions && filteredQuestions.length > 0) {
-    //   console.log('update list with fitlered');
-    // }
-    setQuestions(questionsData);
-    // setPName(product.name);
-  }, [questionsData, product, questions]);
+    if (questionsData) {
+      setQuestions(questionsData);
+    }
+  }, [questionsData]);
 
-  // updates global state
-  // change this name
   const updateState = () => {
     stateHandler(productID, 1, 100);
   }
@@ -120,36 +106,48 @@ function Questions({id, product, questionsData, stateHandler}) {
     }
   };
 
-  const searchQuestions = (query) => {
-    console.log('Searching for', query.length, query);
-    let results = [];
-    const regex = new RegExp(query, 'g');
-
-    for (let q of questions) {
-      const body = q.question_body;
-      let matchArr = [...body.matchAll(regex)];
-      if (matchArr.length > 0) {
-        results.push(q);
+  // Set the query to whatever is typed in search bar.
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    if (value && value.length >= 3) {
+      let results = [];
+      const regex = new RegExp(value, 'g');
+      for (let q of questions) {
+        const body = q.question_body;
+        let matchArr = [...body.matchAll(regex)];
+        if (matchArr.length > 0) {
+          results.push(q);
+        }
       }
+      if (results.length > 0) {
+        setQuestions(results);
+      }
+    } else {
+      setQuestions(questionsData);
     }
-    console.log(results);
-    setFilteredQuestions(results);
-
-    // if (filteredQuestions.length > 0) {
-    //   console.log('found questions');
-    //   console.log(filteredQuestions);
-    //   // setQuestions(filteredQuestions);
-    // }
-    // console.log(questions);
-
   };
+
 
   return (
     <div className="questions-div">
+      {/* {console.log('questions render', questionsData)} */}
 
       <h2>QUESTIONS</h2>
       <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-      <QuestionSearch searchHandler={searchQuestions}/>
+
+      {/* Search Bar */}
+      <div  className="question-search">
+      <input
+        type="search"
+        onChange={onChangeHandler}
+        placeholder="Have a question? Search for answers..." />
+        <i className="fa-solid fa-magnifying-glass"></i>
+      </div>
+
+
+
       <div className="questions-list">
         { questions ? questions.map((q, i) => {
           // console.log(q);

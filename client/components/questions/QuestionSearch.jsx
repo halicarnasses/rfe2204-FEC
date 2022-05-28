@@ -7,7 +7,7 @@ function QuestionSearch({searchHandler}) {
   const onChangeHandler = (event) => {
     const target = event.target;
     const value = target.value;
-    console.log(value);
+    // console.log(value);
     setQuery(value);
     // Add handler to search questions.
     searchHandler(value);
@@ -15,8 +15,11 @@ function QuestionSearch({searchHandler}) {
 
   const searchQuestions = (event) => {
     event.preventDefault();
-    console.log(`SEARCH FOR: ${query}`);
-    searchHandler(query);
+    const target = event.target;
+    const value = target.value;
+    if (value) {
+      searchHandler(value);
+    }
   }
 
   return (

@@ -11,7 +11,6 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
   const [answerModal, setAnswerModal] = useState(false);
 
   useEffect(() => {
-
     setAnswerKeys(Object.keys(answers));
   }, []);
 

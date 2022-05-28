@@ -10,13 +10,13 @@ function QuestionSearch({searchHandler}) {
     console.log(value);
     setQuery(value);
     // Add handler to search questions.
-    searchHandler(query);
+    searchHandler(value);
   };
 
   const searchQuestions = (event) => {
     event.preventDefault();
     console.log(`SEARCH FOR: ${query}`);
-    // Add handler to search questions.
+    searchHandler(query);
   }
 
   return (

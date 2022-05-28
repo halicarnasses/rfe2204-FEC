@@ -14,14 +14,20 @@ function Questions({id, product, questionsData, stateHandler}) {
   const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
   const [productName, setProductName] = useState('');
+  const [filteredQuestions, setFilteredQuestions] = useState([])
 
   useEffect(() => {
+    console.log('questions mount');
     if (questions && questions.length <= 2 ) {
       document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
     }
     if (product) {
       setCurrentProduct(product);
       setProductName(product.name);
+    }
+
+    if (filteredQuestions && filteredQuestions.length > 0) {
+      console.log('update list with fitlered');
     }
 
     setQuestions(questionsData);
@@ -116,16 +122,26 @@ function Questions({id, product, questionsData, stateHandler}) {
 
   const searchQuestions = (query) => {
     console.log('Searching for', query.length, query);
-    let filteredQuestions = [];
+    let results = [];
+    const regex = new RegExp(query, 'g');
+
     for (let q of questions) {
-      if (q.question_body.includes(query)) {
-        filteredQuestions.push(q);
+      const body = q.question_body;
+      let matchArr = [...body.matchAll(regex)];
+      if (matchArr.length > 0) {
+        results.push(q);
       }
     }
-    console.log(filteredQuestions);
-    if (filteredQuestions.length !== 0) {
-      setQuestions(filteredQuestions);
-    }
+    console.log(results);
+    setFilteredQuestions(results);
+
+    // if (filteredQuestions.length > 0) {
+    //   console.log('found questions');
+    //   console.log(filteredQuestions);
+    //   // setQuestions(filteredQuestions);
+    // }
+    // console.log(questions);
+
   };
 
   if (questions) {

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import Overview from './Overview.jsx';
+// import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
+
+
 
 function ProductDetails() {
 
@@ -60,7 +62,7 @@ function ProductDetails() {
 
   return (
     <div>
-      <h1>Product Details</h1>
+      {/* <h1>Product Details</h1> */}
       {/* <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} stateHandler={updateState}/> */}
       <Questions id={productID} product={productAll.productInfo} questionsData={productAll.questions} stateHandler={updateState}/>
       {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}

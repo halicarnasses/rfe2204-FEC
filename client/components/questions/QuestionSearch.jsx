@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function QuestionSearch({searchHandler}) {
   const [query, setQuery] = useState("");
 
@@ -8,6 +7,7 @@ function QuestionSearch({searchHandler}) {
   const onChangeHandler = (event) => {
     const target = event.target;
     const value = target.value;
+    console.log(value);
     setQuery(value);
     // Add handler to search questions.
     searchHandler(query);
@@ -33,6 +33,5 @@ function QuestionSearch({searchHandler}) {
   );
 
 }
-
 
 export default QuestionSearch;

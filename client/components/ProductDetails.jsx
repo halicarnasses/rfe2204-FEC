@@ -8,7 +8,7 @@ function ProductDetails() {
 
   // Inital product ID = 37311.
   // Use this product ID to test all of your API requests.
-  const [productID, setProductID] = useState(37420);
+  const [productID, setProductID] = useState(37360);
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
 

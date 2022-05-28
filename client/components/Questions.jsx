@@ -117,33 +117,38 @@ function Questions({id, product, questionsData, stateHandler}) {
   if (questions) {
     return (
       <div className="questions-div">
+
         <h2>QUESTIONS</h2>
         <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-        { questions.map((q, i) => {
 
-          if (i < qLimit) {
-            return (
-              <Question
-                key={q.question_id}
-                productName={productName}
-                id={q.question_id}
-                body={q.question_body}
-                date={q.question_date}
-                name={q.asker_name}
-                helpfulness={q.question_helpfulness}
-                reported={q.reported}
-                answers={q.answers}
-                helpfulHandler={markHelpful}
-                reportHandler={report}
-                submitHandler={addAnswer}
-                />
-              )
-            }
-          })
-        }
+        <div className="questions-list">
+          { questions.map((q, i) => {
+            if (i < qLimit) {
+              return (
+                <Question
+                  key={q.question_id}
+                  productName={productName}
+                  id={q.question_id}
+                  body={q.question_body}
+                  date={q.question_date}
+                  name={q.asker_name}
+                  helpfulness={q.question_helpfulness}
+                  reported={q.reported}
+                  answers={q.answers}
+                  helpfulHandler={markHelpful}
+                  reportHandler={report}
+                  submitHandler={addAnswer}
+                  />
+                )
+              }
+            })
+          }
+        </div>
+
         <button id="more-questions-btn" name="more-questions"
           onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
         <button onClick={showQuestionModal}>ADD A QUESTION +</button>
+
       </div>
     )
   } else {

@@ -15,7 +15,7 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
   const showMoreAnswers = (event) => {
     event.preventDefault();
     const target = event.target;
-    target.classList.toggle('questions-hide-button')
+    target.classList.toggle('questions-hide-button');
     setAnswerLimit(answerKeys.length);
   };
 
@@ -32,13 +32,9 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
     setAnswerModal(false);
   };
 
-  const submitAnswer = (data) => {
-
-  }
-
-
   return (
     <div  className="list-item">
+
       <AnswerModal
         questionID={id}
         productName={productName}
@@ -61,9 +57,9 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
         <div>
           <p>A: </p>
         </div>
-        <div>
-          {
-            answerKeys.map((key, i) => {
+
+        <div className="answers-list">
+          { answerKeys.map((key, i) => {
               if (i < answerLimit) {
                 return (
                   <Answer
@@ -74,16 +70,13 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
                   />
                 )
               }
-              if (i === answerLimit) {
-                return (
-                  <button className="more-answers-btn" name="more-answers"
-                    onClick={showMoreAnswers}>Load More Answers
-                  </button>
-                )
-              }
             })
           }
+          <button hidden={answerKeys.length >= 2 ? false : true} className="more-answers-btn" name="more-answers"
+              onClick={showMoreAnswers}>Load More Answers
+          </button>
         </div>
+
       </div>
 
       {/* <button className="more-answers-btn" name="more-answers"

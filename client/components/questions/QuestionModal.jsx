@@ -15,13 +15,33 @@ function QuestionModal ({id, productName, show, hide, submitHandler}) {
     // newQuestion === /a-zA-Z?!./
     // nickname === /a-zA-Z0-9/
     // email === /[a-zA-Z0-9.]@a-zA-Z0-9].[com, edu, gov]/
-    const data = {
-      body: newQuestion,
-      name: nickname,
-      email: email,
-      product_id: id
-    };
-    submitHandler(data);
+    const fieldNames = ['Question Field', 'Nickname', 'Email'];
+    let blankWarnings = [false, false, false];
+    const state = [newQuestion, nickname, email];
+    let blankString = '';
+
+    for (let i in state) {
+      if (state[i].length === 0) {
+        blankWarnings[i] = true;
+        blankString += `${fieldNames[i]}, `
+      } else {
+        blankWarnings[i] = false;
+      }
+    }
+
+    if (blankString) {
+      alert(`Please fill in: ${blankString}`);
+    } else {
+      console.log('data not blank');
+      const data = {
+        body: newQuestion,
+        name: nickname,
+        email: email,
+        product_id: id
+      };
+      submitHandler(data);
+    }
+
   };
 
   const changeHandler = (event) => {

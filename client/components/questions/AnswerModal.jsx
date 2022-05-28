@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './QuestionModals.css'
 
 function AnswerModal ({questionID, productName, questionBody, show, hide, submitHandler}) {
-  console.log('answershow', show);
   // const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
   const [newAnswer, setNewAnswer] = useState('');
@@ -11,19 +10,39 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log('Verify Data!', newAnswer, nickname, email);
+
     // Use regex similar to:
     // newQuestion === [a-xA-Z0-9.!?''""]+
     // nickname === [a-xA-Z0-9]+
     // email === [a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z]{2,3}
-    const data = {
-      body: newAnswer,
-      name: nickname,
-      email: email,
-      question_id: questionID
-    };
 
-    submitHandler(data);
+    const fieldNames = ['Answer Field', 'Nickname', 'Email'];
+    let blankWarnings = [false, false, false];
+    const state = [newAnswer, nickname, email];
+    let blankString = '';
+
+    for (let i in state) {
+      if (state[i].length === 0) {
+        blankWarnings[i] = true;
+        blankString += `${fieldNames[i]}, `
+      } else {
+        blankWarnings[i] = false;
+      }
+    }
+
+    if (blankString) {
+      alert(`Please fill in: ${blankString}`);
+    } else {
+      console.log('data not blank');
+      const data = {
+        body: newAnswer,
+        name: nickname,
+        email: email,
+        question_id: questionID
+      };
+      submitHandler(data);
+    }
+
   };
 
   const changeHandler = (event) => {
@@ -47,28 +66,24 @@ function AnswerModal ({questionID, productName, questionBody, show, hide, submit
   }
 
   return (
-    <div hidden={!show}>
-      <div className='modal-content'>
-
-        <div className="modal-header">
-          <h4>Submit Your Answer</h4>
-          <h5>"{productName}: {questionBody}"</h5>
-          <a className="modal-close onclick" onClick={hide}>X</a>
-        </div>
-
-        <form id="modal-form" onSubmit={submitForm}>
-          <h6>Your Answers</h6>
-          <textarea maxLength={1000} name="answer-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
-          <h6>What is your nickname?</h6>
-          <input maxLength={60} name="nickname-input" value={nickname} type="text" placeholder="Example: jack543!" onChange={changeHandler}/>
-          <p>For privacy reasons, do not use your full name or email address</p>
-          <h6>Your Email</h6>
-          <input maxLength={60} name="email-input" value={email} type="text" placeholder="Example: jack@email.com" onChange={changeHandler}/>
-          <p>For authentication reasons, you will not be emailed</p>
-          <button type="submit">SUBMIT ANSWER</button>
-        </form>
-
+    <div hidden={!show} className='modal-content'>
+      <div className="modal-header">
+        <h4>Submit Your Answer</h4>
+        <h5>"{productName}: {questionBody}"</h5>
+        <a className="modal-close onclick" onClick={hide}>X</a>
       </div>
+
+      <form id="modal-form" onSubmit={submitForm}>
+        <h6>Your Answers</h6>
+        <textarea maxLength={1000} name="answer-input" value={newAnswer} rows="4" cols="40" placeholder="Your Answer" onChange={changeHandler}></textarea>
+        <h6>What is your nickname?</h6>
+        <input maxLength={60} name="nickname-input" value={nickname} type="text" placeholder="Example: jack543!" onChange={changeHandler}/>
+        <p>For privacy reasons, do not use your full name or email address</p>
+        <h6>Your Email</h6>
+        <input maxLength={60} name="email-input" value={email} type="text" placeholder="Example: jack@email.com" onChange={changeHandler}/>
+        <p>For authentication reasons, you will not be emailed</p>
+        <button type="submit">SUBMIT ANSWER</button>
+      </form>
     </div>
   );
 };

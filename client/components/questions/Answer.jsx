@@ -10,16 +10,18 @@ function Answer ({answer, helpfulHandler, reportHandler}) {
         <p>
           by {answer.answerer_name}, {format(parseISO(answer.date), 'MMMM, dd, yyyy')} | Helpful?
           <a
+            href=""
             value={answer.id}
             onClick={helpfulHandler}
             name="helpful-answer"
-            className="onclick">Yes</a> {answer.helpfulness} |
-            <a
+            className="onclick">Yes</a>
+          {answer.helpfulness} |
+          <a
+            href=""
             value={answer.id}
             onClick={reportHandler}
             name="report-answer"
-            className="onclick">Report
-          </a>
+            className="onclick">Report</a>
         </p>
       </div>
     </div>

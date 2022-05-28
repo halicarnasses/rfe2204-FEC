@@ -32,6 +32,11 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
     setAnswerModal(false);
   };
 
+  const submitAnswer = (data) => {
+
+  }
+
+
   return (
     <div  className="list-item">
       <AnswerModal
@@ -46,9 +51,9 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
         <p className="question-body">Q: {body}</p>
         <p className="question-info">
           Helpful?
-          <a value={id} href="" onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
+          <a href="" value={id} onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
           {helpfulness} |
-          <a value={id} href="" onClick={showAnswerModal} name="add-answer" className="onclick">Add Answer</a>
+          <a href="" value={id} onClick={showAnswerModal} name="add-answer" className="onclick">Add Answer</a>
         </p>
       </div>
 

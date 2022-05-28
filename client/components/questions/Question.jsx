@@ -8,7 +8,7 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
 
   const [answerLimit, setAnswerLimit] = useState(2);
   const [answerKeys, setAnswerKeys] = useState([]);
-  const [answerModal, setAnswerModal] = useState(false);
+  const [answerHidden, setAnswerHidden] = useState(true);
 
   // useEffect(() => {
   //   setAnswerKeys(Object.keys(answers));
@@ -26,12 +26,12 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
     const target = event.target;
     const id = target.getAttribute('value');
     console.log('ADD ANSWER TO', id);
-    setAnswerModal(true);
+    setAnswerHidden(false);
   };
 
   const hideAnswerModal = (event) => {
     event.preventDefault();
-    setAnswerModal(false);
+    setAnswerHidden(true);
   };
 
   return (
@@ -41,7 +41,7 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
         questionID={id}
         productName={productName}
         questionBody={body}
-        show={answerModal}
+        hidden={answerHidden}
         hide={hideAnswerModal}
         submitHandler={submitHandler}/>
 

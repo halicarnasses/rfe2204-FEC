@@ -1,6 +1,5 @@
-p {
-  font-size: 80%;
-}
+
+/* Questions Widget */
 
 .questions-div {
   margin: 10px;
@@ -9,13 +8,22 @@ p {
   font-size:80%;
 }
 
+.questions-dev p {
+  font-size: 100%;
+}
+
+.onclick {
+  cursor: pointer;
+}
+
+/* Search Bar */
 .question-search{
   margin: 10px;
   padding: 5px;
   border: 4px solid blue;
 }
 
-/* Should be scrollable and fit screen */
+/* Questions List */
 .questions-list{
   margin: 10px;
   padding: 5px;
@@ -24,16 +32,14 @@ p {
   overflow-y: scroll;
 }
 
+/* Question Item */
 .list-item {
   margin: 10px;
   padding: 5px;
   border: 4px solid green;
 }
 
-.onclick {
-  cursor: pointer;
-}
-
+/* Question */
 .item-question {
   margin: 5px;
   display: flex;
@@ -55,6 +61,7 @@ p {
   border: 2px solid orange;
 }
 
+/* Answer */
 .item-answer {
   margin: 5px;
   display: flex;
@@ -80,7 +87,49 @@ p {
   border: 2px solid red;
 }
 
-
 .questions-hide-button {
   display: none;
+}
+
+
+
+/* MODALS */
+.questions-modal {
+  position:fixed;
+  background: white;
+  width: 60%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+
+  display:flex;
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+.questions-modal i {
+  margin-left: auto;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.questions-modal-header {
+  margin: auto;
+  text-align: center;
+  border: 2px solid blue;
+}
+
+
+.questions-modal-form {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 2px;
+  border: 2px solid blue;
+}
+
+.questions-modal-form button{
+  width: fit-content;
+  margin: auto;
 }

@@ -11,16 +11,21 @@ function Questions({id, product, questionsData, stateHandler}) {
   const [productID, setProductID] = useState(id);
   const [questions, setQuestions] = useState([]);
   const [qLimit, setQLimit] = useState(2);
-  const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
   const [productName, setProductName] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
+
+  const [questionHidden, setQuestionHidden] = useState(true);
 
   useEffect(() => {
     if (questionsData) {
       setQuestions(questionsData);
     }
-  }, [questionsData]);
+
+    if (product) {
+      setProductName(product.name);
+    }
+  }, [questionsData, product]);
 
   const updateState = () => {
     stateHandler(productID, 1, 100);
@@ -87,12 +92,12 @@ function Questions({id, product, questionsData, stateHandler}) {
 
   const showQuestionModal = (event) => {
     event.preventDefault();
-    setQuestionModal(true);
+    setQuestionHidden(false);
   };
 
   const hideQuestionModal = (event) => {
     event.preventDefault();
-    setQuestionModal(false);
+    setQuestionHidden(true);
   };
 
   const showMoreQuestions = (event) => {
@@ -115,7 +120,7 @@ function Questions({id, product, questionsData, stateHandler}) {
       let results = [];
       const regex = new RegExp(value, 'g');
       for (let q of questions) {
-        const body = q.question_body;
+        const body = q.question_body.toLowerCase();
         let matchArr = [...body.matchAll(regex)];
         if (matchArr.length > 0) {
           results.push(q);
@@ -135,7 +140,7 @@ function Questions({id, product, questionsData, stateHandler}) {
       {/* {console.log('questions render', questionsData)} */}
 
       <h2>QUESTIONS</h2>
-      <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
+      <QuestionModal id={productID} productName={productName} hidden={questionHidden} hide={hideQuestionModal} submitHandler={addQuestion}/>
 
       {/* Search Bar */}
       <div  className="question-search">
@@ -174,6 +179,7 @@ function Questions({id, product, questionsData, stateHandler}) {
       </div>
 
       <button id="more-questions-btn" name="more-questions"
+        hidden={questions.length <= 2 ? true : false}
         onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
       <button onClick={showQuestionModal}>ADD A QUESTION +</button>
 

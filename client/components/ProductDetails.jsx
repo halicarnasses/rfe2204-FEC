@@ -4,13 +4,10 @@ import axios from "axios";
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
 
-
-
 function ProductDetails() {
 
-  // Inital product ID = 37311.
-  // Use this product ID to test all of your API requests.
   const [productID, setProductID] = useState(37360);
+
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
 
@@ -46,6 +43,7 @@ function ProductDetails() {
           reviews: {},
           reviewsMeta: {}
         }
+
         allInfo.productInfo = responses[0].data;
         allInfo.productStyles = responses[1].data;
         allInfo.questions = responses[2].data.results;

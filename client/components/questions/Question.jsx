@@ -10,9 +10,9 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
   const [answerKeys, setAnswerKeys] = useState([]);
   const [answerModal, setAnswerModal] = useState(false);
 
-  useEffect(() => {
-    setAnswerKeys(Object.keys(answers));
-  }, []);
+  // useEffect(() => {
+  //   setAnswerKeys(Object.keys(answers));
+  // }, []);
 
   const showMoreAnswers = (event) => {
     event.preventDefault();

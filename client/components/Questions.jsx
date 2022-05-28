@@ -7,29 +7,29 @@ import QuestionSearch from "./questions/QuestionSearch.jsx"
 import './questions/Questions.css';
 
 function Questions({id, product, questionsData, stateHandler}) {
-
+  console.log('questions first', questionsData);
   const [productID, setProductID] = useState(id);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(questionsData);
   const [qLimit, setQLimit] = useState(2);
   const [questionModal, setQuestionModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(product);
   const [productName, setProductName] = useState('');
   const [filteredQuestions, setFilteredQuestions] = useState([])
 
+  console.log(questions? true : false, questions);
+
   useEffect(() => {
     console.log('questions mount');
-    if (questions && questions.length <= 2 ) {
-      document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
-    }
-    if (product) {
-      setCurrentProduct(product);
-      setProductName(product.name);
-    }
-
-    if (filteredQuestions && filteredQuestions.length > 0) {
-      console.log('update list with fitlered');
-    }
-
+    // if (questions && questions.length <= 2 ) {
+    //   document.getElementById('more-questions-btn').classList.toggle('questions-hide-button');
+    // }
+    // if (product) {
+    //   setCurrentProduct(product);
+    //   setProductName(product.name);
+    // }
+    // if (filteredQuestions && filteredQuestions.length > 0) {
+    //   console.log('update list with fitlered');
+    // }
     setQuestions(questionsData);
     // setPName(product.name);
   }, [questionsData, product, questions]);
@@ -144,48 +144,43 @@ function Questions({id, product, questionsData, stateHandler}) {
 
   };
 
-  if (questions) {
-    return (
-      <div className="questions-div">
+  return (
+    <div className="questions-div">
 
-        <h2>QUESTIONS</h2>
-        <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-        <QuestionSearch searchHandler={searchQuestions}/>
-        <div className="questions-list">
-          { questions.map((q, i) => {
-            if (i < qLimit) {
-              return (
-                <Question
-                  key={q.question_id}
-                  productName={productName}
-                  id={q.question_id}
-                  body={q.question_body}
-                  date={q.question_date}
-                  name={q.asker_name}
-                  helpfulness={q.question_helpfulness}
-                  reported={q.reported}
-                  answers={q.answers}
-                  helpfulHandler={markHelpful}
-                  reportHandler={report}
-                  submitHandler={addAnswer}
-                  />
-                )
-              }
-            })
-          }
-        </div>
-
-        <button id="more-questions-btn" name="more-questions"
-          onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={showQuestionModal}>ADD A QUESTION +</button>
-
+      <h2>QUESTIONS</h2>
+      <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
+      <QuestionSearch searchHandler={searchQuestions}/>
+      <div className="questions-list">
+        { questions ? questions.map((q, i) => {
+          // console.log(q);
+          if (i < qLimit) {
+            return (
+              <Question
+                key={q.question_id}
+                productName={productName}
+                id={q.question_id}
+                body={q.question_body}
+                date={q.question_date}
+                name={q.asker_name}
+                helpfulness={q.question_helpfulness}
+                reported={q.reported}
+                answers={q.answers}
+                helpfulHandler={markHelpful}
+                reportHandler={report}
+                submitHandler={addAnswer}
+                />
+              )
+            }
+          }) : <h6>no questions yet</h6>
+        }
       </div>
-    )
-  } else {
-    return (
-      <div>NO QUESTIONS!</div>
-    );
-  }
+
+      <button id="more-questions-btn" name="more-questions"
+        onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+      <button onClick={showQuestionModal}>ADD A QUESTION +</button>
+
+    </div>
+  )
 
 }
 

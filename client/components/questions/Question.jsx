@@ -4,11 +4,14 @@ import AnswerModal from "./AnswerModal.jsx"
 
 function Question({id, productName, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
 
+  // turn answers into an array for better sorting.
+
   const [answerLimit, setAnswerLimit] = useState(2);
   const [answerKeys, setAnswerKeys] = useState([]);
   const [answerModal, setAnswerModal] = useState(false);
 
   useEffect(() => {
+
     setAnswerKeys(Object.keys(answers));
   }, []);
 

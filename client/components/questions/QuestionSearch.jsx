@@ -10,7 +10,7 @@ function QuestionSearch({searchHandler}) {
     const value = target.value;
     setQuery(value);
     // Add handler to search questions.
-    console.log(`SEARCH: ${query}`);
+    searchHandler(query);
   };
 
   const searchQuestions = (event) => {
@@ -21,14 +21,13 @@ function QuestionSearch({searchHandler}) {
 
   return (
     <div  className="question-search">
-      <h3>Search</h3>
       <input
         type="text"
         value={query}
         name="question-search"
-        onChange={onChangeHandler}>
-      </input>
-        {/* Searchs questions */}
+        onChange={onChangeHandler}
+        placeholder="Have a question? Search for answers..." />
+
       <button onClick={searchQuestions}>SEARCH</button>
     </div>
   );

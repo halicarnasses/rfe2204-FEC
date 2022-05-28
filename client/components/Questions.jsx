@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
+import QuestionSearch from "./questions/QuestionSearch.jsx"
 
 import './questions/Questions.css';
 
@@ -87,7 +88,7 @@ function Questions({id, product, questionsData, stateHandler}) {
   const addAnswer = (data) => {
     console.log("ADD A: ", data);
     axios
-      .post(`/qa/questions/${data.id}/answers`, data)
+      .post(`/qa/questions/${data.question_id}/answers`, data)
       .then((response) => ( updateState() ))
       .catch((error) => ( console.log(error) ));
   };
@@ -102,7 +103,6 @@ function Questions({id, product, questionsData, stateHandler}) {
     setQuestionModal(false);
   };
 
-  // Actions
   const showMoreQuestions = (event) => {
     const target = event.target;
     let newLimit = qLimit;
@@ -114,13 +114,27 @@ function Questions({id, product, questionsData, stateHandler}) {
     }
   };
 
+  const searchQuestions = (query) => {
+    console.log('Searching for', query.length, query);
+    let filteredQuestions = [];
+    for (let q of questions) {
+      if (q.question_body.includes(query)) {
+        filteredQuestions.push(q);
+      }
+    }
+    console.log(filteredQuestions);
+    if (filteredQuestions.length !== 0) {
+      setQuestions(filteredQuestions);
+    }
+  };
+
   if (questions) {
     return (
       <div className="questions-div">
 
         <h2>QUESTIONS</h2>
         <QuestionModal id={productID} productName={productName} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-
+        <QuestionSearch searchHandler={searchQuestions}/>
         <div className="questions-list">
           { questions.map((q, i) => {
             if (i < qLimit) {

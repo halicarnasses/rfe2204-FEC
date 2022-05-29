@@ -10,7 +10,7 @@
 }
 
 .carousel-slide-content {
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   align-items: center;
   border: 2px solid green;
@@ -36,7 +36,7 @@
   width: 100%;
   color: blue;
   border: 2px solid green;
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   gap: 5px;
   align-items: center;

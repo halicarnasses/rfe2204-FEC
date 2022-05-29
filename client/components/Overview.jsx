@@ -32,6 +32,10 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   }, [productInfo, productStyles, reviews]);
 
+  const updateStyle = () => {
+
+  };
+
 
 
   return (
@@ -39,13 +43,17 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
       {/* <ImageGallery images={style.photos}/> */}
 
       <Carousel slides={style ? style.photos : []}/>
+
       <div className="overview-product-dash">
         <ProductInfo
           name={product ? product.name : ''}
           rating={rating}
           price={product ? product.default_price : 0}
           salePrice={style ? style.sale_price : 0}/>
-        <StyleSelector />
+        <StyleSelector
+          styleHandler={updateStyle}
+          style={styles ? style : {}}
+          styles={styles ? styles.results : []}/>
         <AddToCart />
       </div>
 

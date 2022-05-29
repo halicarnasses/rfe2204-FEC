@@ -4,7 +4,6 @@ import CarouselItem from "./CarouselItem.jsx";
 import "./Carousel.css";
 
 const Carousel = ({ slides }) => {
-  console.log('Carousel', slides);
 
   const [current, setCurrent] = useState(0);
   const [images, setImages] = useState([]);

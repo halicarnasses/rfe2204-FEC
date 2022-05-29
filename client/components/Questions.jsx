@@ -151,8 +151,6 @@ function Questions({id, product, questionsData, stateHandler}) {
         <i className="fa-solid fa-magnifying-glass"></i>
       </div>
 
-
-
       <div className="questions-list">
         { questions ? questions.map((q, i) => {
           // console.log(q);

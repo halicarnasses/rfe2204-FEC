@@ -7,7 +7,6 @@ function QuestionModal ({id, productName,hidden, hide, submitHandler}) {
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log('Verify Data!', newQuestion, nickname, email);
     // Use regex similar to:
     // newQuestion === /a-zA-Z?!./
     // nickname === /a-zA-Z0-9/
@@ -29,7 +28,6 @@ function QuestionModal ({id, productName,hidden, hide, submitHandler}) {
     if (blankString) {
       alert(`Please fill in: ${blankString}`);
     } else {
-      console.log('data not blank');
       const data = {
         body: newQuestion,
         name: nickname,

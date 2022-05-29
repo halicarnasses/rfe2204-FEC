@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-// import Overview from './Overview.jsx';
+import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
+import Slider from './examples/carousel/Slider.jsx';
+import SliderTestData from './examples/carousel/SliderTestData.js';
 
 function ProductDetails() {
 
@@ -21,8 +23,10 @@ function ProductDetails() {
 
     axios
       .all([
+
         // All products not needed right now.
         // axios.get(`/products/?page=${page}&count=${count}`),
+
         // Product Information
         axios.get(`/products/${id}`),
         // Product Styles
@@ -58,11 +62,23 @@ function ProductDetails() {
 
   };
 
+  // Add ternary conditional for all props to handle undefined data
+  // ex:  props={props? props : {}}
   return (
     <div>
-      {/* <h1>Product Details</h1> */}
-      {/* <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} stateHandler={updateState}/> */}
-      <Questions id={productID} product={productAll.productInfo} questionsData={productAll.questions} stateHandler={updateState}/>
+      <h1>Product Details</h1>
+      <Slider slides={SliderTestData}/>
+      {/* <Overview
+        id={productID}
+        productInfo={productAll.productInfo}
+        productStyles={productAll.productStyles}
+        reviewCount={productAll.reviews}
+        stateHandler={updateState}/> */}
+      {/* <Questions
+        id={productID}
+        product={productAll.productInfo}
+        questionsData={productAll.questions}
+        stateHandler={updateState}/> */}
       {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
     </div>
   );

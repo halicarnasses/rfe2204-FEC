@@ -3,8 +3,9 @@ import axios from "axios";
 import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
-import Slider from './examples/carousel/Slider.jsx';
-import SliderTestData from './examples/carousel/SliderTestData.js';
+import Carousel from './examples/carousel/Carousel.jsx';
+import CarouselTestData from './examples/carousel/CarouselTestData.js';
+
 
 function ProductDetails() {
 
@@ -14,9 +15,9 @@ function ProductDetails() {
   const [productAll, setProductAll] =useState({});
 
   // Update state on mount.
-  useEffect(() => {
-    updateState(productID);
-  }, []);
+  // useEffect(() => {
+  //   updateState(productID);
+  // }, []);
 
   const updateState = (id, page=1, count=100, sort='newest') => {
     console.log(`Updating ${id} ${page} ${count}`);
@@ -67,7 +68,7 @@ function ProductDetails() {
   return (
     <div>
       <h1>Product Details</h1>
-      <Slider slides={SliderTestData}/>
+      <Carousel slides={CarouselTestData}/>
       {/* <Overview
         id={productID}
         productInfo={productAll.productInfo}

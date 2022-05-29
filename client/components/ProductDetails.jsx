@@ -3,9 +3,9 @@ import axios from "axios";
 import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
-import Carousel from './examples/carousel/Carousel.jsx';
-import CarouselTestData from './examples/carousel/CarouselTestData.js';
-
+import Carousel from './examples/Carousel/Carousel.jsx';
+import CarouselTestData from './examples/Carousel/CarouselTestData.js';
+import StarRating from './examples/StarRating/StarRating.jsx'
 
 function ProductDetails() {
 
@@ -68,6 +68,7 @@ function ProductDetails() {
   return (
     <div>
       <h1>Product Details</h1>
+      <StarRating stars={4.8}/>
       <Carousel slides={CarouselTestData}/>
       {/* <Overview
         id={productID}

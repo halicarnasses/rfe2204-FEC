@@ -1,0 +1,11 @@
+.overview-div {
+  border: 4px solid black;
+}
+
+.overview-gallery {
+  width: 60vw;
+  height:50vh;
+  border: 4px solid blue;
+}
+
+

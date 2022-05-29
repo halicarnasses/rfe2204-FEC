@@ -3,21 +3,21 @@ import axios from "axios";
 import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
-import Carousel from './examples/Carousel/Carousel.jsx';
-import CarouselTestData from './examples/Carousel/CarouselTestData.js';
-import StarRating from './examples/StarRating/StarRating.jsx'
+// import Carousel from './examples/Carousel/Carousel.jsx';
+// import CarouselTestData from './examples/Carousel/CarouselTestData.js';
+// import StarRating from './examples/StarRating/StarRating.jsx'
 
 function ProductDetails() {
 
-  const [productID, setProductID] = useState(37360);
+  const [productID, setProductID] = useState(37311);
 
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
 
   // Update state on mount.
-  // useEffect(() => {
-  //   updateState(productID);
-  // }, []);
+  useEffect(() => {
+    updateState(productID);
+  }, []);
 
   const updateState = (id, page=1, count=100, sort='newest') => {
     console.log(`Updating ${id} ${page} ${count}`);
@@ -54,6 +54,7 @@ function ProductDetails() {
         allInfo.questions = responses[2].data.results;
         allInfo.reviews = responses[3].data;
         allInfo.reviewsMeta = responses[4].data;
+        // console.log(allInfo.productStyles);
         return allInfo;
       }))
       .then((data) => ( setProductAll(data) ))
@@ -63,19 +64,17 @@ function ProductDetails() {
 
   };
 
-  // Add ternary conditional for all props to handle undefined data
+  // Add ternary conditional for all props to handle undefined data?
   // ex:  props={props? props : {}}
   return (
     <div>
       <h1>Product Details</h1>
-      <StarRating stars={4.8}/>
-      <Carousel slides={CarouselTestData}/>
-      {/* <Overview
+      <Overview
         id={productID}
         productInfo={productAll.productInfo}
         productStyles={productAll.productStyles}
-        reviewCount={productAll.reviews}
-        stateHandler={updateState}/> */}
+        reviews={productAll.reviews}
+        stateHandler={updateState}/>
       {/* <Questions
         id={productID}
         product={productAll.productInfo}

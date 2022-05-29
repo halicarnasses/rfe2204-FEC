@@ -4,3 +4,12 @@ bundle.js
 QuestionsOutline.md
 client/components/questions/old
 client/components/examples
+
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+

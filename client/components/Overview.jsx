@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import ImageGallery from "./overview/ImageGallery.jsx"
+import Carousel from './shared/Carousel/Carousel.jsx';
 import ProductInfo from "./overview/ProductInfo.jsx";
-
-
-import Carousel from './shared/Carousel.jsx';
-
+import StyleSelector from "./overview/StyleSelector.jsx";
+import AddToCart from "./overview/AddToCart.jsx";
 
 import './overview/Overview.css';
 
@@ -34,20 +32,23 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   }, [productInfo, productStyles, reviews]);
 
-  console.log(style);
-  // console.log('PHOTOS', photos);
+
 
   return (
     <div className="overview-div">
       {/* <ImageGallery images={style.photos}/> */}
 
       <Carousel slides={style ? style.photos : []}/>
+      <div className="overview-product-dash">
+        <ProductInfo
+          name={product ? product.name : ''}
+          rating={rating}
+          price={product ? product.default_price : 0}
+          salePrice={style ? style.sale_price : 0}/>
+        <StyleSelector />
+        <AddToCart />
+      </div>
 
-      <ProductInfo
-        name={product ? product.name : ''}
-        rating={rating}
-        price={product ? product.default_price : 0}
-        salePrice={style ? style.sale_price : 0}/>
     </div>
   )
 

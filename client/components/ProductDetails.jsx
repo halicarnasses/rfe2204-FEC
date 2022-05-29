@@ -47,7 +47,7 @@ function ProductDetails() {
           questions: {},
           reviews: {},
           reviewsMeta: {}
-        }
+        };
 
         allInfo.productInfo = responses[0].data;
         allInfo.productStyles = responses[1].data;
@@ -75,12 +75,15 @@ function ProductDetails() {
         productStyles={productAll.productStyles}
         reviews={productAll.reviews}
         stateHandler={updateState}/>
+
       {/* <Questions
         id={productID}
         product={productAll.productInfo}
         questionsData={productAll.questions}
         stateHandler={updateState}/> */}
+
       {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
+
     </div>
   );
 

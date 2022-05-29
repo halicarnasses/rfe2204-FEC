@@ -1,29 +1,57 @@
+.carousel-div {
+  margin: 5px;
+  padding: 5px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid blue;
+}
+
+.carousel-slide-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2px solid green;
+}
+
 .carousel-image {
   margin: 5px;
   max-width: 100px;
-  max-height: 100px;
-  object-fit: contain;
+  max-height: auto;
   border: 2px solid red;
 }
-
-.carousel-div {
-  margin: 10px;
-  /* position: relative; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-}
-
 
 .carousel-left-arrow {
   border: 2px solid red;
-  /* position: fixed; */
-  top: 50%;
-
 }
 
 .carousel-right-arrow {
   border: 2px solid red;
+}
 
+.carousel-indicator-div {
+  margin: 5px;
+  width: 100%;
+  color: blue;
+  border: 2px solid green;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-indicator {
+  max-width: auto;
+  max-height: 40px;
+}
+
+.indicator-left-arrow {
+  border: 2px solid red;
+}
+
+.indicator-right-arrow {
+  border: 2px solid red;
 }

@@ -36,7 +36,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   };
 
-
+  console.log(style);
 
   return (
     <div className="overview-div">
@@ -54,7 +54,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
           styleHandler={updateStyle}
           style={styles ? style : {}}
           styles={styles ? styles.results : []}/>
-        <AddToCart />
+        <AddToCart skus={style ? style.skus : []}/>
       </div>
 
     </div>

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function StyleSelector({styleHandler, style, styles}) {
-  console.log(style, styles);
 
   const chunk = (array, size) => {
     return array.reduce((chunks, item, i) => {
@@ -15,8 +14,6 @@ function StyleSelector({styleHandler, style, styles}) {
   }
 
   const styleRows = chunk( styles? styles : [], 4);
-  console.log(styleRows);
-
 
   return (
     <div className="overview-style-selector">
@@ -29,7 +26,7 @@ function StyleSelector({styleHandler, style, styles}) {
         {
           styleRows ? styleRows.map((row, i) => {
             return (
-              <div className="selector-row">{
+              <div key={i} className="selector-row">{
                 row.map((col) => {
                   return (
                     <img

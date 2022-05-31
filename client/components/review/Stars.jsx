@@ -8,7 +8,6 @@ function StarsList({ rating, handleClick}) {
   const fullPortion = `100%`;
   const zeroPortion = `0%`;
   const filledPortion = `${Math.floor((rating - fullStar) * 100)}%`;
-  console.log(filledPortion, 'salazar')
   return (
     <div>
       {

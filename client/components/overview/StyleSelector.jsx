@@ -3,8 +3,6 @@ import {FaCheck} from 'react-icons/fa';
 
 function StyleSelector({styleHandler, style, results}) {
 
-  console.log('r', results)
-
   const chunk = (array, size) => {
     let selectedStyle = {};
     let unselectedStyles = [];
@@ -28,11 +26,7 @@ function StyleSelector({styleHandler, style, results}) {
 
   }
 
-
-
   const styleRows = chunk( results? results : [], 4);
-
-  console.log(styleRows)
 
   const clickHandler = (event) => {
     const target = event.target;
@@ -44,7 +38,6 @@ function StyleSelector({styleHandler, style, results}) {
         styleHandler(result);
       }
     }
-
   };
 
   return (

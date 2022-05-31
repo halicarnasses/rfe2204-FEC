@@ -76,13 +76,13 @@ function ProductDetails() {
         reviews={productAll.reviews}
         stateHandler={updateState}/>
 
-      {/* <Questions
+      <Questions
         id={productID}
         product={productAll.productInfo}
         questionsData={productAll.questions}
-        stateHandler={updateState}/> */}
+        stateHandler={updateState}/>
 
-      {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
+      <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
 
     </div>
   );

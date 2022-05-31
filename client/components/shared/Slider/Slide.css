@@ -1,0 +1,14 @@
+.slide-image {
+  width: 100px;
+  height: 100px;
+  /* object-fit: cover; */
+  border: 2px solid red;
+}
+
+.slide-div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}

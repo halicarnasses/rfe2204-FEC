@@ -15,8 +15,10 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
+
     setProduct(productInfo);
     setStyles(productStyles);
+
     if (productStyles) {
       setStyle(productStyles.results[0]);
     }

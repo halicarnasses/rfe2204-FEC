@@ -9,10 +9,22 @@ function StarRating({stars}) {
 
   /* This is to round the rating to closest .5 or .0 */
   if (stars) {
+    console.log('STARS', stars);
+    // Ratio is the actual percentage to fill.
     const ratio = (stars/5).toFixed(2);
-    rating = (Math.round((stars) * 4) / 4).toFixed(2);
-    ratingWidth = rating.toString().split(".")[1] + '%';
+    console.log('RATIO', ratio)
+    // Explain this
+    const ratioRounded = (Math.round(ratio * 4) / 4).toFixed(2).toString();
+    console.log(`ADJ ${ ratioRounded }`);
+
+    ratingWidth = ratioRounded.toString().split('.')[1] + '%';
+
+    console.log('str', ratingWidth);
+
     }
+
+  // console.log(stars, ratingWidth);
+
 
   return (
     <div className="star-rating-container">

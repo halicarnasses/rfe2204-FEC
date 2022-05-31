@@ -3,10 +3,7 @@ import axios from "axios";
 import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
 // import Reviews from './Reviews.jsx';
-// import Carousel from './examples/Carousel/Carousel.jsx';
-// import CarouselTestData from './examples/Carousel/CarouselTestData.js';
-// import StarRating from './examples/StarRating/StarRating.jsx'
-
+import "./css/App.css";
 function ProductDetails() {
 
   const [productID, setProductID] = useState(37311);
@@ -76,13 +73,13 @@ function ProductDetails() {
         reviews={productAll.reviews}
         stateHandler={updateState}/>
 
-      <Questions
+      {/* <Questions
         id={productID}
         product={productAll.productInfo}
         questionsData={productAll.questions}
-        stateHandler={updateState}/>
+        stateHandler={updateState}/> */}
 
-      <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
+      {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
 
     </div>
   );

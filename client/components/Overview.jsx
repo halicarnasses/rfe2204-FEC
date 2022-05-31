@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
 import Carousel from './shared/Carousel/Carousel.jsx';
 import ProductInfo from "./overview/ProductInfo.jsx";
 import StyleSelector from "./overview/StyleSelector.jsx";
 import AddToCart from "./overview/AddToCart.jsx";
+import './css/overview/Overview.css';
 
-import './overview/Overview.css';
 
 function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
@@ -25,6 +24,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
     if (reviews) {
       // Get avgerage rating.
       let ratingsSum = 0;
+
       for (let r of reviews.results) {
         ratingsSum += r.rating;
       }
@@ -38,11 +38,8 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   };
 
-  console.log(style);
-
   return (
     <div className="overview-div">
-      {/* <ImageGallery images={style.photos}/> */}
 
       <Carousel slides={style ? style.photos : []}/>
 
@@ -52,11 +49,11 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
           rating={rating}
           price={product ? product.default_price : 0}
           salePrice={style ? style.sale_price : 0}/>
-        <StyleSelector
+        {/* <StyleSelector
           styleHandler={updateStyle}
           style={styles ? style : {}}
-          styles={styles ? styles.results : []}/>
-        <AddToCart skus={style ? style.skus : []}/>
+          styles={styles ? styles.results : []}/> */}
+        {/* <AddToCart skus={style ? style.skus : []}/> */}
       </div>
 
     </div>

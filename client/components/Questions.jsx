@@ -4,7 +4,7 @@ import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
 import QuestionSearch from "./questions/QuestionSearch.jsx"
 
-import './questions/Questions.css';
+import './css/questions/Questions.css';
 
 function Questions({id, product, questionsData, stateHandler}) {
 

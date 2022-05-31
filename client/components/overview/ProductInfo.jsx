@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react'
 import StarRating from '../shared/StarRating/StarRating.jsx';
 
 function ProductInfo({rating, name, price }) {
-  // console.log(name, rating, price)
-  // const [pInfo, setInfo] = setState({});
+  console.log(name, rating, price)
 
   return (
     <div className="overview-product-info">
@@ -19,3 +18,4 @@ function ProductInfo({rating, name, price }) {
 }
 
 export default ProductInfo
+2

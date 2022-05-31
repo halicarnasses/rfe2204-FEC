@@ -21,13 +21,13 @@ function AddToCart({skus}) {
           onChange={changeHandler}>
             {
               skus ? Object.keys(skus).map((key) => {
-                console.log(skus[key]);
                 return (
-                  <option value={skus[key].size}>{skus[key].size}</option>
+                  <option key={key} value={skus[key].size}>{skus[key].size}</option>
                 )
               }) : 0
             }
         </select>
+
         {/* <select
           name="select-quantity"
           onChange={changeHandler}>

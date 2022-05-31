@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import './css/StyleSelector.css'
 
 function StyleSelector(props) {
   // const [styleurl, setStyle] = useState(props.ProductStyle)
@@ -7,9 +8,16 @@ function StyleSelector(props) {
   return <>
     <div>---Style Selector---</div>
     <div>{props.styles.map((val, i) => {
-      return <button onClick={(e) => {
+      return <button style={{
+        "borderRadius" : "50%",
+        "border" : `solid ${val.name.split(' ')[1] || "grey"}`,
+        "backgroundColor" : `${val.name.split(' ')[3] || "grey"}`,
+        "borderWidth" : "thick",
+        "padding" : "7px",
+        "margin" : "5px"
+      }} onClick={(e) => {
         props.setCurrStyle(i)
-      }} key={i}>{val.name.split(' ')[1] + ' ' + val.name.split(' ')[3]}</button>
+      }} key={i}></button>
     })}</div>
   </>
   //image stuff will be determined by the styles

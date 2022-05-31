@@ -8,7 +8,7 @@ function ProductDetails() {
 
   // Inital product ID = 37311.
   // Use this product ID to test all of your API requests.
-  const [productID, setProductID] = useState(37317);
+  const [productID, setProductID] = useState(37311);
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
 
@@ -27,8 +27,8 @@ function ProductDetails() {
         axios.get(`/products/${id}`),
         axios.get(`/products/${id}/styles`),
         axios.get(`/qa/questions/?product_id=${id}`),
-        axios.get(`/reviews/?product_id=${id}`),
-        axios.get(`/reviews/?page=&count=&product_id=${id}`)
+        axios.get(`/reviews/?page=&count=&product_id=${id}`),
+        axios.get(`/reviews/meta/?product_id=${id}`),
       ])
       .then(axios.spread((...responses) => {
 
@@ -56,8 +56,8 @@ function ProductDetails() {
 
   return (
     <div>
-      <h1>Product Details</h1>
-      {/* <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} stateHandler={updateState}/> */}
+      {/* <h1>Product Details</h1> */}
+      <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
       <Questions id={productID} questionsData={productAll.questions} stateHandler={updateState}/>
       {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
     </div>

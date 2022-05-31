@@ -41,7 +41,9 @@ function Cart(props) {
       })}
     </select>
     </>: <div></div>}
-    {cartStage.stageNum > 1 ? <button>Add To Cart</button> : <div></div>}
+    <button onClick={() => {
+      //when everything has been selected, the stage should be set to a number, check that number and if it is good then you can send post request, otherwise alert user; reset to 0 after post request complete
+    }}>Add To Cart</button>
   </>
 }
 

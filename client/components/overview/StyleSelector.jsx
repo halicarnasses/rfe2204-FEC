@@ -1,8 +1,8 @@
 import React from 'react'
 import {FaCheck} from 'react-icons/fa';
 
-function StyleSelector({styleHandler, style, styles}) {
-
+function StyleSelector({styleHandler, style, results}) {
+  console.log(results)
   const chunk = (array, size) => {
     return array.reduce((chunks, item, i) => {
       if (i % size === 0) {
@@ -14,7 +14,20 @@ function StyleSelector({styleHandler, style, styles}) {
     }, []);
   }
 
-  const styleRows = chunk( styles? styles : [], 4);
+  const styleRows = chunk( results? results : [], 4);
+
+  const clickHandler = (event) => {
+    const target = event.target;
+    const name = target.name;
+    console.log(results);
+    for ( let result of results) {
+      console.log(name, result.style_id)
+      if (parseInt(name) === result.style_id) {
+        styleHandler(result);
+      }
+    }
+
+  };
 
   return (
     <div className="overview-style-selector">
@@ -31,7 +44,7 @@ function StyleSelector({styleHandler, style, styles}) {
                 row.map((col) => {
 
                   let checkDiv = <></>
-                  console.log(col.style_id, style.style_id);
+
                   if ( col.style_id === style.style_id) {
                     checkDiv = <FaCheck className="thumb-checkmark" size={25}/>
                   }
@@ -41,7 +54,7 @@ function StyleSelector({styleHandler, style, styles}) {
                       <img
                         className="selector-thumb"
                         name={col.style_id}
-                        onClick={styleHandler}
+                        onClick={clickHandler}
                         src={col.photos[0].thumbnail_url}>
                       </img>
                       { checkDiv }

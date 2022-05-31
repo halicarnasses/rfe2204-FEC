@@ -33,13 +33,12 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   }, [productInfo, productStyles, reviews]);
 
-  const updateStyle = (event) => {
-    const target = event.target;
-    const name = target.name;
-    console.log(name)
+  const updateStyle = (obj) => {
+    console.log(obj);
+    setStyle(obj);
   };
 
-  console.log(style);
+  console.log(styles);
 
   return (
     <div className="overview-div">
@@ -58,7 +57,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
         <StyleSelector
           styleHandler={updateStyle}
           style={styles ? style : {}}
-          styles={styles ? styles.results : []}/>
+          results={styles ? styles.results : []}/>
         {/* <AddToCart skus={style ? style.skus : []}/> */}
       </div>
 

@@ -20,8 +20,8 @@ function ProductInfo({name, description, rating, reviewCount, price, salePrice, 
       <h5>{description}</h5>
       { salePrice ?
         <h6>
-          <span style={{textDecoration: lineThrough}}>{price}</span>
-          <span style={{color: red}}>{salePrice}</span>
+          <span style={{textDecorationLine: 'line-through'}}>{price}</span>
+          <span style={{color: 'red'}}>{salePrice}</span>
         </h6>
         : <></>
       }

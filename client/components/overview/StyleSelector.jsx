@@ -2,9 +2,22 @@ import React from 'react'
 import {FaCheck} from 'react-icons/fa';
 
 function StyleSelector({styleHandler, style, results}) {
-  console.log(results)
+
+  console.log('r', results)
+
   const chunk = (array, size) => {
-    return array.reduce((chunks, item, i) => {
+    let selectedStyle = {};
+    let unselectedStyles = [];
+
+    for (let i in array) {
+      if (array[i].style_id !== style.style_id) {
+        unselectedStyles.push(array[i])
+      }
+    }
+
+    unselectedStyles.unshift(style);
+
+    return unselectedStyles.reduce((chunks, item, i) => {
       if (i % size === 0) {
         chunks.push([item]);
       } else {
@@ -12,16 +25,21 @@ function StyleSelector({styleHandler, style, results}) {
       }
       return chunks;
     }, []);
+
   }
 
+
+
   const styleRows = chunk( results? results : [], 4);
+
+  console.log(styleRows)
 
   const clickHandler = (event) => {
     const target = event.target;
     const name = target.name;
-    console.log(results);
+    // console.log(results);
     for ( let result of results) {
-      console.log(name, result.style_id)
+      // console.log(name, result.style_id)
       if (parseInt(name) === result.style_id) {
         styleHandler(result);
       }
@@ -38,7 +56,8 @@ function StyleSelector({styleHandler, style, results}) {
 
       <div className="selector-body">
         {
-          styleRows ? styleRows.map((row, i) => {
+          styleRows.length > 1 ? styleRows.map((row, i) => {
+
             return (
               <div key={i} className="selector-row">{
                 row.map((col) => {
@@ -66,6 +85,8 @@ function StyleSelector({styleHandler, style, results}) {
           }) : 0
         }
       </div>
+
+
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { FaFacebook, FaTwitter, FaPinterest } from "react-icons/fa";
 import StarRating from '../shared/StarRating/StarRating.jsx';
 
 function ProductInfo({name, description, rating, reviewCount, price, salePrice, category }) {
-  console.log(name, rating, price, salePrice);
+  // console.log(name, rating, price, salePrice);
 
   return (
     <div className="overview-product-info">

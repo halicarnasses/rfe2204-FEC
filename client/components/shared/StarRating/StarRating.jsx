@@ -9,7 +9,6 @@ function StarRating({stars}) {
 
   /* This is to round the rating to closest .5 or .0 */
   if (stars) {
-    console.log('STARS', stars);
     // Ratio is the actual percentage to fill.
     const ratio = (stars/5).toFixed(2);
     // Ratio times 4 when rounded,
@@ -21,7 +20,6 @@ function StarRating({stars}) {
     // then multiple by 100 to get a percentage for the div width;
     const ratioRounded = (Math.round(ratio * 4) / 4).toFixed(2) * 100;
     ratingWidth = ratioRounded.toString() + '%';
-    console.log(ratingWidth);
     }
 
   return (

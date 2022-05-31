@@ -57,6 +57,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
         <StyleSelector
           styleHandler={updateStyle}
           style={styles ? style : {}}
+
           results={styles ? styles.results : []}/>
         {/* <AddToCart skus={style ? style.skus : []}/> */}
       </div>

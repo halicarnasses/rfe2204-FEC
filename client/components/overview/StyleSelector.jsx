@@ -1,4 +1,5 @@
 import React from 'react'
+import {FaCheck} from 'react-icons/fa';
 
 function StyleSelector({styleHandler, style, styles}) {
 
@@ -28,11 +29,23 @@ function StyleSelector({styleHandler, style, styles}) {
             return (
               <div key={i} className="selector-row">{
                 row.map((col) => {
+
+                  let checkDiv = <></>
+                  console.log(col.style_id, style.style_id);
+                  if ( col.style_id === style.style_id) {
+                    checkDiv = <FaCheck className="thumb-checkmark" size={25}/>
+                  }
+
                   return (
-                    <img
-                      key={col.style_id}
-                      className="selector-thumb"
-                      src={col.photos[0].thumbnail_url}></img>
+                    <div key={col.style_id} className="thumb-div">
+                      <img
+                        className="selector-thumb"
+                        name={col.style_id}
+                        onClick={styleHandler}
+                        src={col.photos[0].thumbnail_url}>
+                      </img>
+                      { checkDiv }
+                    </div>
                   )
                 })
               }</div>

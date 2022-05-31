@@ -26,20 +26,20 @@ function StarRating({stars}) {
 
   return (
     <div className="stars-div">
-          <div className="star-rating-back">
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-      <div className="star-rating-front" style={{width: ratingWidth}}>
+      <div className="star-rating-back">
         <Star />
         <Star />
         <Star />
         <Star />
         <Star />
+        <div className="star-rating-front" style={{width: ratingWidth}}>
+          <Star />
+          <Star />
+          <Star />
+          <Star />
+          <Star />
+        </div>
       </div>
-    </div>
     </div>
   );
 }

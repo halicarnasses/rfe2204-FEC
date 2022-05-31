@@ -32,21 +32,41 @@
 }
 
 
+/* Style Selector */
 
 .overview-style-selector {
   margin: 5px;
   border: 2px solid green;
 }
 
+.selector-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.thumb-div {
+  width: fit-content;
+  border: 2px solid green;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .selector-thumb {
+  position: relative;
   width: 30px;
   max-height: 30px;
   border: 2px solid red;
 }
 
-.selector-row {
-  border: 2px solid red;
+.thumb-checkmark {
+  position: absolute;
+  color: green;
 }
+
+
+/* Add To Cart */
 
 .overview-add-to-cart {
   margin: 5px;

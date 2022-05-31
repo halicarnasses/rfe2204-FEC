@@ -1,21 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
+import { FaFacebook, FaTwitter, FaPinterest } from "react-icons/fa";
 
 import StarRating from '../shared/StarRating/StarRating.jsx';
 
-function ProductInfo({rating, name, price }) {
-  console.log(name, rating, price)
+function ProductInfo({name, description, rating, reviewCount, price, salePrice, category }) {
+  console.log(name, rating, price, salePrice);
 
   return (
     <div className="overview-product-info">
-      {/* Star Rating */}
-      <StarRating stars={rating} />
-      <h5>CATEGORY</h5>
+      <div className="overview-product-reviews">
+        <StarRating stars={rating} />
+        {reviewCount ?
+          <h4><a href="reviews-div">See all reviews</a>{reviewCount}</h4>
+          : <></>
+        }
+      </div>
+      <h5>CATEGORY: {category}</h5>
       <h3>{name}</h3>
-      <h6>{price}</h6>
+      <h5>{description}</h5>
+      { salePrice ?
+        <h6>
+          <span style={{textDecoration: lineThrough}}>{price}</span>
+          <span style={{color: red}}>{salePrice}</span>
+        </h6>
+        : <></>
+      }
+      <div className="overview-social-icons">
+        <FaFacebook />
+        <FaTwitter />
+        <FaPinterest />
+      </div>
     </div>
-  )
+  );
 
 }
 
-export default ProductInfo
+export default ProductInfo;
 2

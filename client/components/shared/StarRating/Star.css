@@ -1,24 +1,27 @@
-.star-rating-container {
+.stars-div {
+  border: 2px solid red;
+  width: fit-content;
   display: flex;
   align-items: center;
-}
-
-.star-rating-front {
-  display: flex;
-  position: absolute;
-  flex-direction: row;
-  top: 0;
-  overflow: hidden;
-  color: black;
 }
 
 .star-rating-back {
   display: flex;
   position: relative;
+  top: 0;
   color:white;
   stroke-width: 4%;
   stroke: black;
 }
+
+.star-rating-front {
+  display: flex;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  color: black;
+}
+
 
 .star-svg {
   flex-shrink: 0;

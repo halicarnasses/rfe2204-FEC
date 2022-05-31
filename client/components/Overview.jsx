@@ -24,7 +24,6 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
     if (reviews) {
       // Get avgerage rating.
       let ratingsSum = 0;
-
       for (let r of reviews.results) {
         ratingsSum += r.rating;
       }
@@ -38,6 +37,8 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
   };
 
+  console.log(product);
+
   return (
     <div className="overview-div">
 
@@ -46,9 +47,12 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
       <div className="overview-product-dash">
         <ProductInfo
           name={product ? product.name : ''}
+          description={product ? product.description : ''}
           rating={rating}
+          reviewCount={reviews ? reviews.count : 0}
           price={product ? product.default_price : 0}
-          salePrice={style ? style.sale_price : 0}/>
+          salePrice={style ? style.sale_price : 0}
+          category={product ? product.category : ''}/>
         {/* <StyleSelector
           styleHandler={updateStyle}
           style={styles ? style : {}}
@@ -57,7 +61,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
       </div>
 
     </div>
-  )
+  );
 
 }
 

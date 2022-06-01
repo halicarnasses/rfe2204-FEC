@@ -1,41 +1,184 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Question from "./questions/Question.jsx"
+import QuestionModal from "./questions/QuestionModal.jsx"
+import AnswerModal from "./questions/AnswerModal.jsx"
 
-function Questions({props}) {
-  console.log(props);
-  const [productID, setProductID] = useState(props);
-  const [questionData, setQuestionData] = useState();
+import './questions/Questions.css';
 
-  // When componenet mounts, get question info for product.
+function Questions({id, questionsData, stateHandler}) {
+  console.log(questionsData);
+  const [productID, setProductID] = useState(id);
+  const [questions, setQuestions] = useState(questionsData);
+  const [qLimit, setQLimit] = useState(2);
+  const [questionModal, setQuestionModal] = useState(false);
+  const [answerModal, setAnswerModal] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Make request to server
+  useEffect(() => {
+    setQuestions(questionsData);
+  }, [questionsData]);
+
+  // updates global state
+  // change this name
+  const updateState = () => {
+    stateHandler(productID);
   }
 
-  return (
-    <div>
-      <h2>Questions</h2>
-      <h3>Search Bar</h3>
-        {/* Searchs questions */}
-        <button onSubmit={handleSubmit}>SEARCH</button>
-      <h3>QAList</h3>
-        {/* QAListItem */}
-          {/* Item Question */}
-            {/* Helpful Button */}
-            {/* Add Answer MAKE MODAL*/}
-          {/* Item Answer */}
-            {/* Timestamp with UserID */}
-            {/* Helpful Button */}
-            {/* Report Button */}
-            {/* Potential Photo List MAKE MODAL */}
-            {/* Load more answers for question */}
-      <h3>ActionBar</h3>
-        {/* More Questions Button */}
-          {/* Loads more questions */}
-        {/* Add Questions Button MAKE MODAL */}
-    </div>
-  );
+  // Search bar
+  // List functions
+  const markHelpful = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(name);
+    const id = target.getAttribute('value');
+    if (name === 'helpful-question') {
+      axios
+        .put(`/qa/questions/${id}/helpful`)
+        .then((response) => {
+          stateHandler(productID);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (name === 'helpful-answer') {
+      axios
+        .put(`/qa/answers/${id}/helpful`)
+        .then((response) => {
+          stateHandler(productID);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const report = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(name);
+
+    if (name === 'report-question') {
+      axios
+      .put(`/qa/questions/${id}/report`)
+      .then((response) => {
+        stateHandler(productID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } else if (name === 'report-answer') {
+      axios
+      .put(`/qa/answers/${id}/report`)
+      .then((response) => {
+        stateHandler(productID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+  };
+
+  const addQuestion = (data) => {
+    console.log("ADD Q: ", data);
+    axios
+      .post('/qa/questions', data)
+      .then((response) => (
+        stateHandler(productID)
+      ))
+      .catch((error) => {
+        console.log(error)
+      });
+  };
+
+  const addAnswer = (data) => {
+    console.log("ADD A: ", data);
+    axios
+    .post(`/qa/questions/${data.id}/answers`, data)
+    .then((response) => (
+      stateHandler(productID)
+    ))
+    .catch((error) => {
+      console.log(error)
+    });
+  };
+
+  const showQuestionModal = (event) => {
+    event.preventDefault();
+    setQuestionModal(true);
+  };
+
+  const hideQuestionModal = (event) => {
+    event.preventDefault();
+    setQuestionModal(false);
+  };
+
+  const showAnswerModal = (event) => {
+    event.preventDefault();
+    console.log('ADD ANSWER');
+    setAnswerModal(true);
+  };
+
+  const hideAnswerModal = (event) => {
+    event.preventDefault();
+    setAnswerModal(false);
+  };
+
+
+  // Actions
+  const showMoreQuestions = () => {
+    let newLimit = qLimit;
+    newLimit += 2;
+    setQLimit(newLimit);
+    // if questions.length < newLimit, hide more question button
+    if (questions.length < newLimit) {
+      document.getElementById('more-questions-btn').style.display = 'none';
+    }
+  };
+
+
+
+  if (questions) {
+    return (
+
+      <div className="questions-div">
+        <h2>QUESTIONS</h2>
+        <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
+        <AnswerModal show={answerModal} hide={hideAnswerModal}/>
+        { questions.map((q, i) => {
+          if ( i < qLimit) {
+            return (
+              <Question
+                key={q.question_id}
+                id={q.question_id}
+                body={q.question_body}
+                date={q.question_date}
+                name={q.asker_name}
+                helpfulness={q.question_helpfulness}
+                reported={q.reported}
+                answers={q.answers}
+                helpfulHandler={markHelpful}
+                reportHandler={report}
+                modalHandler={showAnswerModal}
+                />
+              )
+            }
+          })
+        }
+
+        <button id="more-questions-btn" name="more-questions"
+          onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+        <button onClick={showQuestionModal}>ADD A QUESTION +</button>
+      </div>
+    )
+  } else {
+    return (
+      <div>NO QUESTIONS!</div>
+    );
+  }
+
 }
 
 export default Questions;

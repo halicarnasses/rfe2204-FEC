@@ -1,2 +1,5 @@
 .env
 /node_modules
+/public/bundle.js
+QuestionsOutline.md
+client/components/questions/old

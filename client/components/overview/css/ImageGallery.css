@@ -1,0 +1,184 @@
+.carousel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.carousel__main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__main img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+
+}
+
+.carousel__main__fullscreen {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+.carousel__main__fullscreen img{
+  width: 300px;
+  height: 300px;
+  object-fit:cover;
+}
+.carousel__nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__nav__fullscreen {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.nav__item img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+
+  background-color: transparent;
+}
+
+.nav__item {
+  padding: 2px;
+  background-color: transparent;
+  border: none;
+}
+
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrowbutton {
+  border: none;
+  background-color: transparent;
+  height: 20px;
+
+}
+
+.fullscreen__button {
+  border: none;
+  background-color: grey;
+  height: 20px;
+  position: relative;
+  left: 170px;
+  top: -198px;
+  border-radius: 30%;
+  border: solid black;
+  display: flex;
+  align-items: center;
+  background-position: right;
+
+}
+.fullscreen__button__fullscreen {
+  border: none;
+  background-color: grey;
+  height: 20px;
+  position: relative;
+  left: 270px;
+  top: -298px;
+  border-radius: 30%;
+  border: solid black;
+  display: flex;
+  align-items: center;
+  /* background-position: 50% 50%; */
+
+}
+
+.main__image__container {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  cursor: pointer
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+/* body {
+  font-size: 5rem;
+  font-family: 'Varela Round', sans-serif;
+  margin: 0;
+  padding: 3rem;
+  background: #04233D;
+  color: #1CCECE;
+} */
+p {
+  margin: 0 0 .5em 0;
+  height:fit-content;
+  padding-top: 0.2rem;
+}
+section {
+  font-size: 80%;
+}
+
+.full-screen {
+
+  vertical-align: middle;
+  box-sizing: border-box;
+  display: inline-block;
+  border: .1em solid currentColor;
+  width: 1em;
+  height: 1em;
+  position: relative;
+}
+.full-screen:before, .full-screen:after {
+  content: '';
+  background: green;
+  background-color: grey;
+  position: absolute;
+}
+.full-screen:before {
+  width: .333em;
+  height: 1em;
+  left: .233em;
+  top: -.1em;
+}
+.full-screen:after {
+  width: 1em;
+  height: .333em;
+  top: .233em;
+  left: -.1em;
+}
+
+.fullscreen {
+  width: 100%;
+  height: auto;
+}
+
+

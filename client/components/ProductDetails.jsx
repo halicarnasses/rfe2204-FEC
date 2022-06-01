@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Overview from './Overview.jsx';
 import Questions from './Questions.jsx';
-<<<<<<< HEAD
-import ReviewApp from './RR/ReviewApp.jsx';
-=======
 import Reviews from './Reviews.jsx';
->>>>>>> review
 
 function ProductDetails() {
+
   // Inital product ID = 37311.
   // Use this product ID to test all of your API requests.
   const [productID, setProductID] = useState(37311);
@@ -21,11 +18,6 @@ function ProductDetails() {
   }, [])
 
   const updateState = (id) => {
-<<<<<<< HEAD
-    setProductID(id);
-    // Once the state has been changed,
-    // componenets should re-render with updated product.s
-=======
     console.log(`Updating ${id}`);
 
     axios
@@ -60,24 +52,17 @@ function ProductDetails() {
         console.log(error);
       });
 
->>>>>>> review
   };
 
   return (
     <div>
-<<<<<<< HEAD
-      <h1>Product Details</h1>
-      <Overview props={productID} stateHandler={updateState}/>
-      <Questions props={productID} />
-      <ReviewApp product={productID} />
-=======
       {/* <h1>Product Details</h1> */}
       <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
       <Questions id={productID} questionsData={productAll.questions} stateHandler={updateState}/>
       <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
->>>>>>> review
     </div>
   );
 
 }
+
 export default ProductDetails;

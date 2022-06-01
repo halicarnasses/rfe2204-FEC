@@ -29,7 +29,7 @@ app.get('/*', function(req, res) {
     res.send(response.data)
   })
   .catch((error) => {
-    console.log(error.message);
+    console.log('GET', endpoint, error.message);
   });
 });
 
@@ -51,7 +51,7 @@ app.post('/*', function(req, res) {
     res.send(response.data)
   })
   .catch((error) => {
-    console.log(error.message);
+    console.log('POST', endpoint, error.message);
   });
 
 });
@@ -73,7 +73,7 @@ app.put('/*', function(req, res) {
     res.send(response.data)
   })
   .catch((error) => {
-    console.log(error.message)
+    console.log('PUT', endpoint, error.message);
   });
 
 });

@@ -1,13 +1,14 @@
 import React from 'react';
 
-function StarMaker({ index, portion, handleClick }) {
+function StarMaker({ positionOfStar, index, portion, handleClick }) {
   // console.log("Hello", handleClick)
   const grad = `url(#${index})`;
   const starId = `${index}star`;
-  const theV = index;
+  const pos = positionOfStar;
+  const svgId = `${index}svg`
   // console.log(grad)
   return (
-    <svg onClick={() => handleClick(theV)} stroke="#ff9c5b" width="37px" height="37px" id="StarId">
+    <svg onClick={() => handleClick(pos)} stroke="#ff9c5b" width="37px" height="37px" id={svgId}>
       <defs>
         <linearGradient id={index}>
           <stop stopColor="gold" offset={portion} />

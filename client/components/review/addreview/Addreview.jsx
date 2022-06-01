@@ -4,32 +4,24 @@ import Characterstics from './Charcterstics.jsx';
 import Photos from './Photos.jsx'
 import Body from './Body.jsx';
 
-
 function AddReview(props) {
   // obj collects all input data, and is sent to handleAddReview
   let obj = {};
-  // validation states
-  const [ratingStarError, updateRatingStarError] = useState('');
-  const [revBodyError, updateRevBodyError] = useState('');
-  const [emailError, updateEmailError] = useState('');
-  const [nickNameError, updatenickNameError] = useState('');
-  const [imagesError, updateImagesError] = useState('');
-  const [recommendationError, updateRecommendationError] = useState('');
-  const [charsError, updateCharsError] = useState('');
-
+  console.log('Hello');
   // end fo validation states
 
   const [rating, updateRating] = useState(0);
   const [ratingMeaning, updatRatingMeaning] = useState('none rated');
   const [photos, addPhoto] = useState(null);
   const [recommendation, updateRecommendation] = useState(null);
-
+  const [email, updateEmail] = useState('');
+  const [summary, updateSummary] = useState('');
+  const [nickName, updateNickName] = useState('');
 
   const charChoices = {};
   Object.keys(props.chars).forEach((key) => {
     charChoices[key] = null;
   });
-  console.log('Hello: Halicernasuss');
   const availableChars = Object.keys(props.chars);
   // star ------------  --------- --------  ------
   // rating meaning
@@ -40,47 +32,63 @@ function AddReview(props) {
     4: 'Good',
     5: 'Great',
   }
-  // end of star------------  --------- --------  ------
-
-  // character  ----  ------  ------  ----
-
-  // end of character ----- ------- ------
 
   function handleClick(clickedStar) {
     updateRating(clickedStar);
     updatRatingMeaning(resultOfStar[clickedStar]);
+    obj['ratings'] = clickedStar;
   }
 
+  function handleSummarySubmit(e) {
+    // I think this is an error
+    console.log(e.target.value)
+    updateSummary(e.target.value)
+  }
+  function handleEmailSubmit(e) {
+    // I think this is an error
+    console.log(e.target.value)
+    updateEmail(e.target.value)
+  }
   function handleCharChoice(char, choice) {
     charChoices[char] = choice;
-    console.log(charChoices);
+    console.log('Choice: ', charChoices);
+  }
+  function handleNameInput(e) {
+    console.log(e.target.value);
   }
   function handleRecommendationChange(e) {
-    e.preventDefault();
+    console.log('Hello from ')
     const value = e.target.value;
     updateRecommendation(value);
-    console.log('Recommended: ', value)
   }
 
   function handleReviewSubmit(e) {
-
     e.preventDefault();
-    // if (rating === 0) {
-    //   return alert('please do the rating first');
-    // }
-    // if () {
-    //   return alert('please do the rating first');
-    // }
+    // Check blanks
+      // if element is blank (from the states)
+      // set= for that thing
+      // return null
+    console.log(e)
   }
 
-  console.log('Not sure ', ratingMeaning);
   return (
     <form>
+      <div className="reviewnickname">
+        <h3>Enter Name*</h3>
+        <input onSubmit={handleNameInput} required minLength="2" maxLength="50" placeholder="Enter name" name="reviewername" id="reviewername" />
+        <input type="submit" />
+      </div>
 
       <div id="starrating">
-        <p>rate this product *</p>
-        <StarsList rating={rating} handleClick={handleClick}/>
+        <h3>rate this product*</h3>
+        <StarsList compId="review" rating={rating} handleClick={handleClick}/>
         <p id="ratemeaning">{ratingMeaning}</p>
+      </div>
+
+      <div className="email">
+        <h3>Enter email</h3>
+        <input onSubmit={handleEmailSubmit} type="email" required placeholder="Enter email" name="revieweremail" id="revieweremail" />
+        <input type="submit" />
       </div>
 
       <div id="characterstic">
@@ -91,10 +99,10 @@ function AddReview(props) {
       </div>
 
       <div>
-        <p>Do you recomment this product*</p>
-          <input type="radio" id="yes" name="recommendation" onClick={handleRecommendationChange} value={true} />
+        <p>Do you recommend this product*</p>
+          <input type="radio" id="yesrecommend" name="recommendation" value={true} onClick={handleRecommendationChange} value={true} />
           <label htmlFor="yes">Yes</label>
-          <input type="radio" id="no" name="recommendation" onClick={handleRecommendationChange} value={false} />
+          <input type="radio" id="norecommend" name="recommendation" value={false} onClick={handleRecommendationChange} value={false} />
           <label htmlFor="no">No</label>
       </div>
 
@@ -102,8 +110,12 @@ function AddReview(props) {
         <Photos />
       </div>
 
-      <Body />
+      <div className="reviewsummaryentry">
+        <input onSubmit={handleSummarySubmit} maxLength="60" placeholder="Briefly summarize" name="reviewsummary" id="reviewsummaery" />
+        <input type="submit" />
+      </div>
 
+      <Body />
 
       <div>
 

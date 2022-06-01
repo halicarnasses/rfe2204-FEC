@@ -1,8 +1,9 @@
 import React from 'react';
 import StarMaker from './StarMaker.jsx';
 
-function StarsList({ rating, handleClick}) {
+function StarsList({ compId, rating, handleClick}) {
   // console.log('handleCli', handleClick ,rating)
+
   const fullStar = Math.floor(rating);
   const empty = 5 - fullStar + 1;
   const fullPortion = `100%`;
@@ -15,7 +16,7 @@ function StarsList({ rating, handleClick}) {
           const index = i + 1;
           const portion = i < fullStar ? fullPortion : i === fullStar ? filledPortion : zeroPortion;
           const id = i < fullStar ? 'full' : i === fullStar ? 'offset' : 'empty';
-          return <StarMaker handleClick={handleClick} index={index} portion={portion} key={i} />
+          return <StarMaker positionOfStar={i + 1} handleClick={handleClick} index={`${compId}${id}${index}`} portion={portion} key={i} />
         })
       }
     </div>

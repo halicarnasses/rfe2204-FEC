@@ -5,7 +5,7 @@ function Body() {
   const [message, updaMessage] = useState('Minimum required characters left: [50]');
   const [reviewBody, setReviewBody] = useState('');
 
-  console.log('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>')
+  // console.log('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>')
   function handleInputBodyChange(e) {
     const input = e.target.value;
     updateCounter(input.length);
@@ -16,7 +16,7 @@ function Body() {
   return (
     <div>
         <h3>Enter</h3>
-          <input required onChange={handleInputBodyChange} required minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" name="reviewbody" id="reviewbody" />
+          <input onChange={handleInputBodyChange} required minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" name="reviewbody" id="reviewbody" />
           <input type="submit" />
           <p>{message}</p>
       </div>

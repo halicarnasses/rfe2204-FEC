@@ -10,20 +10,22 @@ function Characterstics({ value, handleCharChoice }) {
 
   return (
     <div>
-      <h3>{value}</h3>
-        <input required name="ratingchoice" type="radio" value="1" onClick={handleClick} className="option" id="1" />
-        <label htmlFor="1">1</label>
-        <input required name="ratingchoice" type="radio" value="2" onClick={handleClick} className="option" id="2" />
-        <label htmlFor="2">2</label>
-        <input required name="ratingchoice" type="radio" value="3" onClick={handleClick} className="option" id="3" />
-        <label htmlFor="3">3</label>
-        <input required name="ratingchoice" type="radio" value="4" onClick={handleClick} className="option" id="4" />
-        <label htmlFor="4">4</label>
-        <input required name="ratingchoice" type="radio" value="5" onClick={handleClick} className="option" id="5" />
-      <label htmlFor="5">5</label>
-      <p>{charValues[value]['1']}</p>
-      <p>{charValues[value]['5']}</p>
-      <p>Your choice {meaningOfChoice}</p>
+      <form id={value}>
+        <h3>{value}</h3>
+          <input required name="ratingchoice" type="radio" value="1" onClick={handleClick} className="option" id="1" />
+          <label htmlFor="1">1</label>
+          <input required name="ratingchoice" type="radio" value="2" onClick={handleClick} className="option" id="2" />
+          <label htmlFor="2">2</label>
+          <input required name="ratingchoice" type="radio" value="3" onClick={handleClick} className="option" id="3" />
+          <label htmlFor="3">3</label>
+          <input required name="ratingchoice" type="radio" value="4" onClick={handleClick} className="option" id="4" />
+          <label htmlFor="4">4</label>
+          <input required name="ratingchoice" type="radio" value="5" onClick={handleClick} className="option" id="5" />
+        <label htmlFor="5">5</label>
+        <p>{charValues[value]['1']}</p>
+        <p>{charValues[value]['5']}</p>
+        <p>Your choice {meaningOfChoice}</p>
+      </form>
     </div>
   );
 }

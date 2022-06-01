@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 // require('dotenv').config();
 const axios = require('axios')
 import './css/ProductInfo.css'
+=======
+import React from 'react';
+import { FaFacebook, FaTwitter, FaPinterest } from "react-icons/fa";
 
-function ProductInfo(props) {
+import StarRating from '../shared/StarRating/StarRating.jsx';
+>>>>>>> f67d3baf0d536154fca5cb7554e4590dfcef3363
 
+function ProductInfo({name, description, rating, reviewCount, price, salePrice, category }) {
+  // console.log(name, rating, price, salePrice);
+
+<<<<<<< HEAD
 
 
   return <div className="product-info">
@@ -30,3 +39,36 @@ function ProductInfo(props) {
 }
 
 export default ProductInfo
+=======
+  return (
+    <div className="overview-product-info">
+      <div className="overview-product-reviews">
+        <StarRating stars={rating} />
+        {reviewCount ?
+          <h4><a href="reviews-div">See all reviews</a>{reviewCount}</h4>
+          : <></>
+        }
+      </div>
+      <h5>CATEGORY: {category}</h5>
+      <h3>{name}</h3>
+      <h5>{description}</h5>
+      { salePrice ?
+        <h6>
+          <span style={{textDecorationLine: 'line-through'}}>{price}</span>
+          <span style={{color: 'red'}}>{salePrice}</span>
+        </h6>
+        : <></>
+      }
+      <div className="overview-social-icons">
+        <FaFacebook />
+        <FaTwitter />
+        <FaPinterest />
+      </div>
+    </div>
+  );
+
+}
+
+export default ProductInfo;
+2
+>>>>>>> f67d3baf0d536154fca5cb7554e4590dfcef3363

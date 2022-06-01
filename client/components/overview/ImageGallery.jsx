@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './css/ImageGallery.css'
@@ -115,6 +116,19 @@ function ImageGallery(props) {
       </button> */}
     </div>
   </div>
+=======
+
+import React from 'react';
+import Carousel from '../shared/Carousel/Carousel.jsx';
+
+function ImageGallery({slides}) {
+  console.log(slides);
+
+  return (
+    <Carousel slides={slides} className={'carousel-div'}/>
+  )
+
+>>>>>>> f67d3baf0d536154fca5cb7554e4590dfcef3363
 }
 
-export default ImageGallery
+export default ImageGallery;

@@ -3,7 +3,7 @@ import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import CarouselItem from "./CarouselItem.jsx";
 import "./Carousel.css";
 
-const Carousel = ({ slides }) => {
+const Carousel = ({ slides, className }) => {
 
   const [current, setCurrent] = useState(0);
   const [images, setImages] = useState([]);
@@ -24,9 +24,10 @@ const Carousel = ({ slides }) => {
   };
 
   return (
-    <div className="carousel-div">
+    <div className={className}>
 
       <div className="carousel-slide-content">
+
         <FaChevronLeft
           className="carousel-left-arrow"
           onClick={prevSlide}

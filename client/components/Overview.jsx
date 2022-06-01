@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Carousel from './shared/Carousel/Carousel.jsx';
+import ImageGallery from "./overview/ImageGallery.jsx";
 import ProductInfo from "./overview/ProductInfo.jsx";
 import StyleSelector from "./overview/StyleSelector.jsx";
 import AddToCart from "./overview/AddToCart.jsx";
@@ -43,7 +43,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
   return (
     <div className="overview-div">
 
-      <Carousel slides={style ? style.photos : []}/>
+      <ImageGallery slides={style ? style.photos : []}/>
 
       <div className="overview-product-dash">
         <ProductInfo

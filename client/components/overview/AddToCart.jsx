@@ -7,13 +7,13 @@ function AddToCart({skus}) {
 
   const [size, setSize] = useState('');
   const [quantityLimit, setQuantityLimit] = useState(0);
-  const [] = useState([]);
+  const [cartItem, setCartItem] = useState([]);
 
   useEffect(() => {
     if (skus) {
       const firstSku = skus[Object.keys(skus)[0]];
       console.log(firstSku)
-      setQuantityLimit(firstSku.quantity);
+      // setQuantityLimit(firstSku.quantity);
     }
   }, [skus]);
 
@@ -21,8 +21,12 @@ function AddToCart({skus}) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log(skus[value]);
-    if (skus[value].quantity < 15) {
+    let currentItem = {};
+
+    if(value === 'default') {
+      setQuantityLimit(0);
+      setCartItem([]);
+    } else if (skus[value].quantity < 15) {
       setQuantityLimit(skus[value].quantity);
     } else {
       setQuantityLimit(15);
@@ -33,31 +37,38 @@ function AddToCart({skus}) {
     <div className="overview-add-to-cart">
       <div className="cart-size-row">
 
-        <select
-          name="select-size"
-          onChange={changeHandler}>
-            {
-              skus ? Object.keys(skus).map((key) => {
-                return (
-                  <option key={key} value={key}>{skus[key].size}</option>
-                )
-              }) : 0
-            }
-        </select>
-
-        <select
-          name="select-quantity"
-          onChange={changeHandler}>
-            {
-              quantityLimit ? [...Array(quantityLimit).keys()].map((key) => {
-                return (
-                  <option key={key} value={key+1}>{key+1}</option>
-                )
-              }) : 0
-            }
-        </select>
+        {
+          skus ?  <select
+            name="select-size"
+            onChange={changeHandler}>
+              <option key={0} value={'default'}>SELECT SIZE</option>
+              {
+                Object.keys(skus).map((key) => {
+                  return (
+                    <option key={key+1} value={key}>{skus[key].size}</option>
+                  )
+                })
+              }
+          </select>
+          : <h5>OUT OF STOCK</h5>
+        }
 
 
+        {
+          quantityLimit ?
+            <select
+              name="select-quantity"
+              onChange={changeHandler}>
+                {
+                  [...Array(quantityLimit).keys()].map((key) => {
+                    return (
+                      <option key={key} value={key+1}>{key+1}</option>
+                    )
+                  })
+                }
+            </select>
+            : <></>
+        }
       </div>
 
       {/* <div className="cart-add-row">

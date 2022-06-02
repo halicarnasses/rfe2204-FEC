@@ -49,12 +49,12 @@
   right: 5vw;
 }
 
-.carousel-fullscreen-btn:hover,
+/* .carousel-fullscreen-btn:hover,
 .carousel-left-arrow:hover,
 .carousel-right-arrow:hover{
   transform: scale(1.2);
   color: green;
-}
+} */
 
 
 .carousel-indicator-div {

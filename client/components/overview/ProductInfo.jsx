@@ -18,7 +18,7 @@ function ProductInfo({name, description, rating, reviewCount, price, salePrice, 
     <div className="overview-product-info">
       <StarRating stars={rating} />
       {reviewCount ?
-        <h5><a href="reviews-div">See all reviews</a> {reviewCount}</h5>
+        <h5><a className="onclick" href="reviews-div">See all reviews</a> {reviewCount}</h5>
         : <></>
       }
       <h5>CATEGORY: {category}</h5>
@@ -34,15 +34,15 @@ function ProductInfo({name, description, rating, reviewCount, price, salePrice, 
       }
       <div className="overview-social-icons">
 
-        <a target="_blank" href= {`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}>
+        <a target="_blank" className="onclick" href= {`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}>
           <FaFacebook name="icon" size={25}/>
         </a>
 
-        <a target="_blank" className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20this%20out%33" data-size="large">
+        <a target="_blank" className="twitter-share-button  onclick" href="https://twitter.com/intent/tweet?text=Check%20this%20out%33" data-size="large">
           <FaTwitter size={25}/>
         </a>
 
-        <a target="_blank" href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true">
+        <a target="_blank" className="onclick" href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true">
           <FaPinterest size={25}/>
         </a>
 

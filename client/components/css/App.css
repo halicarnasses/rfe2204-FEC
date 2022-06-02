@@ -7,3 +7,7 @@ html {
 .onclick {
   cursor: pointer;
 }
+
+.onclick:hover {
+  color:green;
+}

@@ -47,7 +47,7 @@ const Carousel = ({ slides, className }) => {
       {/* <div className="crousel-slide-content"> */}
 
         { current > 0 ?
-          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide} size={35}/>
+          <FaChevronLeft className="carousel-left-arrow onclick" onClick={prevSlide} size={35}/>
           : null
         }
 
@@ -58,19 +58,19 @@ const Carousel = ({ slides, className }) => {
                 hidden={false}
                 className={fullscreen? "carousel-image-fullscreen" : "carousel-image"}
                 src={currentImage.url} />
-              <FaExpandArrowsAlt onClick={makeFullscreen} className="carousel-fullscreen-btn" size={25}/>
+              <FaExpandArrowsAlt onClick={makeFullscreen} className="carousel-fullscreen-btn onclick" size={25}/>
             </div>
             : null
         }
 
         { current >= 0 && current != length -1?
-          <FaChevronRight className="carousel-right-arrow" onClick={nextSlide} size={35}/>
+          <FaChevronRight className="carousel-right-arrow onclick" onClick={nextSlide} size={35}/>
             : null
         }
 
       <div className="carousel-indicator-div">
         { current > 0 ?
-          <FaChevronLeft className="indicator-left-arrow" onClick={prevSlide} size={20}/>
+          <FaChevronLeft className="indicator-left-arrow onclick" onClick={prevSlide} size={20}/>
           : null
         }
         {
@@ -79,7 +79,7 @@ const Carousel = ({ slides, className }) => {
               <img
                 key={index}
                 src={slide.thumbnail_url}
-                className={slide.thumbnail_url === currentImage.thumbnail_url ? "selected-thumbnail carousel-indicator" : "carousel-indicator"}
+                className={slide.thumbnail_url === currentImage.thumbnail_url ? "selected-thumbnail carousel-indicator onclick" : "carousel-indicator onclick"}
                 name={index}
                 onClick={updateCurrentImage}/>
               )
@@ -87,7 +87,7 @@ const Carousel = ({ slides, className }) => {
           : null
         }
         { current >= 0 && current != length - 1?
-          <FaChevronRight className="indicator-right-arrow" onClick={nextSlide} size={20}/>
+          <FaChevronRight className="indicator-right-arrow onclick" onClick={nextSlide} size={20}/>
           : null
         }
       </div>

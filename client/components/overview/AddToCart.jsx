@@ -82,7 +82,7 @@ function AddToCart({skus}) {
         }
       </div>
       <div className="cart-add-row">
-        <button className="add-to-cart-btn" name="add-to-cart-btn" onClick={clickHandler}>ADD TO CART</button>
+        <button className="add-to-cart-btn onclick" name="add-to-cart-btn" onClick={clickHandler}>ADD TO CART</button>
       </div>
     </div>
   )

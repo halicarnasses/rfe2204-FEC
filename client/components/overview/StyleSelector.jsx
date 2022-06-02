@@ -63,7 +63,7 @@ function StyleSelector({styleHandler, style, results}) {
                   return (
                     <div key={col.style_id} className="thumb-div">
                       <img
-                        className="selector-thumb"
+                        className="selector-thumb onclick"
                         name={col.style_id}
                         onClick={clickHandler}
                         src={col.photos[0].thumbnail_url}>

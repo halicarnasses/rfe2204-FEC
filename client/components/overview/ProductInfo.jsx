@@ -18,7 +18,7 @@ function ProductInfo({name, description, rating, reviewCount, price, salePrice, 
     <div className="overview-product-info">
       <StarRating stars={rating} />
       {reviewCount ?
-        <h5><a className="onclick" href="reviews-div">See all reviews</a> {reviewCount}</h5>
+        <h5><a className="onclick" href="#reviews-div">See all reviews</a> {reviewCount}</h5>
         : <></>
       }
       <h5>CATEGORY: {category}</h5>

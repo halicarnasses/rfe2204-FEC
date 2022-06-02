@@ -31,16 +31,16 @@ const Carousel = ({ slides, className }) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
+    console.log(target);
     setCurrent(name);
   };
 
   return (
     <div className={className}>
-
       <div className="carousel-slide-content">
 
         { current > 0 ?
-          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide}/>
+          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide} size={25}/>
           : null
         }
 
@@ -49,33 +49,33 @@ const Carousel = ({ slides, className }) => {
         }
 
         { current >= 0 && current != length -1?
-        <FaChevronRight className="carousel-right-arrow" onClick={nextSlide}/>
+        <FaChevronRight className="carousel-right-arrow" onClick={nextSlide} size={25}/>
           : null
         }
-      </div>
 
-      <div className="carousel-indicator-div">
-
-        <FaChevronLeft
-          className="indicator-left-arrow"
-          onClick={prevSlide}
-        />
-        {
-          images ? images.map((slide, index) => {
-            return (
-              <img
-                key={index}
-                src={slide.thumbnail_url}
-                className="carousel-indicator"
-                name={index}
-                onClick={updateCurrentImage}/>
-            )
-          }) : null
-        }
-        <FaChevronRight
-          className="indicator-right-arrow"
-          onClick={nextSlide}
-        />
+        <div className="carousel-indicator-div">
+          <FaChevronLeft
+            className="indicator-left-arrow"
+            onClick={prevSlide}
+          />
+          {
+            images ? images.map((slide, index) => {
+              console.log(currentImage.thumbnail_url === slide.thumbnail_url ? 'thumb' : null)
+              return (
+                <img
+                  key={index}
+                  src={slide.thumbnail_url}
+                  className={slide.thumbnail_url === currentImage.thumbnail_url ? "selected-thumbnail carousel-indicator" : "carousel-indicator"}
+                  name={index}
+                  onClick={updateCurrentImage}/>
+              )
+            }) : null
+          }
+          <FaChevronRight
+            className="indicator-right-arrow"
+            onClick={nextSlide}
+          />
+        </div>
 
       </div>
     </div>

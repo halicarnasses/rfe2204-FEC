@@ -4,14 +4,16 @@ import CarouselItem from "./CarouselItem.jsx";
 import "./Carousel.css";
 
 const Carousel = ({ slides, className }) => {
-
   const [current, setCurrent] = useState(0);
   const [images, setImages] = useState([]);
-  const [currentImage, setCurrentImage] = useState('');
+  const [currentImage, setCurrentImage] = useState({});
 
   useEffect(() => {
-    setImages(slides);
-  }, [slides]);
+    if(slides) {
+      setImages(slides);
+      setCurrentImage(slides[current]);
+    }
+  }, [slides, current]);
 
   const length = slides ? slides.length : 0;
 
@@ -21,6 +23,14 @@ const Carousel = ({ slides, className }) => {
 
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
+  };
+
+  const updateCurrentImage = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(name)
+    setCurrent(name);
   };
 
   return (
@@ -34,13 +44,7 @@ const Carousel = ({ slides, className }) => {
         />
 
         {
-          images ? images.map((slide, index) => {
-            return (
-              <div key={index}>
-                { index === current ? <CarouselItem image={slide.thumbnail_url} /> : <></>}
-              </div>
-            );
-          }) : 0
+          currentImage ? <img className="carousel-image" src={currentImage.url} /> : null
         }
 
         <FaChevronRight
@@ -57,8 +61,15 @@ const Carousel = ({ slides, className }) => {
         />
         {
           images ? images.map((slide, index) => {
-            return <img key={index} src={slide.thumbnail_url} className="carousel-indicator" />
-          }) : 0
+            return (
+              <img
+                key={index}
+                src={slide.thumbnail_url}
+                className="carousel-indicator"
+                name={index}
+                onClick={updateCurrentImage}/>
+            )
+          }) : null
         }
         <FaChevronRight
           className="indicator-right-arrow"

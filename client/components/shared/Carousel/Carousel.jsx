@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaChevronRight, FaChevronLeft, FaExpandArrowsAlt } from "react-icons/fa";
 import "./Carousel.css";
+import "./CarouselFullscreen.css";
 
 const Carousel = ({ slides, className }) => {
 
@@ -42,59 +43,55 @@ const Carousel = ({ slides, className }) => {
   };
 
   return (
-    // <div className={className}>
-    <div className={fullscreen ? 'carousel-div carousel-fullscreen' : 'carousel-div'}>
-      <div className="carousel-slide-content">
-
+    <div className={fullscreen ? 'carousel-div-fullscreen' : 'carousel-div'}>
+      {/* <div className="crousel-slide-content"> */}
 
         { current > 0 ?
-          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide} size={25}/>
+          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide} size={35}/>
           : null
         }
 
         {
           currentImage ?
-            <div className="carousel-image-container">
-              <img className="carousel-image" src={currentImage.url} />
+            <div className={fullscreen ? "carousel-content-fullscreen" : "carousel-content"}>
+              <img
+                hidden={false}
+                className={fullscreen? "carousel-image-fullscreen" : "carousel-image"}
+                src={currentImage.url} />
               <FaExpandArrowsAlt onClick={makeFullscreen} className="carousel-fullscreen-btn" size={25}/>
             </div>
             : null
         }
 
         { current >= 0 && current != length -1?
-        <FaChevronRight className="carousel-right-arrow" onClick={nextSlide} size={25}/>
+          <FaChevronRight className="carousel-right-arrow" onClick={nextSlide} size={35}/>
+            : null
+        }
+
+      <div className="carousel-indicator-div">
+        { current > 0 ?
+          <FaChevronLeft className="indicator-left-arrow" onClick={prevSlide} size={20}/>
           : null
         }
-
-        <div className="carousel-indicator-div">
-
-          { current > 0 ?
-            <FaChevronLeft className="indicator-left-arrow" onClick={prevSlide} size={20}/>
-            : null
-          }
-
-          {
-            images ? images.map((slide, index) => {
-
-              return (
-                <img
-                  key={index}
-                  src={slide.thumbnail_url}
-                  className={slide.thumbnail_url === currentImage.thumbnail_url ? "selected-thumbnail carousel-indicator" : "carousel-indicator"}
-                  name={index}
-                  onClick={updateCurrentImage}/>
+        {
+          images ? images.map((slide, index) => {
+            return (
+              <img
+                key={index}
+                src={slide.thumbnail_url}
+                className={slide.thumbnail_url === currentImage.thumbnail_url ? "selected-thumbnail carousel-indicator" : "carousel-indicator"}
+                name={index}
+                onClick={updateCurrentImage}/>
               )
-            }) : null
-          }
-
+            })
+          : null
+        }
         { current >= 0 && current != length - 1?
           <FaChevronRight className="indicator-right-arrow" onClick={nextSlide} size={20}/>
-            : null
+          : null
         }
-
-        </div>
-
       </div>
+
     </div>
   );
 

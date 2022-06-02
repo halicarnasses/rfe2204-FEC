@@ -1,75 +1,65 @@
 .carousel-div {
+  border: 4px solid blue;
+  background: white;
+  position: relative;
   margin: 5px;
   padding: 5px;
-  width: 40vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 4px solid blue;
-}
-
-.carousel-slide-content {
-  position: relative;
+  width: 100%;
+  height: 80vh;
   display: flex;
   flex-direction: row;
-  height: 400px;
-  width: 35vw;
-  align-items: center;
   justify-content: center;
-  border: 2px solid green;
 }
 
-.carousel-image-container {
+.carousel-content {
+  margin: auto;
+  padding: 5px;
   position: relative;
   width: fit-content;
   height: auto;
-  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .carousel-image {
-  position: relative;
-  margin: 5px;
-  max-width: 20vw;
-  height: auto;
+  width: auto;
+  height: 50vh;
+  object-fit: contain;
 }
 
 .carousel-fullscreen-btn {
   color: blue;
   position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.carousel-fullscreen-btn:hover {
-  transform: scale(1.2);
-  color: green;
+  top: 1vh;
+  right: 1vw;
 }
 
 .carousel-left-arrow {
   color: black;
   position: absolute;
-  left: 1vw;
-  /* border: 2px solid red; */
+  top: 50%;
+  left: 5vw;
 }
 
 .carousel-right-arrow {
   color: black;
   position: absolute;
-  right: 1vw;
-  /* border: 2px solid red; */
+  top: 50%;
+  right: 5vw;
 }
+
+.carousel-fullscreen-btn:hover,
 .carousel-left-arrow:hover,
 .carousel-right-arrow:hover{
   transform: scale(1.2);
   color: green;
 }
 
+
 .carousel-indicator-div {
   position: absolute;
-  bottom: 0;
-  margin: 5px;
-  height: 50px;
+  bottom: 8vh;
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -95,15 +85,4 @@
 
 .selected-thumbnail {
   border: 2px solid green;
-}
-
-.carousel-fullscreen {
-  z-index: 99;
-  border: 4px solid red;
-  background: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }

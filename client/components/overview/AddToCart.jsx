@@ -48,9 +48,7 @@ function AddToCart({skus}) {
 
   return (
     <div className="overview-add-to-cart">
-
       <div className="cart-size-row">
-
         {
           skus ?
             <select
@@ -59,7 +57,6 @@ function AddToCart({skus}) {
                 <option key={0} value={'default'}>SELECT SIZE</option>
                 {
                   Object.keys(skus).map((key) => {
-                    // console.log(skus[key])
                     return (
                       <option key={key+1} value={key}>{skus[key].size}</option>
                     )
@@ -68,7 +65,6 @@ function AddToCart({skus}) {
             </select>
           : <h5>OUT OF STOCK</h5>
         }
-
         {
           quantityLimit ?
             <select
@@ -84,13 +80,10 @@ function AddToCart({skus}) {
             </select>
           : null
         }
-
       </div>
-
       <div className="cart-add-row">
         <button className="add-to-cart-btn" name="add-to-cart-btn" onClick={clickHandler}>ADD TO CART</button>
       </div>
-
     </div>
   )
 }

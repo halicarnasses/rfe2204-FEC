@@ -16,8 +16,6 @@ function AddToCart({skus}) {
 
     if (name === 'select-size') {
 
-      console.log(name, value, skus[value])
-
       if(value === 'default') {
         setQuantityLimit(0);
       } else if (skus[value].quantity < 15) {
@@ -35,20 +33,17 @@ function AddToCart({skus}) {
     }
   }
 
-
   const clickHandler = (event) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
 
-    console.log(sku, quantity);
     for (let i = 0; i < quantity; i++) {
       axios
         .post(`/cart`, { "sku_id": sku})
         .then((response) => ( console.log(response.status) ))
         .catch((error) => ( console.log(error) ));
     }
-
   };
 
   return (

@@ -4,32 +4,33 @@ import CarouselItem from "./CarouselItem.jsx";
 import "./Carousel.css";
 
 const Carousel = ({ slides, className }) => {
+
   const [current, setCurrent] = useState(0);
+  const [length, setLength] = useState(0);
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState({});
 
   useEffect(() => {
-    if(slides) {
+    if (slides) {
       setImages(slides);
       setCurrentImage(slides[current]);
+      setLength(slides.length);
     }
   }, [slides, current]);
 
-  const length = slides ? slides.length : 0;
 
   const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
+    setCurrent(current === length - 1 ? length - 1 : current + 1);
   };
 
   const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
+    setCurrent(current === 0 ? 0 : current - 1);
   };
 
   const updateCurrentImage = (event) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
-    console.log(name)
     setCurrent(name);
   };
 
@@ -38,19 +39,19 @@ const Carousel = ({ slides, className }) => {
 
       <div className="carousel-slide-content">
 
-        <FaChevronLeft
-          className="carousel-left-arrow"
-          onClick={prevSlide}
-        />
+        { current > 0 ?
+          <FaChevronLeft className="carousel-left-arrow" onClick={prevSlide}/>
+          : null
+        }
 
         {
           currentImage ? <img className="carousel-image" src={currentImage.url} /> : null
         }
 
-        <FaChevronRight
-          className="carousel-right-arrow"
-          onClick={nextSlide}
-        />
+        { current >= 0 && current != length -1?
+        <FaChevronRight className="carousel-right-arrow" onClick={nextSlide}/>
+          : null
+        }
       </div>
 
       <div className="carousel-indicator-div">

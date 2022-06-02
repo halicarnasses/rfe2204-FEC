@@ -25,7 +25,7 @@
     "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
-    "build": "webpack --mode=production",
+    "build": "webpack",
     "build-dev": "webpack --mode=development --watch",
     "server-dev": "nodemon server/server.js",
     "dev": "webpack serve --open"

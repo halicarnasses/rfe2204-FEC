@@ -16,7 +16,7 @@ function ProductDetails() {
     updateState(productID);
   }, []);
 
-  const updateState = (id, page=1, count=100, sort='newest') => {
+  const updateState = (id, page=1, count=10, sort='newest') => {
     console.log(`Updating ${id} ${page} ${count}`);
 
     axios

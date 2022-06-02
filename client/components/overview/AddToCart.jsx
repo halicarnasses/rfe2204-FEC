@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-// import './css/Cart.css'
+import React, { useState } from 'react';
+import axios from "axios";
 
 function AddToCart({skus}) {
 
@@ -7,13 +7,6 @@ function AddToCart({skus}) {
   const [sku, setSku] = useState('');
   const [quantity, setQuantity] = useState();
   const [quantityLimit, setQuantityLimit] = useState(0);
-  // const [cartItems, setCartItems] = useState([]);
-
-  // useEffect(() => {
-  //   if (skus) {
-  //     const firstSku = skus[Object.keys(skus)[0]];
-  //   }
-  // }, [skus]);
 
   const changeHandler = (event) => {
     event.preventDefault();
@@ -49,6 +42,12 @@ function AddToCart({skus}) {
     const name = target.name;
 
     console.log(sku, quantity);
+    for (let i = 0; i < quantity; i++) {
+      axios
+        .post(`/cart`, { "sku_id": sku})
+        .then((response) => ( console.log(response.status) ))
+        .catch((error) => ( console.log(error) ));
+    }
 
   };
 

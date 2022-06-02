@@ -21,10 +21,8 @@ function ProductDetails() {
 
     axios
       .all([
-
         // All products not needed right now.
         // axios.get(`/products/?page=${page}&count=${count}`),
-
         // Product Information
         axios.get(`/products/${id}`),
         // Product Styles
@@ -51,7 +49,6 @@ function ProductDetails() {
         allInfo.questions = responses[2].data.results;
         allInfo.reviews = responses[3].data;
         allInfo.reviewsMeta = responses[4].data;
-        // console.log(allInfo.productStyles);
         return allInfo;
       }))
       .then((data) => ( setProductAll(data) ))
@@ -60,9 +57,6 @@ function ProductDetails() {
       });
 
   };
-
-  // Add ternary conditional for all props to handle undefined data?
-  // ex:  props={props? props : {}}
 
   return (
     <div>

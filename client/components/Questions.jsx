@@ -3,6 +3,8 @@ import axios from 'axios';
 import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
 import QuestionSearch from "./questions/QuestionSearch.jsx"
+import {GoSearch} from 'react-icons/go'
+
 
 import './css/questions/Questions.css';
 
@@ -31,8 +33,6 @@ function Questions({id, product, questionsData, stateHandler}) {
     stateHandler(productID, 1, 100);
   }
 
-  // Search bar
-  // List functions
   const markHelpful = (event) => {
     event.preventDefault();
     const target = event.target;
@@ -137,18 +137,16 @@ function Questions({id, product, questionsData, stateHandler}) {
 
   return (
     <div className="questions-div">
-      {/* {console.log('questions render', questionsData)} */}
 
-      <h2>QUESTIONS</h2>
       <QuestionModal id={productID} productName={productName} hidden={questionHidden} hide={hideQuestionModal} submitHandler={addQuestion}/>
 
       {/* Search Bar */}
-      <div  className="question-search">
-      <input
-        type="search"
-        onChange={onChangeHandler}
-        placeholder="Have a question? Search for answers..." />
-        <i className="fa-solid fa-magnifying-glass"></i>
+      <div className="question-search">
+        <input
+          type="search"
+          onChange={onChangeHandler}
+          placeholder="Have a question? Search for answers..." />
+          <GoSearch size={20}/>
       </div>
 
       <div className="questions-list">
@@ -172,15 +170,19 @@ function Questions({id, product, questionsData, stateHandler}) {
                 />
               )
             }
-          }) : <h6>no questions yet</h6>
+          }) : null
         }
       </div>
 
-      <button id="more-questions-btn" name="more-questions"
-        hidden={questions.length <= 2 ? true : false}
-        onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-      <button onClick={showQuestionModal}>ADD A QUESTION +</button>
-
+      <div className="questions-actions">
+        <button
+          className="questions-more-btn onclick"
+          hidden={questions.length <= 2 ? true : false}
+          onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+        <button
+          className="questions-add-btn onclick"
+          onClick={showQuestionModal}>ADD A QUESTION +</button>
+      </div>
     </div>
   )
 

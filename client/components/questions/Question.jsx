@@ -4,17 +4,11 @@ import AnswerModal from "./AnswerModal.jsx"
 
 function Question({id, productName, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
 
-  // turn answers into an array for better sorting.
-
   const [answerLimit, setAnswerLimit] = useState(2);
   const [answerKeys, setAnswerKeys] = useState([]);
   const [answerHidden, setAnswerHidden] = useState(true);
 
-  // useEffect(() => {
-  //   setAnswerKeys(Object.keys(answers));
-  // }, []);
-
-  const showMoreAnswers = (event) => {
+   const showMoreAnswers = (event) => {
     event.preventDefault();
     const target = event.target;
     target.classList.toggle('questions-hide-button');
@@ -80,10 +74,6 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
         </div>
 
       </div>
-
-      {/* <button className="more-answers-btn" name="more-answers"
-          onClick={showMoreAnswers}>Load More Answers
-      </button> */}
 
     </div>
   );

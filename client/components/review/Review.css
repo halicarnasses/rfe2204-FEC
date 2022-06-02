@@ -3,10 +3,22 @@
   grid-template-columns: 0.8fr 2.2fr;
   border: blue solid;
   padding: 15px;
+  column-gap: 7%;
 }
 .revieListAndAddReviewContainer {
   background-color: rgb(239, 245, 248);
   width: 98%;
   height: 90vh;
   overflow: scroll;
+}
+#sorting {
+  width: 150px;
+  height: 25px;
+  margin: 15px;
+}
+.LeftPage {
+  display: grid;
+  grid-template-rows: 0.8fr 2.2fr;
+  border: blue solid;
+  row-gap: 15%;
 }

@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react'
 
 function AddToCart({skus}) {
 
-  console.log(skus);
-
   const [size, setSize] = useState('');
   const [quantityLimit, setQuantityLimit] = useState(0);
   const [cartItem, setCartItem] = useState([]);
@@ -12,8 +10,6 @@ function AddToCart({skus}) {
   useEffect(() => {
     if (skus) {
       const firstSku = skus[Object.keys(skus)[0]];
-      console.log(firstSku)
-      // setQuantityLimit(firstSku.quantity);
     }
   }, [skus]);
 
@@ -71,9 +67,9 @@ function AddToCart({skus}) {
         }
       </div>
 
-      {/* <div className="cart-add-row">
+      <div className="cart-add-row">
         <button>ADD TO BAG</button>
-      </div> */}
+      </div>
     </div>
   )
 }

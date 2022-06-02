@@ -1,5 +1,4 @@
 .stars-div {
-  border: 2px solid red;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -19,9 +18,9 @@
   position: absolute;
   top: 0;
   overflow: hidden;
-  color: black;
+  color: gold;
+  stroke: black;
 }
-
 
 .star-svg {
   flex-shrink: 0;

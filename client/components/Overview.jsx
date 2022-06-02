@@ -8,6 +8,10 @@ import './css/overview/Overview.css';
 
 function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
 
+  if (productInfo === undefined ) {
+    console.log('OVERVIEW NO DATA');
+  }
+
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState([]);
   const [style, setStyle] = useState({});
@@ -34,11 +38,8 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
   }, [productInfo, productStyles, reviews]);
 
   const updateStyle = (obj) => {
-    console.log(obj);
     setStyle(obj);
   };
-
-  console.log(styles);
 
   return (
     <div className="overview-div">

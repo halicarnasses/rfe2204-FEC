@@ -6,7 +6,7 @@ import Questions from './Questions.jsx';
 import "./css/App.css";
 function ProductDetails() {
 
-  const [productID, setProductID] = useState(37311);
+  const [productID, setProductID] = useState(37313);
 
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
@@ -63,14 +63,9 @@ function ProductDetails() {
 
   // Add ternary conditional for all props to handle undefined data?
   // ex:  props={props? props : {}}
+
   return (
     <div>
-<<<<<<< HEAD
-      {/* <h1>Product Details</h1> */}
-      <Overview id={productID} productInfo={productAll.productInfo} productStyles={productAll.productStyles} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
-      <Questions id={productID} questionsData={productAll.questions} stateHandler={updateState}/>
-      <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/>
-=======
       <h1>Product Details</h1>
       <Overview
         id={productID}
@@ -79,15 +74,13 @@ function ProductDetails() {
         reviews={productAll.reviews}
         stateHandler={updateState}/>
 
-      {/* <Questions
+      <Questions
         id={productID}
         product={productAll.productInfo}
         questionsData={productAll.questions}
-        stateHandler={updateState}/> */}
+        stateHandler={updateState}/>
 
       {/* <Reviews id={productID} reviews={productAll.reviews} reviewsMeta={productAll.reviewsMeta} stateHandler={updateState}/> */}
-
->>>>>>> f67d3baf0d536154fca5cb7554e4590dfcef3363
     </div>
   );
 

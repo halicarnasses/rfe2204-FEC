@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-import './css/StyleSelector.css'
-
-function StyleSelector(props) {
-  // const [styleurl, setStyle] = useState(props.ProductStyle)
-
-  return <>
-    <div>---Style Selector---</div>
-    <div>{props.styles.map((val, i) => {
-      return <button style={{
-        "borderRadius" : "50%",
-        "border" : `solid ${val.name.split(' ')[1] || "grey"}`,
-        "backgroundColor" : `${val.name.split(' ')[3] || "grey"}`,
-        "borderWidth" : "thick",
-        "padding" : "7px",
-        "margin" : "5px"
-      }} onClick={(e) => {
-        props.setCurrStyle(i)
-      }} key={i}></button>
-    })}</div>
-  </>
-  //image stuff will be determined by the styles
-=======
 import React from 'react'
 import {FaCheck} from 'react-icons/fa';
 
@@ -56,9 +31,8 @@ function StyleSelector({styleHandler, style, results}) {
   const clickHandler = (event) => {
     const target = event.target;
     const name = target.name;
-    // console.log(results);
+
     for ( let result of results) {
-      // console.log(name, result.style_id)
       if (parseInt(name) === result.style_id) {
         styleHandler(result);
       }
@@ -100,14 +74,12 @@ function StyleSelector({styleHandler, style, results}) {
                 })
               }</div>
             )
-          }) : 0
+          }) : null
         }
       </div>
 
-
     </div>
   )
->>>>>>> f67d3baf0d536154fca5cb7554e4590dfcef3363
 }
 
 export default StyleSelector

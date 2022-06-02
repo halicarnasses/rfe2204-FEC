@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ImageGallery from "./overview/ImageGallery.jsx";
 import Carousel from './shared/Carousel/Carousel.jsx';
-
-
 import ProductInfo from "./overview/ProductInfo.jsx";
 import StyleSelector from "./overview/StyleSelector.jsx";
 import AddToCart from "./overview/AddToCart.jsx";

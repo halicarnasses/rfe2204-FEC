@@ -1,32 +1,55 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
-// require('dotenv').config();
-const axios = require('axios')
-import './css/ProductInfo.css'
+import React from 'react';
+import { FaFacebook, FaTwitter, FaPinterest } from "react-icons/fa";
 
-function ProductInfo(props) {
+import StarRating from '../shared/StarRating/StarRating.jsx';
 
+function ProductInfo({name, description, rating, reviewCount, price, salePrice, category }) {
 
 
-  return <div className="product-info">
-    <div>star rating: {props.ratings.stars}</div> <a href="#reviews">read all {props.ratings.count} ratings</a>
-    <div className="ratings">
-      <div className="empty-stars"></div>
-      <div className="full-stars" style={{width:`${4.6/5*100}%`}}></div>
+  const sharePage = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const name = target.name;
+    console.log(target);
+
+  }
+
+  return (
+    <div className="overview-product-info">
+      <StarRating stars={rating} />
+      {reviewCount ?
+        <h5><a className="onclick" href="reviews-div">See all reviews</a> {reviewCount}</h5>
+        : <></>
+      }
+      <h5>CATEGORY: {category}</h5>
+      <h4>{name}</h4>
+      <h5>{description}</h5>
+      {/* <h6>{price}</h6> */}
+      { salePrice ?
+        <h4>
+          <span style={{textDecorationLine: 'line-through'}}>${price}</span>
+          <span style={{color: 'red'}}> ${salePrice}</span>
+        </h4>
+        : <h4>${price}</h4>
+      }
+      <div className="overview-social-icons">
+
+        <a target="_blank" className="onclick" href= {`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}>
+          <FaFacebook name="icon" size={25}/>
+        </a>
+
+        <a target="_blank" className="twitter-share-button  onclick" href="https://twitter.com/intent/tweet?text=Check%20this%20out%33" data-size="large">
+          <FaTwitter size={25}/>
+        </a>
+
+        <a target="_blank" className="onclick" href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true">
+          <FaPinterest size={25}/>
+        </a>
+
+      </div>
     </div>
-    <div className="category">{props.product.category}</div>
-    <div className="product-name">{props.product.name}</div>
-    <div className='price'>
+  );
 
-      <div >{props.currStyle.sale_price ? 'original price: ' : ''}</div> <s className='price__old'>{props.currStyle.sale_price ? props.currStyle.original_price : ''}</s>
-    </div>
-    <div >price: {props.currStyle.sale_price || props.currStyle.original_price}</div>
-    <div>product overview: {props.product.slogan}</div>
-
-
-    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Share to Twitter</a><script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
-    <div className="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share on Facebook</a></div>
-  </div>
 }
 
-export default ProductInfo
+export default ProductInfo;

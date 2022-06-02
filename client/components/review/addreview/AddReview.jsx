@@ -7,9 +7,11 @@ import Body from './Body.jsx';
 function AddReview(props) {
   // obj collects all input data, and is sent to handleAddReview
   let obj = {};
-  console.log('Hello');
+  obj.id = props.id;
+  obj.characteristics = {};
+  const [data, updateData] = useState(obj);
   // end fo validation states
-
+  const [body, setBody] = useState('');
   const [rating, updateRating] = useState(0);
   const [ratingMeaning, updatRatingMeaning] = useState('none rated');
   const [photos, addPhoto] = useState(null);
@@ -34,61 +36,109 @@ function AddReview(props) {
   }
 
   function handleClick(clickedStar) {
+    let prevData = data;
+    prevData['rating'] = clickedStar;
+    updateData(prevData);
     updateRating(clickedStar);
+
+    console.log('rawData:', data)
     updatRatingMeaning(resultOfStar[clickedStar]);
-    obj['ratings'] = clickedStar;
   }
 
   function handleSummarySubmit(e) {
-    // I think this is an error
-    console.log(e.target.value)
-    updateSummary(e.target.value)
+    let prevData = data;
+    prevData['summary'] = e.target.value;
+    updateData(prevData);
+    console.log('rawData:', data)
+    updateSummary(e.target.value);
+
   }
   function handleEmailSubmit(e) {
     // I think this is an error
-    console.log(e.target.value)
+    let prevData = data;
+    prevData['email'] = e.target.value;
+    updateData(prevData);
+    console.log('rawData:', data)
     updateEmail(e.target.value)
   }
   function handleCharChoice(char, choice) {
     charChoices[char] = choice;
+    let prevData = data;
+    prevData['characteristics'][char] = choice;
+    updateData(prevData);
+    console.log('rawData:', data)
     console.log('Choice: ', charChoices);
   }
   function handleNameInput(e) {
-    console.log(e.target.value);
+    let prevData = data;
+    prevData['name'] = e.target.value;
+    updateData(prevData);
+    console.log('rawData:', data)
+    updateNickName(e.target.value)
   }
   function handleRecommendationChange(e) {
-    console.log('Hello from ')
-    const value = e.target.value;
-    updateRecommendation(value);
+    let prevData = data;
+    prevData['recommend'] = e.target.value;
+    updateData(prevData);
+    console.log('rawData:', data)
+    updateRecommendation(e.target.value);
+  }
+  function handleBodySubmt(body) {
+    let prevData = data;
+    prevData['body'] = e.target.value;
+    updateData(prevData);
+    console.log('rawData:', data)
+    setBody(body);
   }
 
   function handleReviewSubmit(e) {
     e.preventDefault();
-    // Check blanks
-      // if element is blank (from the states)
-      // set= for that thing
-      // return null
-    console.log(e)
-  }
 
+    console.log('RAW OBJECT: ', obj)
+    if (body.length === 0) {
+      alert('body can not be empty');
+      return;
+    }
+    if (rating === 0) {
+      alert('rating cannot be empty');
+      return;
+    }
+    if (recommendation === null) {
+      alert('recommendations cannot empty');
+      return;
+    }
+    if (email.length === 0) {
+      alert('email cannot be empty');
+      return;
+    }
+    if (nickName.length === 0) {
+      alert('nickname cannot be empty');
+      return;
+    }
+    for (let key in charChoices) {
+      if (charChoices[key] === null) {
+        alert('give ' + key + ' a rating')
+        return;
+      }
+    }
+    handleAddReview(data);
+  }
   return (
     <form>
       <div className="reviewnickname">
         <h3>Enter Name*</h3>
-        <input onSubmit={handleNameInput} required minLength="2" maxLength="50" placeholder="Enter name" name="reviewername" id="reviewername" />
-        <input type="submit" />
+        <input onChange={handleNameInput} required minLength="2" maxLength="50" placeholder="Enter name" name="reviewername" id="reviewername" />
       </div>
 
       <div id="starrating">
         <h3>rate this product*</h3>
-        <StarsList compId="review" rating={rating} handleClick={handleClick}/>
+        <StarsList compId="review" rating={rating} handleClick={handleClick} />
         <p id="ratemeaning">{ratingMeaning}</p>
       </div>
 
       <div className="email">
         <h3>Enter email</h3>
-        <input onSubmit={handleEmailSubmit} type="email" required placeholder="Enter email" name="revieweremail" id="revieweremail" />
-        <input type="submit" />
+        <input onChange={handleEmailSubmit} type="email" required placeholder="Enter email" name="revieweremail" id="revieweremail" />
       </div>
 
       <div id="characterstic">
@@ -100,9 +150,9 @@ function AddReview(props) {
 
       <div>
         <p>Do you recommend this product*</p>
-          <input type="radio" id="yesrecommend" name="recommendation" value={true} onClick={handleRecommendationChange} value={true} />
+          <input type="radio" id="yesrecommend" name="recommendation" value={true} onChange={handleRecommendationChange} value={true} />
           <label htmlFor="yes">Yes</label>
-          <input type="radio" id="norecommend" name="recommendation" value={false} onClick={handleRecommendationChange} value={false} />
+          <input type="radio" id="norecommend" name="recommendation" value={false} onChange={handleRecommendationChange} value={false} />
           <label htmlFor="no">No</label>
       </div>
 
@@ -111,11 +161,10 @@ function AddReview(props) {
       </div>
 
       <div className="reviewsummaryentry">
-        <input onSubmit={handleSummarySubmit} maxLength="60" placeholder="Briefly summarize" name="reviewsummary" id="reviewsummaery" />
-        <input type="submit" />
+        <input onChange={handleSummarySubmit} maxLength="60" placeholder="Briefly summarize" name="reviewsummary" id="reviewsummaery" />
       </div>
 
-      <Body />
+      <Body handleBodySubmt={handleBodySubmt} />
 
       <div>
 

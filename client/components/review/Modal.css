@@ -1,11 +1,11 @@
-.modal-container {
-  background:white;
-}
+
 
 .modal {
   background-color: #ede5e5;
+  text-align: center;
   padding: 5px;
   border: 1px solid #888;
-  width: 100%; /* Could be more or less, depending on screen size */
+  width: 95%; /* Could be more or less, depending on screen size */
+  height: 90vh;
   overflow: scroll;
 }

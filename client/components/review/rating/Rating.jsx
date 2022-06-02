@@ -3,7 +3,7 @@ import axios from 'axios';
 import StarsList from '../Stars.jsx'
 import BarsList from './BarsList.jsx';
 
-function Rating({ id, ratings, }) {
+function Rating({ id, ratings, handleFilter }) {
   const stars = Object.values(ratings);
   // console.log(stars)
   const sum = stars.reduce((acc, cur) => Number(cur) + acc, 0);
@@ -16,7 +16,7 @@ function Rating({ id, ratings, }) {
   return (
     <div className="ratingApp">
       <StarsList compId="rating" rating={ave} handleClick={handleStarClick} />
-      <BarsList id={id} starsWithNumber={ratings} />
+      <BarsList id={id} handleFilter={handleFilter} starsWithNumber={ratings} />
     </div>
   );
 }

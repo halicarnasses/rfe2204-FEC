@@ -1,12 +1,17 @@
 import React from 'react';
 import Carousel from '../shared/Carousel/Carousel.jsx';
 
-function ImageGallery({slides}) {
+
+function ImageGallery({fullscreen, slides}) {
 
   return (
-    <Carousel slides={slides} className={'carousel-div'}/>
+    <Carousel slides={slides} />
   )
 
 }
 
 export default ImageGallery;
+
+
+
+//className={fullscreen ? 'carousel-div carousel-fullscreen' : 'carousel-div'}

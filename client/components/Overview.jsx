@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ImageGallery from "./overview/ImageGallery.jsx";
+import Carousel from './shared/Carousel/Carousel.jsx';
+
+
 import ProductInfo from "./overview/ProductInfo.jsx";
 import StyleSelector from "./overview/StyleSelector.jsx";
 import AddToCart from "./overview/AddToCart.jsx";
@@ -16,6 +19,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
   const [styles, setStyles] = useState([]);
   const [style, setStyle] = useState({});
   const [rating, setRating] = useState(0);
+  const [fullscreen, setFullscreen] = useState(false);
 
   useEffect(() => {
 
@@ -44,7 +48,7 @@ function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
   return (
     <div className="overview-div">
 
-      <ImageGallery slides={style ? style.photos : []}/>
+      <Carousel slides={style ? style.photos : [] } />
 
       <div className="overview-product-dash">
         <ProductInfo

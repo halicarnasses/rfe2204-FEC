@@ -79,5 +79,19 @@
 /* Add To Cart */
 .overview-add-to-cart {
   margin: 5px;
+  padding: 5px;
   border: 2px solid green;
+}
+
+.cart-size-row {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.cart-add-row {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
 }

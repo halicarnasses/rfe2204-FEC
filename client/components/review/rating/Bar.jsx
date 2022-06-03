@@ -5,7 +5,6 @@ function Bar({ total, handleFilter, bar, index, id, label}) {
   const idIndex = id + index;
   const svgId = `${idIndex}bar`;
 
-  console.log(index)
   return (
     <div className="singleBar">
       <svg onClick={() => handleFilter(index)} name={index} id={svgId} width='95%' height='13px'>

@@ -7,10 +7,11 @@ import Body from './Body.jsx';
 function AddReview(props) {
   // obj collects all input data, and is sent to handleAddReview
   let obj = {};
-  obj.id = props.id;
+  obj.product_id  = props.id;
   obj.characteristics = {};
   const [data, updateData] = useState(obj);
   // end fo validation states
+  const [invalid, setInvalid] = useState('');
   const [body, setBody] = useState('');
   const [rating, updateRating] = useState(0);
   const [ratingMeaning, updatRatingMeaning] = useState('none rated');
@@ -24,7 +25,16 @@ function AddReview(props) {
   Object.keys(props.chars).forEach((key) => {
     charChoices[key] = null;
   });
+  Object.keys(props.chars).forEach(key => {
+    obj['characteristics'][props.chars[key]['id']] = 0;
+  });
+  console.log('Hello', obj)
   const availableChars = Object.keys(props.chars);
+  let mapping = {};
+  for (let key in props.chars) {
+    mapping[key] = props.chars[key]['id'];
+  }
+  console.log('MAPPING: ', mapping)
   // star ------------  --------- --------  ------
   // rating meaning
   const resultOfStar = {
@@ -40,8 +50,6 @@ function AddReview(props) {
     prevData['rating'] = clickedStar;
     updateData(prevData);
     updateRating(clickedStar);
-
-    console.log('rawData:', data)
     updatRatingMeaning(resultOfStar[clickedStar]);
   }
 
@@ -49,7 +57,6 @@ function AddReview(props) {
     let prevData = data;
     prevData['summary'] = e.target.value;
     updateData(prevData);
-    console.log('rawData:', data)
     updateSummary(e.target.value);
 
   }
@@ -58,70 +65,65 @@ function AddReview(props) {
     let prevData = data;
     prevData['email'] = e.target.value;
     updateData(prevData);
-    console.log('rawData:', data)
     updateEmail(e.target.value)
   }
   function handleCharChoice(char, choice) {
     charChoices[char] = choice;
     let prevData = data;
-    prevData['characteristics'][char] = choice;
+    prevData['characteristics'][mapping[char]] = Number(choice);
+    console.log('Choice ', prevData)
     updateData(prevData);
-    console.log('rawData:', data)
-    console.log('Choice: ', charChoices);
   }
   function handleNameInput(e) {
     let prevData = data;
     prevData['name'] = e.target.value;
     updateData(prevData);
-    console.log('rawData:', data)
     updateNickName(e.target.value)
   }
   function handleRecommendationChange(e) {
     let prevData = data;
-    prevData['recommend'] = e.target.value;
+    const input = e.target.value === 'true' ? true : false;
+    prevData['recommend'] = input;
     updateData(prevData);
-    console.log('rawData:', data)
     updateRecommendation(e.target.value);
   }
   function handleBodySubmt(body) {
+    console.log('Body Update: ', body)
     let prevData = data;
-    prevData['body'] = e.target.value;
+    prevData['body'] = body;
     updateData(prevData);
-    console.log('rawData:', data)
     setBody(body);
   }
 
   function handleReviewSubmit(e) {
     e.preventDefault();
-
-    console.log('RAW OBJECT: ', obj)
-    if (body.length === 0) {
-      alert('body can not be empty');
+    setInvalid('');
+    if (data.body === undefined || data.body.length < 50) {
+      setInvalid('Please fill body upto 50 chars');
       return;
     }
-    if (rating === 0) {
-      alert('rating cannot be empty');
+    if (data.rating === 0) {
+      setInvalid('Please rate this product');
       return;
     }
-    if (recommendation === null) {
-      alert('recommendations cannot empty');
+    if (data.recommend === null) {
+      setInvalid('please recommend this product')
       return;
     }
-    if (email.length === 0) {
-      alert('email cannot be empty');
+    if (data.name === undefined || data.name.length < 2) {
+      setInvalid('please fill your name')
       return;
     }
-    if (nickName.length === 0) {
-      alert('nickname cannot be empty');
+    if (data.email === undefined || data.email.length < 0) {
+      setInvalid('please fill your email')
       return;
     }
-    for (let key in charChoices) {
-      if (charChoices[key] === null) {
-        alert('give ' + key + ' a rating')
-        return;
-      }
+    if (data.email.indexOf('@') === -1|| data.email.indexOf('.com') === -1) {
+      setInvalid('please give your email correct format')
+      return;
     }
-    handleAddReview(data);
+    console.log('DATA: ', data)
+    props.handleSubmit(data);
   }
   return (
     <form>
@@ -166,9 +168,13 @@ function AddReview(props) {
 
       <Body handleBodySubmt={handleBodySubmt} />
 
-      <div>
-
-      </div>
+      {
+        invalid && (
+        <div id="invalidinput">
+          {invalid}
+        </div>
+        )
+      }
       <button onClick={handleReviewSubmit} >
         submit review
       </button>

@@ -24,8 +24,10 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   const [page, setPage] = useState(1);
   const [sortOptions, setSortoptions] = useState('relevant');
   function handleAddReview(data) {
-    console.log('DATA: ', data)
-    setData(data);
+    console.log(data)
+    axios.post('/reviews', data)
+      .then(res => console.log('YaYYYYYYYY'))
+      .catch(err => console.error('Wait'))
   }
   function handleNextPage() {
     // console.log('The correct page: ', page)
@@ -35,7 +37,6 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   // Search
   function handleSearch(input){
     if (input.length < 3) {
-      console.log(input, list, filtedL)
       setFilterdL(list);
       return;
     }
@@ -48,7 +49,6 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
     setSortoptions(value);
   }
   const markedHelpful = (value, reviewId) => {
-    console.log('Hello,id: ', reviewId, value)
     if (value) {
       axios
           .put(`/reviews/${value}/helpful`)
@@ -66,7 +66,6 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
       prevValue[star] = !prevValue[star];
       return prevValue;
     });
-    console.log(toggledStar);
   }
   const chars = reviewsMeta.characteristics;
   const ratings = reviewsMeta.ratings;

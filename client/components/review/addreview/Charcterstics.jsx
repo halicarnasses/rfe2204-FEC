@@ -6,7 +6,6 @@ function Characterstics({ value, handleCharChoice }) {
     setMeaningOfCoice(charValues[value][e.target.value]);
     handleCharChoice(value, e.target.value);
   }
-  // console.log('Hello, character: I see now:', props)
 
   return (
     <div>

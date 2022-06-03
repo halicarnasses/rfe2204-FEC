@@ -15,9 +15,8 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
     return null;
   }
   const [data, setData] = useState({});
-  const list = reviews.results;
+  const [list, updateList] = useState(reviews.results);
   const [filtedL, setFilterdL] = useState(reviews.results);
-  const [feedList, setFeedList] = useState(reviews.results);
   const [toggledStar, updateToggledStar] = useState({1: false, 2: false, 3: false, 4: false, 5: false});
   const [starIsToggle, updateStarIsToggled] = useState(false);
   const [page, setPage] = useState(1);
@@ -25,22 +24,22 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   function handleAddReview(data) {
     axios.post('/reviews', data)
       .then(res => console.log('Submitted succefully'))
-      .catch(err => console.error('Wait No'))
+      .catch(err => console.error('Wait No'));
   }
   // Sorting and next page
 
   function handleNextPage() {
-    alert('Executed')
     setPage(page + 1);
   }
   useEffect(() => {
-    stateHandler(id, 100, page, sortOptions)
+    stateHandler(id, page, 100, sortOptions)
   }, [page, sortOptions]);
 
   // Sorting and next page
 
   // Search
   function handleSearch(input){
+    console.log(input, 'HELLO SEARcher')
     if (input.length < 3) {
       setFilterdL(list);
       return;

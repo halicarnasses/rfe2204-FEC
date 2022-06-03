@@ -26,21 +26,11 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   function handleAddReview(data) {
     console.log(data)
     axios.post('/reviews', data)
-<<<<<<< HEAD
-      .then(res => console.log('YaYYYYYYYY'))
-      .catch(err => console.error('Wait'))
-=======
       .then(res => console.log('Submitted succefully'))
       .catch(err => console.error('Wait No'));
->>>>>>> d2482f5f130c1091b933c03d0e2a6465a56be7eb
   }
 
   function handleNextPage() {
-<<<<<<< HEAD
-    // console.log('The correct page: ', page)
-    // setPage(page + 1);
-  }
-=======
     setPage(page + 1);
   }
   useEffect(() => {
@@ -48,7 +38,6 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   }, [page, sortOptions]);
 
   // Sorting and next page
->>>>>>> d2482f5f130c1091b933c03d0e2a6465a56be7eb
 
   // Search
   function handleSearch(input){

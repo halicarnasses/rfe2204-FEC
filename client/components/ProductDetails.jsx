@@ -10,15 +10,14 @@ function ProductDetails() {
 
   // All info stored in one state.
   const [productAll, setProductAll] =useState({});
-
   // Update state on mount.
   useEffect(() => {
     updateState(productID);
   }, []);
 
   const updateState = (id, page=1, count=100, sort='relevant') => {
-    console.log(`Updating ${id} ${page} ${count} ${sort} ${typeof id}`);
     id = Number(id);
+    console.log(`${typeof id}`);
     axios
       .all([
         // All products not needed right now.

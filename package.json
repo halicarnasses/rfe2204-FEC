@@ -28,6 +28,7 @@
   "scripts": {
     "build": "webpack",
     "build-dev": "webpack --mode=development --watch",
+    "start": "node server/server.js",
     "server-dev": "nodemon server/server.js",
     "dev": "webpack serve --open"
   },

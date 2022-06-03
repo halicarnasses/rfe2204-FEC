@@ -5,7 +5,6 @@ import BarsList from './BarsList.jsx';
 
 function Rating({ id, ratings, handleFilter }) {
   const stars = Object.values(ratings);
-  // console.log(stars)
   const sum = stars.reduce((acc, cur) => Number(cur) + acc, 0);
   let ave = stars.reduce((acc, cur, i) => Number(cur) * (i + 1) + acc, 0) / sum;
   ave = Math.floor(ave * 10) / 10;

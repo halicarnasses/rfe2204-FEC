@@ -2,7 +2,6 @@ import React from 'react';
 import StarMaker from './StarMaker.jsx';
 
 function StarsList({ compId, rating, handleClick}) {
-  // console.log('handleCli', handleClick ,rating)
 
   const fullStar = Math.floor(rating);
   const empty = 5 - fullStar + 1;

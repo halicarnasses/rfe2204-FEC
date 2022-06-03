@@ -28,8 +28,6 @@ function Tile({ item, markedHelpful }) {
     e.preventDefault();
     const value = e.target.value;
     const reviewId = e.target.name;
-    // console.log(reviewId, value)
-    // // console.log('THe whole thing: ', reviewId)
     markedHelpful(reviewId, value);
     setHelpful(false);
   }

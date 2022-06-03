@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GoX } from 'react-icons/go';
 
 function AnswerModal ({questionID, productName, questionBody, hidden, hide, submitHandler}) {
   // const showHideClassName = show ? 'modal display-block' : 'modal display-none';
@@ -35,6 +36,7 @@ function AnswerModal ({questionID, productName, questionBody, hidden, hide, subm
         question_id: questionID
       };
       submitHandler(data);
+      hide(event);
     }
 
   };
@@ -63,7 +65,8 @@ function AnswerModal ({questionID, productName, questionBody, hidden, hide, subm
     <div hidden={hidden}>
       <div className='questions-modal'>
 
-        <i className="fa-solid fa-x onclick" onClick={hide}></i>
+        {/* <i className="fa-solid fa-x onclick" onClick={hide}></i> */}
+        <GoX className={"onclick"} onClick={hide} size={40}/>
 
         <div className="questions-modal-header">
           <h4>Submit Your Answer</h4>

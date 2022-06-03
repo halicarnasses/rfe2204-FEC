@@ -6,7 +6,6 @@ function Body({ handleBodySubmt }) {
 
   const message = `Minimum required characters left: [${charLeft}]`;
 
-  // console.log('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>')
   function handleInputBodyChange(e) {
     const input = e.target.value;
     if (input.length > 50) return null;

@@ -4,8 +4,10 @@ import AnswerModal from "./AnswerModal.jsx"
 
 function Question({id, productName, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
 
+  let answersKeys = Object.keys(answers);
+
   const [answerLimit, setAnswerLimit] = useState(2);
-  const [answerKeys, setAnswerKeys] = useState([]);
+  const [answerKeys, setAnswerKeys] = useState(answersKeys);
   const [answerHidden, setAnswerHidden] = useState(true);
 
    const showMoreAnswers = (event) => {
@@ -27,7 +29,6 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
     event.preventDefault();
     setAnswerHidden(true);
   };
-
   return (
     <div  className="list-item">
 
@@ -41,7 +42,7 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
 
       <div className="item-question">
         <p className="question-body">Q: {body}</p>
-        <p className="question-info">
+        <p className="question-actions">
           Helpful?
           <a href="" value={id} onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
           {helpfulness} |
@@ -50,6 +51,7 @@ function Question({id, productName, body, date, name, helpfulness, reported, ans
       </div>
 
       <div className="item-answer">
+
         <div>
           <p>A: </p>
         </div>

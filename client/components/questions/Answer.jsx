@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 
 function Answer ({answer, helpfulHandler, reportHandler}) {
-
   return (
-    <div>
+    <div className="answer">
       <p className="answer-body">{answer.body}</p>
+
       <div>
         <p>
           by {answer.answerer_name}, {format(parseISO(answer.date), 'MMMM, dd, yyyy')} | Helpful?
@@ -24,6 +24,7 @@ function Answer ({answer, helpfulHandler, reportHandler}) {
             className="onclick">Report</a>
         </p>
       </div>
+
     </div>
   )
 }

@@ -15,9 +15,8 @@ function ProductDetails() {
     updateState(productID);
   }, []);
 
-  const updateState = (id, page=1, count=100, sort='relevant') => {
+  const updateState = (id, page=1, count=10, sort='relevant') => {
     id = Number(id);
-    console.log(`THE ID ${id} ${sort}`);
     axios
       .all([
         // All products not needed right now.
@@ -58,7 +57,7 @@ function ProductDetails() {
   };
 
   return (
-    <div>
+    <div className="product-details-div">
       <Overview
         id={productID}
         productInfo={productAll.productInfo}

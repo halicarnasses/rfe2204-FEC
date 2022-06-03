@@ -1,6 +1,7 @@
 .env
 /node_modules
-bundle.js
+public/bundle.js
+
 
 **/.DS_Store
 

@@ -12,9 +12,9 @@ function ModalAddReview ({handleSubmit, id, chars, hidden, closeHandler, props})
 
   return (
     <div hidden={hidden} className="modal">
+      <button onClick={closeHandler} id="closemodal">CLOSE MODAL</button>
       <h1>Add Review</h1>
       <AddReview handleSubmit={handleSubmit} id={id} chars={chars} />
-      <button onClick={closeHandler}>CLOSE MODAL</button>
     </div>
   );
 };

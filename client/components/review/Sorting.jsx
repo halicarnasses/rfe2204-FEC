@@ -6,7 +6,7 @@ function Sorting({ currentOption, handleSortChange }) {
   }
   return (
     <div id="sorting">
-      <label>Sort by</label>
+      <label>Sort by &emsp;</label>
       <select onChange={handleChange} name="sortingOps" id="sortvalues">
         <option value="relevant">revlevant</option>
         <option value="helpful">helpful</option>

@@ -5,12 +5,7 @@ import StyleSelector from "./overview/StyleSelector.jsx";
 import AddToCart from "./overview/AddToCart.jsx";
 import './css/overview/Overview.css';
 
-
 function Overview({id, productInfo, productStyles, reviews, stateHandler}) {
-
-  if (productInfo === undefined ) {
-    console.log('OVERVIEW NO DATA');
-  }
 
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState([]);

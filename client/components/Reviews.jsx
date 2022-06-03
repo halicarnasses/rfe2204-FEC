@@ -15,6 +15,7 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   if (reviews === undefined || reviewsMeta === undefined || id === undefined) {
     return null;
   }
+
   const [data, setData] = useState({});
   const [list, updateList] = useState(reviews.results);
   const [filtedL, setFilterdL] = useState(reviews.results);
@@ -24,15 +25,15 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   const [sortOptions, setSortoptions] = useState('relevant');
 
   function handleAddReview(data) {
-    console.log(data)
     axios.post('/reviews', data)
-      .then(res => console.log('Submitted succefully'))
+      .then(res => console.log(res.status))
       .catch(err => console.error('Wait No'));
   }
 
   function handleNextPage() {
     setPage(page + 1);
   }
+
   useEffect(() => {
     stateHandler(id, page, 100, sortOptions)
   }, [page, sortOptions]);
@@ -41,7 +42,6 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
 
   // Search
   function handleSearch(input){
-    console.log(input, 'HELLO SEARcher')
     if (input.length < 3) {
       setFilterdL(list);
       return;

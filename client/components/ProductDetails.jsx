@@ -15,9 +15,8 @@ function ProductDetails() {
     updateState(productID);
   }, []);
 
-  const updateState = (id, page=1, count=100, sort='relevant') => {
+  const updateState = (id, page=1, count=10, sort='relevant') => {
     id = Number(id);
-    console.log(`${typeof id}`);
     axios
       .all([
         // All products not needed right now.
@@ -72,11 +71,11 @@ function ProductDetails() {
         questionsData={productAll.questions}
         stateHandler={updateState}/>
 
-      <Reviews
+      {/* <Reviews
         id={productID}
         reviews={productAll.reviews}
         reviewsMeta={productAll.reviewsMeta}
-        stateHandler={updateState}/>
+        stateHandler={updateState}/> */}
 
     </div>
   );

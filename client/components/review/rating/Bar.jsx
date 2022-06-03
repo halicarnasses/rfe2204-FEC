@@ -14,7 +14,7 @@ function Bar({ total, handleFilter, bar, index, id, label}) {
         </g>
         {label && (
           <>
-            <g class='markers'>
+            <g className='markers'>
               <rect fill='red' x={`${portion}%`} y='10%' width='6' height='35'></rect>
             </g>
           </>

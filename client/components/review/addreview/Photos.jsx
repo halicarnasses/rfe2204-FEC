@@ -7,7 +7,6 @@ function Photos() {
   function handleChange(e) {
     e.preventDefault(e);
     const selctedImage = e.target.files[0];
-    // console.log(selctedImage);
     insertedImage = selctedImage;
   }
   function handleClick(e) {

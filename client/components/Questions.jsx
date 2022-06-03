@@ -56,10 +56,8 @@ function Questions({id, product, questionsData, stateHandler}) {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
-    console.log(name);
 
     const id = target.getAttribute('value');
-    console.log('REPORTING', id);
     if (name === 'report-question') {
       axios
         .put(`/qa/questions/${id}/report`)
@@ -75,7 +73,6 @@ function Questions({id, product, questionsData, stateHandler}) {
   };
 
   const addQuestion = (data) => {
-    console.log("ADD Q: ", data);
     axios
       .post('/qa/questions', data)
       .then((response) => ( updateState() ))
@@ -83,7 +80,6 @@ function Questions({id, product, questionsData, stateHandler}) {
   };
 
   const addAnswer = (data) => {
-    console.log("ADD A: ", data);
     axios
       .post(`/qa/questions/${data.question_id}/answers`, data)
       .then((response) => ( updateState() ))
@@ -151,7 +147,6 @@ function Questions({id, product, questionsData, stateHandler}) {
 
       <div className="questions-list">
         { questions ? questions.map((q, i) => {
-          // console.log(q);
           if (i < qLimit) {
             return (
               <Question

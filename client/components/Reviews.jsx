@@ -32,12 +32,16 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
     setPage(page + 1);
   }
   useEffect(() => {
-    stateHandler(id, page, 100, sortOptions)
+    updateState();
   }, [page, sortOptions]);
 
+  function updateState() {
+    stateHandler(id, page, 100, sortOptions)
+  }
   // Sorting and next page
 
   // Search
+
   function handleSearch(input){
     console.log(input, 'HELLO SEARcher')
     if (input.length < 3) {
@@ -45,8 +49,10 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
       return;
     }
     const newList = filterBySearch(input, list);
+    console.log('returned from Search: ', newList);
     setFilterdL(newList);
   }
+
   // End of Search
 
   function handleSortChange(value) {

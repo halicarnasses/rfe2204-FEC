@@ -15,7 +15,10 @@ function Rating({ id, ratings, handleFilter }) {
   }
   return (
     <div className="ratingApp">
+      <div className="starrating">
+      <span id="starnum">{ave}</span>
       <StarsList compId="rating" rating={ave} handleClick={handleStarClick} />
+      </div>
       <BarsList id={id} handleFilter={handleFilter} starsWithNumber={ratings} />
     </div>
   );

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from './Image.jsx';
 import StarsList from '../Stars.jsx';
+import '../../css/reviews/Reviews.css';
 
 function Tile({ item, markedHelpful }) {
   const rating = item.rating;
@@ -37,7 +38,7 @@ function Tile({ item, markedHelpful }) {
   }
   return (
 
-    <div id={id}>
+    <div id={id} className="tile">
       <div className="reviewdateandname">
         <p>
           {item.reviewer_name}

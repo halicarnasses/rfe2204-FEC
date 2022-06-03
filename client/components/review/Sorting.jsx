@@ -2,6 +2,7 @@ import React from 'react';
 
 function Sorting({ currentOption, handleSortChange }) {
   function handleChange(e) {
+    e.preventDefault();
     handleSortChange(e.target.value);
   }
   return (

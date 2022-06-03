@@ -17,7 +17,7 @@ function ProductDetails() {
 
   const updateState = (id, page=1, count=100, sort='relevant') => {
     id = Number(id);
-    console.log(`${typeof id}`);
+    console.log(`THE ID ${id} ${sort}`);
     axios
       .all([
         // All products not needed right now.

@@ -1,8 +1,14 @@
 .env
 /node_modules
-/public/bundle.js
-QuestionsOutline.md
-client/components/questions/old
-
+bundle.js
 
 **/.DS_Store
+
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+

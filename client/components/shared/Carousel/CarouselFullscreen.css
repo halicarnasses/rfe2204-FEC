@@ -1,0 +1,28 @@
+.carousel-div-fullscreen {
+  background: white;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.carousel-content-fullscreen {
+  margin: auto;
+  position: relative;
+  width: 80vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image-fullscreen {
+  width: 80vw;
+  height: 80vh;
+  object-fit: contain;
+}

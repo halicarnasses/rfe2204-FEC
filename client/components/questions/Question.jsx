@@ -1,26 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
+import AnswerModal from "./AnswerModal.jsx"
 
-function Question({id, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, modalHandler}) {
+function Question({id, productName, body, date, name, helpfulness, reported, answers, helpfulHandler, reportHandler, submitHandler}) {
 
-  const [answerLimit, setALimit] = useState(2);
-  const [allAnswers, setAllAnswers] = useState(false);
-  const [answerKeys, setAnswerKeys] = useState(Object.keys(answers));
+  const [answerLimit, setAnswerLimit] = useState(2);
+  const [answerKeys, setAnswerKeys] = useState([]);
+  const [answerHidden, setAnswerHidden] = useState(true);
 
-  const showMoreAnswers = () => {
-    const newLimit = answerKeys.length;
-    setALimit(newLimit);
+   const showMoreAnswers = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    target.classList.toggle('questions-hide-button');
+    setAnswerLimit(answerKeys.length);
+  };
+
+  const showAnswerModal = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const id = target.getAttribute('value');
+    console.log('ADD ANSWER TO', id);
+    setAnswerHidden(false);
+  };
+
+  const hideAnswerModal = (event) => {
+    event.preventDefault();
+    setAnswerHidden(true);
   };
 
   return (
     <div  className="list-item">
+
+      <AnswerModal
+        questionID={id}
+        productName={productName}
+        questionBody={body}
+        hidden={answerHidden}
+        hide={hideAnswerModal}
+        submitHandler={submitHandler}/>
+
       <div className="item-question">
         <p className="question-body">Q: {body}</p>
         <p className="question-info">
           Helpful?
-          <a value={id} href="" onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
+          <a href="" value={id} onClick={helpfulHandler} name="helpful-question" className="onclick">Yes</a>
           {helpfulness} |
-          <a href="" onClick={modalHandler} name="add-answer" className="onclick">Add Answer</a>
+          <a href="" value={id} onClick={showAnswerModal} name="add-answer" className="onclick">Add Answer</a>
         </p>
       </div>
 
@@ -28,9 +53,9 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
         <div>
           <p>A: </p>
         </div>
-        <div>
-          {
-            answerKeys.map((key, i) => {
+
+        <div className="answers-list">
+          { answerKeys.map((key, i) => {
               if (i < answerLimit) {
                 return (
                   <Answer
@@ -43,11 +68,12 @@ function Question({id, body, date, name, helpfulness, reported, answers, helpful
               }
             })
           }
+          <button hidden={answerKeys.length >= 2 ? false : true} className="more-answers-btn" name="more-answers"
+              onClick={showMoreAnswers}>Load More Answers
+          </button>
         </div>
-      </div>
 
-      <button id="more-answers-btn" name="more-answers"
-          onClick={showMoreAnswers}>Load More Answers</button>
+      </div>
 
     </div>
   );

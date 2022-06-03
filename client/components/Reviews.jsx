@@ -35,20 +35,26 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   }
 
   useEffect(() => {
-    stateHandler(id, page, 100, sortOptions)
+    updateState();
   }, [page, sortOptions]);
 
+  function updateState() {
+    stateHandler(id, page, 100, sortOptions)
+  }
   // Sorting and next page
 
   // Search
+
   function handleSearch(input){
     if (input.length < 3) {
       setFilterdL(list);
       return;
     }
     const newList = filterBySearch(input, list);
+    console.log('returned from Search: ', newList);
     setFilterdL(newList);
   }
+
   // End of Search
 
   function handleSortChange(value) {

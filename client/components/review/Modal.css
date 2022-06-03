@@ -1,13 +1,28 @@
-
+/*
 .modal {
-  background-color: #c89d9d;
-  text-align: center;
+  position:fixed;
+  background: white;
+  width: 60%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+
+  display:flex;
+  flex-direction: column;
+  border: 2px solid black;
+} */
+.modal {
+  background-color: #ede5e5;
   padding: 15px;
-  border: 1px solid rgb(232, 240, 243);
+  border: 1px solid #888;
   width: 95%; /* Could be more or less, depending on screen size */
   height: 90vh;
   overflow: scroll;
 }
 #closemodal {
-  margin: 0%;
+  background-color: rgb(241, 125, 125);
+  margin: 0;
+  width: 35px;
+  height: 30px;
 }

@@ -57,7 +57,7 @@ function ProductDetails() {
   };
 
   return (
-    <div>
+    <div className="product-details-div">
       <Overview
         id={productID}
         productInfo={productAll.productInfo}
@@ -71,11 +71,11 @@ function ProductDetails() {
         questionsData={productAll.questions}
         stateHandler={updateState}/>
 
-      {/* <Reviews
+      <Reviews
         id={productID}
         reviews={productAll.reviews}
         reviewsMeta={productAll.reviewsMeta}
-        stateHandler={updateState}/> */}
+        stateHandler={updateState}/>
 
     </div>
   );

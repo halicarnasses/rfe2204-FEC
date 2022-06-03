@@ -29,6 +29,5 @@
 .LeftPage {
   display: grid;
   grid-template-rows: 0.8fr 2.2fr;
-  border: blue solid;
   row-gap: 15%;
 }

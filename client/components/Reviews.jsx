@@ -7,11 +7,11 @@ import ModalMain from './review/ModalMain.jsx';
 import Sorting from './review/Sorting.jsx';
 import ProducBd from './review/productbreakdown/ProductBd.jsx';
 import Search from './review/keywordsearch/Search.jsx';
-import filterBySearch from './filter.js'
-import './review/Review.css'
+import filterBySearch from './review/filter.js'
+import './css/reviews/Reviews.css'
 
 function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
-  // Add Review
+
   if (reviews === undefined || reviewsMeta === undefined || id === undefined) {
     return null;
   }
@@ -70,7 +70,7 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   const chars = reviewsMeta.characteristics;
   const ratings = reviewsMeta.ratings;
   return (
-    <div>
+    <div id="reviews-div" className="reviews-div">
       {
         chars && (
           <div className="reviewsContainer">

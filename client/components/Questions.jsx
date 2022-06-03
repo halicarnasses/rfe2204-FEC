@@ -2,54 +2,53 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Question from "./questions/Question.jsx"
 import QuestionModal from "./questions/QuestionModal.jsx"
-import AnswerModal from "./questions/AnswerModal.jsx"
+import QuestionSearch from "./questions/QuestionSearch.jsx"
+import {GoSearch} from 'react-icons/go'
 
-import './questions/Questions.css';
 
-function Questions({id, questionsData, stateHandler}) {
-  console.log(questionsData);
+import './css/questions/Questions.css';
+
+function Questions({id, product, questionsData, stateHandler}) {
+
   const [productID, setProductID] = useState(id);
-  const [questions, setQuestions] = useState(questionsData);
+  const [questions, setQuestions] = useState([]);
   const [qLimit, setQLimit] = useState(2);
-  const [questionModal, setQuestionModal] = useState(false);
-  const [answerModal, setAnswerModal] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(product);
+  const [productName, setProductName] = useState('');
+  const [filteredResults, setFilteredResults] = useState([]);
+
+  const [questionHidden, setQuestionHidden] = useState(true);
 
   useEffect(() => {
-    setQuestions(questionsData);
-  }, [questionsData]);
+    if (questionsData) {
+      setQuestions(questionsData);
+    }
 
-  // updates global state
-  // change this name
+    if (product) {
+      setProductName(product.name);
+    }
+  }, [questionsData, product]);
+
   const updateState = () => {
-    stateHandler(productID);
+    stateHandler(productID, 1, 100);
   }
 
-  // Search bar
-  // List functions
   const markHelpful = (event) => {
     event.preventDefault();
     const target = event.target;
     const name = target.name;
-    console.log(name);
+
     const id = target.getAttribute('value');
     if (name === 'helpful-question') {
       axios
         .put(`/qa/questions/${id}/helpful`)
-        .then((response) => {
-          stateHandler(productID);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     } else if (name === 'helpful-answer') {
       axios
         .put(`/qa/answers/${id}/helpful`)
-        .then((response) => {
-          stateHandler(productID);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     }
   };
 
@@ -59,24 +58,18 @@ function Questions({id, questionsData, stateHandler}) {
     const name = target.name;
     console.log(name);
 
+    const id = target.getAttribute('value');
+    console.log('REPORTING', id);
     if (name === 'report-question') {
       axios
-      .put(`/qa/questions/${id}/report`)
-      .then((response) => {
-        stateHandler(productID);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .put(`/qa/questions/${id}/report`)
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     } else if (name === 'report-answer') {
       axios
-      .put(`/qa/answers/${id}/report`)
-      .then((response) => {
-        stateHandler(productID);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .put(`/qa/answers/${id}/report`)
+        .then((response) => ( updateState() ))
+        .catch((error) => ( console.log(error) ));
     }
 
   };
@@ -85,73 +78,85 @@ function Questions({id, questionsData, stateHandler}) {
     console.log("ADD Q: ", data);
     axios
       .post('/qa/questions', data)
-      .then((response) => (
-        stateHandler(productID)
-      ))
-      .catch((error) => {
-        console.log(error)
-      });
+      .then((response) => ( updateState() ))
+      .catch((error) => ( console.log(error) ));
   };
 
   const addAnswer = (data) => {
     console.log("ADD A: ", data);
     axios
-    .post(`/qa/questions/${data.id}/answers`, data)
-    .then((response) => (
-      stateHandler(productID)
-    ))
-    .catch((error) => {
-      console.log(error)
-    });
+      .post(`/qa/questions/${data.question_id}/answers`, data)
+      .then((response) => ( updateState() ))
+      .catch((error) => ( console.log(error) ));
   };
 
   const showQuestionModal = (event) => {
     event.preventDefault();
-    setQuestionModal(true);
+    setQuestionHidden(false);
   };
 
   const hideQuestionModal = (event) => {
     event.preventDefault();
-    setQuestionModal(false);
+    setQuestionHidden(true);
   };
 
-  const showAnswerModal = (event) => {
-    event.preventDefault();
-    console.log('ADD ANSWER');
-    setAnswerModal(true);
-  };
-
-  const hideAnswerModal = (event) => {
-    event.preventDefault();
-    setAnswerModal(false);
-  };
-
-
-  // Actions
-  const showMoreQuestions = () => {
+  const showMoreQuestions = (event) => {
+    const target = event.target;
     let newLimit = qLimit;
     newLimit += 2;
     setQLimit(newLimit);
     // if questions.length < newLimit, hide more question button
-    if (questions.length < newLimit) {
-      document.getElementById('more-questions-btn').style.display = 'none';
+    if (questions.length <= newLimit) {
+      target.classList.toggle('questions-hide-button');
+    }
+  };
+
+  // Set the query to whatever is typed in search bar.
+  const onChangeHandler = (event) => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    if (value && value.length >= 3) {
+      let results = [];
+      const regex = new RegExp(value, 'g');
+      for (let q of questions) {
+        const body = q.question_body.toLowerCase();
+        let matchArr = [...body.matchAll(regex)];
+        if (matchArr.length > 0) {
+          results.push(q);
+        }
+      }
+      if (results.length > 0) {
+        setQuestions(results);
+      }
+    } else {
+      setQuestions(questionsData);
     }
   };
 
 
+  return (
+    <div className="questions-div">
 
-  if (questions) {
-    return (
+      <QuestionModal id={productID} productName={productName} hidden={questionHidden} hide={hideQuestionModal} submitHandler={addQuestion}/>
 
-      <div className="questions-div">
-        <h2>QUESTIONS</h2>
-        <QuestionModal id={productID} show={questionModal} hide={hideQuestionModal} submitHandler={addQuestion}/>
-        <AnswerModal show={answerModal} hide={hideAnswerModal}/>
-        { questions.map((q, i) => {
-          if ( i < qLimit) {
+      {/* Search Bar */}
+      <div className="question-search">
+        <input
+          type="search"
+          onChange={onChangeHandler}
+          placeholder="Have a question? Search for answers..." />
+          <GoSearch size={20}/>
+      </div>
+
+      <div className="questions-list">
+        { questions ? questions.map((q, i) => {
+          // console.log(q);
+          if (i < qLimit) {
             return (
               <Question
                 key={q.question_id}
+                productName={productName}
                 id={q.question_id}
                 body={q.question_body}
                 date={q.question_date}
@@ -161,23 +166,25 @@ function Questions({id, questionsData, stateHandler}) {
                 answers={q.answers}
                 helpfulHandler={markHelpful}
                 reportHandler={report}
-                modalHandler={showAnswerModal}
+                submitHandler={addAnswer}
                 />
               )
             }
-          })
+          }) : null
         }
-
-        <button id="more-questions-btn" name="more-questions"
-          onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
-        <button onClick={showQuestionModal}>ADD A QUESTION +</button>
       </div>
-    )
-  } else {
-    return (
-      <div>NO QUESTIONS!</div>
-    );
-  }
+
+      <div className="questions-actions">
+        <button
+          className="questions-more-btn onclick"
+          hidden={questions.length <= 2 ? true : false}
+          onClick={showMoreQuestions}>MORE ANSWERED QUESTIONS</button>
+        <button
+          className="questions-add-btn onclick"
+          onClick={showQuestionModal}>ADD A QUESTION +</button>
+      </div>
+    </div>
+  )
 
 }
 

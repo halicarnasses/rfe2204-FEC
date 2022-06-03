@@ -1,0 +1,13 @@
+html {
+  background: white;
+  font-size: 100%;
+  font-family: monospace;
+}
+
+.onclick {
+  cursor: pointer;
+}
+
+.onclick:hover {
+  color:green;
+}

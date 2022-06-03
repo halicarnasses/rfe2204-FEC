@@ -16,9 +16,9 @@ function ProductDetails() {
     updateState(productID);
   }, []);
 
-  const updateState = (id, page=1, count=10, sort='newest') => {
-    console.log(`Updating ${id} ${page} ${count}`);
-
+  const updateState = (id, page=1, count=100, sort='relevant') => {
+    console.log(`Updating ${id} ${page} ${count} ${sort} ${typeof id}`);
+    id = Number(id);
     axios
       .all([
         // All products not needed right now.
@@ -30,7 +30,7 @@ function ProductDetails() {
         // Questions
         axios.get(`/qa/questions/?product_id=${id}&page=${page}&count=${count}`),
         // Reviews
-        axios.get(`/reviews/?page=&count=&product_id=${id}`),
+        axios.get(`/reviews/?product_id=${id}&page=${page}&count=${count}&sort=${sort}`),
         axios.get(`/reviews/meta/?product_id=${id}`),
       ])
       .then(axios.spread((...responses) => {

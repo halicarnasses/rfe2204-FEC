@@ -1,9 +1,13 @@
+
 .modal {
-  background-color: #ede5e5;
+  background-color: #c89d9d;
   text-align: center;
-  padding: 5px;
-  border: 1px solid #888;
+  padding: 15px;
+  border: 1px solid rgb(232, 240, 243);
   width: 95%; /* Could be more or less, depending on screen size */
   height: 90vh;
   overflow: scroll;
+}
+#closemodal {
+  margin: 0%;
 }

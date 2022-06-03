@@ -5,7 +5,6 @@ function ProducBd({ chars }) {
 
   const keys = Object.keys(chars);
   const values = Object.values(chars);
-  console.log('Chars: ', chars)
   // <Bar handleFilter={handleFilter} total={total} bar={bar} index={index + 1} id={id} key={index + id} />
   return (
     <div>

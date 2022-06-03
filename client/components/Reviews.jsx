@@ -11,7 +11,6 @@ import filterBySearch from './review/filter.js'
 import './css/reviews/Reviews.css'
 
 function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
-
   if (reviews === undefined || reviewsMeta === undefined || id === undefined) {
     return null;
   }
@@ -24,15 +23,21 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   const [page, setPage] = useState(1);
   const [sortOptions, setSortoptions] = useState('relevant');
   function handleAddReview(data) {
-    console.log(data)
     axios.post('/reviews', data)
-      .then(res => console.log('YaYYYYYYYY'))
-      .catch(err => console.error('Wait'))
+      .then(res => console.log('Submitted succefully'))
+      .catch(err => console.error('Wait No'))
   }
+  // Sorting and next page
+
   function handleNextPage() {
-    // console.log('The correct page: ', page)
-    // setPage(page + 1);
+    alert('Executed')
+    setPage(page + 1);
   }
+  useEffect(() => {
+    stateHandler(id, 100, page, sortOptions)
+  }, [page, sortOptions]);
+
+  // Sorting and next page
 
   // Search
   function handleSearch(input){
@@ -48,13 +53,13 @@ function Reviews({ id, reviews, reviewsMeta, stateHandler }) {
   function handleSortChange(value) {
     setSortoptions(value);
   }
-  const markedHelpful = (value, reviewId) => {
-    if (value) {
+  const markedHelpful = (review_id, value) => {
+    if (value === 'true') {
       axios
-          .put(`/reviews/${value}/helpful`)
+          .put(`/reviews/${review_id}/helpful`)
           .then((response) => {
-            stateHandler()
-          })
+            console.log('Marked Helpful')
+          }).then((executed) => stateHandler(id, page, 100, sortOptions))
           .catch((error) => ( console.log(error) ));
     }
   };

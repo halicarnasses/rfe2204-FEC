@@ -28,13 +28,11 @@ function AddReview(props) {
   Object.keys(props.chars).forEach(key => {
     obj['characteristics'][props.chars[key]['id']] = 0;
   });
-  console.log('Hello', obj)
   const availableChars = Object.keys(props.chars);
   let mapping = {};
   for (let key in props.chars) {
     mapping[key] = props.chars[key]['id'];
   }
-  console.log('MAPPING: ', mapping)
   // star ------------  --------- --------  ------
   // rating meaning
   const resultOfStar = {
@@ -71,7 +69,6 @@ function AddReview(props) {
     charChoices[char] = choice;
     let prevData = data;
     prevData['characteristics'][mapping[char]] = Number(choice);
-    console.log('Choice ', prevData)
     updateData(prevData);
   }
   function handleNameInput(e) {
@@ -88,7 +85,6 @@ function AddReview(props) {
     updateRecommendation(e.target.value);
   }
   function handleBodySubmt(body) {
-    console.log('Body Update: ', body)
     let prevData = data;
     prevData['body'] = body;
     updateData(prevData);
@@ -122,7 +118,6 @@ function AddReview(props) {
       setInvalid('please give your email correct format')
       return;
     }
-    console.log('DATA: ', data)
     props.handleSubmit(data);
   }
   return (

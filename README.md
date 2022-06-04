@@ -16,34 +16,8 @@ Start development client:
 
 yarn build-dev
 
-## Project Style Guide
+For .env, use the following:
 
-### Lint Style
-
-Follows AirBnB mostly:
-
-LINK FOR STYLE HERE
-
-### Naming Standards
-
-Branch Names:
-
-Branch names should be in the form of 'pre-widget'
-EX: bug-questions, imp-productDetail
-
-| PRE | Ticket Type    |
-| --- | -------------- |
-| bug | Bug            |
-| imp | Implementation |
-| fea | Feature        |
-| tbt | Technical Debt |
-
--Keep commits to single major changes to code only.
--Keep commit messages short and in the form of the answer to:
--This commit "your message here"
-  -EX: "fixed question submit form", "changed order of componets", "created new folders for componenets"
--Remove all console.logs() when they are no longer needed!
--App must comply with Accessibility standards
-https://developer.mozilla.org/en-US/docs/Web/Accessibility/Understanding_WCAG
-
-### App Structure
+CAMPUS_CODE="hr-rfe"
+PORT="3000"
+GIT_API_TOKEN="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"

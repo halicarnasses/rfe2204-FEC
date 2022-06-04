@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Question from "./questions/Question.jsx"
-import QuestionModal from "./questions/QuestionModal.jsx"
-import QuestionSearch from "./questions/QuestionSearch.jsx"
-import {GoSearch} from 'react-icons/go'
+import Question from "./questions/Question.jsx";
+import QuestionModal from "./questions/QuestionModal.jsx";
+import { GoSearch } from 'react-icons/go';
 
 
 import './css/questions/Questions.css';
@@ -114,7 +113,8 @@ function Questions({id, product, questionsData, stateHandler}) {
     const value = target.value;
     if (value && value.length >= 3) {
       let results = [];
-      const regex = new RegExp(value, 'g');
+      // testing                              // somethingSOmthing.sdomsdf@adsgo3333masdgomads.com
+      const regex = new RegExp(value, 'g'); // /[a-zA-Z].[a-zA-Z]@[a-zA-Z0-9].[com, edu, org]/
       for (let q of questions) {
         const body = q.question_body.toLowerCase();
         let matchArr = [...body.matchAll(regex)];

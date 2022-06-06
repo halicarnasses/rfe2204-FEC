@@ -15,11 +15,3 @@ yarn server-dev
 Start development client:
 
 yarn build-dev
-
-For .env, use the following:
-
-```
-CAMPUS_CODE="hr-rfe"
-PORT="3000"
-GIT_API_TOKEN="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"
-```
